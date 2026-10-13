@@ -96,13 +96,15 @@ cat > Eyebreak.app/Contents/Info.plist << 'EOF'
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>Eyebreak</string>
+    <string>EyeBreak</string>
+    <key>CFBundleDisplayName</key>
+    <string>EyeBreak</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0</string>
+    <string>3.0.0</string>
     <key>CFBundleVersion</key>
-    <string>1</string>
+    <string>3</string>
     <key>LSMinimumSystemVersion</key>
     <string>13.0</string>
     <key>LSUIElement</key>
@@ -110,7 +112,9 @@ cat > Eyebreak.app/Contents/Info.plist << 'EOF'
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
     <key>NSHumanReadableCopyright</key>
-    <string>Copyright © 2024. All rights reserved.</string>
+    <string>Copyright © 2026 EyeBreak. All rights reserved.</string>
+    <key>NSUserNotificationAlertStyle</key>
+    <string>alert</string>
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
 </dict>
@@ -124,7 +128,7 @@ if [ "$BUILD_DMG" = true ]; then
     echo "Creating DMG..."
 
     BUILD_DIR="build"
-    DMG_NAME="Eyebreak-1.0.dmg"
+    DMG_NAME="EyeBreak-3.0.0.dmg"
     DMG_TEMP="dmg_temp"
 
     # Create build directory

@@ -4,6 +4,8 @@ import Carbon.HIToolbox
 class HotkeyManager {
     // MARK: - Callbacks
     var onOverride: (() -> Void)?
+    /// Plain ESC while one of our windows has focus. Return true to consume the key.
+    var onEscape: (() -> Bool)?
 
     // MARK: - Properties
     private var globalMonitor: Any?
@@ -25,6 +27,10 @@ class HotkeyManager {
         localMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
             if self?.handleKeyEvent(event) == true {
                 return nil // Consume the event
+            }
+            let noModifiers = event.modifierFlags.intersection([.command, .option, .control, .shift]).isEmpty
+            if event.keyCode == 53 && noModifiers && self?.onEscape?() == true {
+                return nil
             }
             return event
         }

@@ -1,26 +1,52 @@
 import AppKit
 import SwiftUI
 
-class BlockerWindowController {
-    // MARK: - Properties
-    private var windows: [NSWindow] = []
-    var timerManager: TimerManager?
+// MARK: - Key-capable Windows
+/// Borderless windows can't become key by default, which would swallow ESC.
+final class KeyableWindow: NSWindow {
+    override var canBecomeKey: Bool { true }
+}
 
-    // MARK: - Public Methods
-    func showBlocker() {
-        hideBlocker() // Clean up any existing windows
+/// Floating panel that takes key focus when clicked without activating the app.
+final class KeyablePanel: NSPanel {
+    override var canBecomeKey: Bool { true }
+}
+
+// MARK: - Full-screen Overlay
+/// Frosted overlay across every display: the given content on the primary screen,
+/// the plain frosted backdrop on the others.
+class OverlayWindowController {
+    private var windows: [NSWindow] = []
+    var isVisible: Bool { !windows.isEmpty }
+
+    func show<Content: View>(palette: Palette, @ViewBuilder content: () -> Content) {
+        hide() // Clean up any existing windows
 
         let screens = NSScreen.screens
         guard let primaryScreen = screens.first else { return }
+        let primaryContent = content()
 
         for screen in screens {
-            let window = createBlockerWindow(for: screen, isPrimary: screen == primaryScreen)
-            window.orderFrontRegardless()
+            let isPrimary = screen == primaryScreen
+            let window = makeWindow(for: screen)
+            if isPrimary {
+                window.contentView = NSHostingView(rootView: primaryContent.environment(\.palette, palette))
+            } else {
+                window.contentView = NSHostingView(rootView: BreakBackdrop().environment(\.palette, palette))
+            }
             windows.append(window)
+            if isPrimary {
+                // Key + active so ESC reaches the app's local key monitor
+                NSApp.activate(ignoringOtherApps: true)
+                window.makeKeyAndOrderFront(nil)
+            } else {
+                window.orderFrontRegardless()
+            }
         }
     }
 
-    func hideBlocker() {
+    func hide() {
+        guard !windows.isEmpty else { return }
         let windowsToClose = windows
         windows.removeAll()
 
@@ -28,11 +54,12 @@ class BlockerWindowController {
             window.contentView = nil  // Remove SwiftUI view first
             window.orderOut(nil)
         }
+        // Hand focus back to whatever the user was doing
+        NSApp.deactivate()
     }
 
-    // MARK: - Private Methods
-    private func createBlockerWindow(for screen: NSScreen, isPrimary: Bool) -> NSWindow {
-        let window = NSWindow(
+    private func makeWindow(for screen: NSScreen) -> NSWindow {
+        let window = KeyableWindow(
             contentRect: screen.frame,
             styleMask: .borderless,
             backing: .buffered,
@@ -41,26 +68,17 @@ class BlockerWindowController {
 
         window.level = .screenSaver
         window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
-        window.backgroundColor = .black
-        window.isOpaque = true
+        // Transparent so the frosted backdrop can blur the desktop behind it
+        window.backgroundColor = .clear
+        window.isOpaque = false
+        window.appearance = NSAppearance(named: .darkAqua)
         window.hasShadow = false
         window.ignoresMouseEvents = false
         window.acceptsMouseMovedEvents = false
+        window.isReleasedWhenClosed = false
 
         // Make window appear on all spaces and above fullscreen apps
         window.setFrame(screen.frame, display: true)
-
-        if isPrimary, let timerManager = timerManager {
-            // Primary screen shows countdown and quote
-            let blockerView = BlockerView(timerManager: timerManager)
-            window.contentView = NSHostingView(rootView: blockerView)
-        } else {
-            // Secondary screens show solid black
-            window.contentView = NSView()
-            window.contentView?.wantsLayer = true
-            window.contentView?.layer?.backgroundColor = NSColor.black.cgColor
-        }
-
         return window
     }
 }

@@ -4,15 +4,19 @@ A macOS menu bar app that helps you follow the **20-20-20 rule** to prevent digi
 
 ## Features
 
-- **Menu Bar App** - Lives quietly in your menu bar with an eye icon
-- **20-Minute Timer** - Counts down and shows time until next break
-- **5-Second Warning** - Notification before screen blocks with option to skip
-- **Full-Screen Blocker** - Blocks all displays during break with countdown and inspirational quotes
-- **Multi-Monitor Support** - Primary display shows countdown + quote, secondary displays show black
-- **Override Shortcut** - Press `⌥⇧⎋` (Option+Shift+Escape) to dismiss blocker immediately
-- **Pause/Resume** - Pause the timer when you need a longer break from reminders
-- **Sleep/Wake Aware** - Timer resets when your Mac wakes from sleep
-- **Launch at Login** - Option to start automatically when you log in
+Frosted glass throughout (Liquid Glass on macOS 26+): violet for everything about your eyes, clear aqua-blue for water, red only for the dry-eye warning. Full spec: [docs/FEATURES.md](docs/FEATURES.md).
+
+- **Break timer** - 20-20-20 by default, Pomodoro (25/5), or custom intervals, with a pre-break warning
+- **Four break styles** - Blur Screen, Floating Window, guided Eye Exercise, or Notification Only
+- **Tapered countdown ring** - Glowing violet ring that widens toward its head
+- **Dry-eye nudge** - After you skip breaks in a row, a red, dry eye shows what's coming
+- **Water reminders** - Floating or full-screen, custom icon and message, "I already drank"
+- **Ambient reminders** - Small glass pills that nudge you to blink or look away, then fade
+- **Smart Schedule** - Work hours, active days, presets; pauses outside them
+- **Away detection** - Pauses when you're idle or the screen is locked
+- **Themes** - Default, Random Color, or a custom palette per reminder type
+- **Statistics** - Daily goal, streak, week/month chart, insights
+- **Multi-monitor**, **launch at login**, **ESC / ⌥⇧⎋ to skip**
 
 ## Requirements
 

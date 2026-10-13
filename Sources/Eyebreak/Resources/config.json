@@ -1,5 +1,7 @@
 {
     "workDurationMinutes": 20,
     "breakDurationSeconds": 20,
-    "warningTimeSeconds": 5
+    "warningTimeSeconds": 5,
+    "skipsBeforeDryEyeNudge": 2,
+    "waterReminderMinutes": 45
 }
