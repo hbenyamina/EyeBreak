@@ -6,25 +6,16 @@ class WarningWindowController {
     // MARK: - Properties
     private var window: NSWindow?
     var onSkip: (() -> Void)?
-    var onDismiss: (() -> Void)?
 
     // MARK: - Public Methods
-    func showWarning(timerManager: TimerManager) {
+    func showWarning(timerManager: TimerManager, settings: AppSettings = .shared) {
         // Hide existing warning first
         hideWarning()
 
-        let warningView = WarningView(
-            timerManager: timerManager,
-            showsDryEye: timerManager.shouldShowDryEyeNudge,
-            onSkip: { [weak self] in
-                self?.hideWarning()
-                self?.onSkip?()
-            },
-            onDismiss: { [weak self] in
-                self?.hideWarning()
-                self?.onDismiss?()
-            }
-        )
+        let warningView = WarningView(timerManager: timerManager, settings: settings) { [weak self] in
+            self?.hideWarning()
+            self?.onSkip?()
+        }
 
         window = ToastWindow.show(warningView.environment(\.palette, Palette.current(for: .breakOverlay)))
     }
@@ -75,16 +66,24 @@ enum ToastWindow {
         let y = screenFrame.maxY - size.height - inset
         window.setFrameOrigin(NSPoint(x: x, y: y))
 
-        window.alphaValue = 0
+        // A short fade in and out, or none with Reduce Motion
+        let fades = !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
+        window.alphaValue = fades ? 0 : 1
         window.orderFrontRegardless()
-        NSAnimationContext.runAnimationGroup { context in
-            context.duration = 0.25
-            window.animator().alphaValue = 1
+        if fades {
+            NSAnimationContext.runAnimationGroup { context in
+                context.duration = 0.25
+                window.animator().alphaValue = 1
+            }
         }
         return window
     }
 
     static func fadeOut(_ window: NSWindow) {
+        guard !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion else {
+            window.orderOut(nil)
+            return
+        }
         NSAnimationContext.runAnimationGroup({ context in
             context.duration = 0.3
             window.animator().alphaValue = 0
@@ -95,95 +94,45 @@ enum ToastWindow {
 }
 
 // MARK: - Warning View
+/// The optional heads-up before a break (off by default: the menu bar's eye fills instead).
 struct WarningView: View {
     @ObservedObject var timerManager: TimerManager
+    @ObservedObject var settings: AppSettings
     @Environment(\.palette) private var palette
-    let showsDryEye: Bool
     let onSkip: () -> Void
-    let onDismiss: () -> Void
 
     private var secondsLeft: Int { Int(timerManager.timeRemaining) }
 
     var body: some View {
-        if showsDryEye {
-            dryEyeCard
-        } else {
-            standardCard
-        }
-    }
-
-    // MARK: - Standard
-    private var standardCard: some View {
         HStack(spacing: 14) {
             countdownBadge
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("Wrap up your work")
+                Text("Break in \(secondsLeft) s")
                     .font(.system(size: 14, weight: .semibold))
+                    .monospacedDigit()
                     .foregroundStyle(palette.textStyle)
-
-                Text("Break starting in \(secondsLeft)s")
+                Text(settings.waitForPause ? "It waits for a pause in your typing." : "Wrap up what you're doing.")
                     .font(.system(size: 12))
                     .foregroundStyle(palette.secondaryTextStyle)
-                    .monospacedDigit()
             }
 
             Spacer(minLength: 8)
 
+            if timerManager.canPostpone {
+                Button("5 More Minutes") { timerManager.postpone() }
+                    .buttonStyle(SoftButtonStyle())
+            }
             Button("Skip", action: onSkip)
                 .buttonStyle(SoftButtonStyle())
-
-            GlassCloseButton(action: onDismiss)
         }
         .padding(.leading, 12)
         .padding(.trailing, 14)
         .padding(.vertical, 12)
-        .frame(width: 372)
+        .frame(width: 440)
         .themedGlass(in: RoundedRectangle(cornerRadius: 22, style: .continuous), palette: palette, frosted: true)
     }
 
-    // MARK: - Dry-Eye Nudge
-    private var dryEyeCard: some View {
-        VStack(spacing: 12) {
-            DryEyeView()
-                .frame(width: 200)
-                .padding(.top, 8)
-
-            VStack(spacing: 4) {
-                Text("Your eyes will be like this.")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundStyle(.primary)
-
-                Text(DryEyeView.skippedMessage(timerManager.skippedBreakStreak) + " Take this one.")
-                    .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-            }
-
-            HStack(spacing: 10) {
-                countdownBadge
-
-                Text("Break in \(secondsLeft)s")
-                    .font(.system(size: 13, weight: .semibold))
-                    .monospacedDigit()
-
-                Spacer(minLength: 8)
-
-                Button("Skip anyway", action: onSkip)
-                    .buttonStyle(SoftButtonStyle())
-            }
-            .padding(.top, 2)
-        }
-        .padding(16)
-        .frame(width: 340)
-        .overlay(alignment: .topTrailing) {
-            GlassCloseButton(action: onDismiss)
-                .padding(12)
-        }
-        .glassSurface(in: RoundedRectangle(cornerRadius: 26, style: .continuous), tint: Theme.alert.opacity(0.14), frosted: true)
-    }
-
-    // MARK: - Shared
     private var countdownBadge: some View {
         ZStack {
             LiveCountdownRing(

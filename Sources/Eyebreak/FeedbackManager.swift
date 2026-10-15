@@ -7,11 +7,10 @@ enum SoundEffect: String {
     case breakStart = "Glass"
     case breakEnd = "Hero"
     case water = "Bottle"
-    case ambient = "Pop"
 
     var volume: Float {
         switch self {
-        case .ambient, .warning: return 0.35
+        case .warning: return 0.35
         default: return 0.6
         }
     }
@@ -43,11 +42,17 @@ enum NotificationManager {
         UNUserNotificationCenter.current().add(request)
     }
 
-    static func postBreakStart(seconds: Int) {
-        post(title: "Time for a Break!", body: "Look away! Stare at something 20 feet away for \(seconds) seconds. Your eyes will thank you.")
+    static func postBreakStart(duration: TimeInterval, isLong: Bool) {
+        if isLong {
+            post(title: String(localized: "Time for a long break"),
+                 body: String(localized: "Stand up, refill your water and look out of a window."))
+        } else {
+            post(title: String(localized: "Time for a break"),
+                 body: String(localized: "Look across the room for \(Int(duration)) seconds, then blink slowly twice."))
+        }
     }
 
     static func postBreakComplete() {
-        post(title: "Break complete!", body: "Back to work.")
+        post(title: String(localized: "Break done"), body: String(localized: "Back to it."))
     }
 }

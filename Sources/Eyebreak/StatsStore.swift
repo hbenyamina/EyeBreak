@@ -33,6 +33,14 @@ final class StatsStore: ObservableObject {
 
     /// Newest first, one entry per day.
     @Published private(set) var days: [DayStats]
+    /// When a day begins, in minutes after midnight, so a night shift stays one day. Set
+    /// from the shift.
+    var dayStartMinutes = 0
+
+    /// The start of the day `date` belongs to.
+    private func dayKey(_ date: Date) -> Date {
+        calendar.startOfDay(for: date.addingTimeInterval(-Double(dayStartMinutes) * 60))
+    }
 
     private init() {
         days = UserDefaults.standard.data(forKey: key)
@@ -55,7 +63,7 @@ final class StatsStore: ObservableObject {
     }
 
     private func updateToday(_ change: (inout DayStats) -> Void) {
-        let today = calendar.startOfDay(for: Date())
+        let today = dayKey(Date())
         if let index = days.firstIndex(where: { calendar.isDate($0.date, inSameDayAs: today) }) {
             change(&days[index])
         } else {
@@ -75,60 +83,64 @@ final class StatsStore: ObservableObject {
     var yesterday: DayStats { stats(for: calendar.date(byAdding: .day, value: -1, to: Date()) ?? Date()) }
 
     func stats(for date: Date) -> DayStats {
-        days.first { calendar.isDate($0.date, inSameDayAs: date) } ?? .empty(calendar.startOfDay(for: date))
+        let key = dayKey(date)
+        return days.first { calendar.isDate($0.date, inSameDayAs: key) } ?? .empty(key)
     }
 
     /// Oldest → newest, with empty days filled in.
     func series(days count: Int) -> [DayStats] {
-        let today = calendar.startOfDay(for: Date())
+        let today = dayKey(Date())
         return (0..<count).reversed().compactMap { offset in
             calendar.date(byAdding: .day, value: -offset, to: today).map(stats(for:))
         }
     }
 
-    /// Consecutive days with at least one completed break, counting back from today
-    /// (or from yesterday if today has none yet).
-    var streak: Int {
-        var date = calendar.startOfDay(for: Date())
-        if stats(for: date).breaksCompleted == 0 {
-            date = calendar.date(byAdding: .day, value: -1, to: date) ?? date
-        }
-        var count = 0
-        while stats(for: date).breaksCompleted > 0 {
-            count += 1
-            guard let previous = calendar.date(byAdding: .day, value: -1, to: date) else { break }
-            date = previous
-        }
-        return count
+    /// Work days in a row with at least one break, days off skipped and one miss a week
+    /// forgiven (`Streak`).
+    func streak(workdays: Set<Int>) -> Int {
+        let withBreaks = Set(days.filter { $0.breaksCompleted > 0 }.map { calendar.startOfDay(for: $0.date) })
+        return Streak.workDays(withBreaks: withBreaks, workdays: workdays, today: dayKey(Date()), calendar: calendar)
     }
 
-    func insights(goal: Int) -> [Insight] {
+    /// What the last week says, in plain facts: no praise, no scolding.
+    func insights(goal: Int, workdays: Set<Int>) -> [Insight] {
         let week = series(days: 7).filter { $0.total > 0 }
         var result: [Insight] = []
 
         if !week.isEmpty {
             let metGoal = week.filter { $0.breaksCompleted >= goal }.count
-            let daysLabel = week.count == 1 ? "day" : "days"
-            if Double(metGoal) / Double(week.count) >= 0.7 {
-                result.append(Insight(icon: "checkmark.circle", title: "Goal met on \(metGoal) of \(week.count) \(daysLabel)", message: "You're keeping up with \(goal) breaks a day.", tone: .positive))
-            } else {
-                result.append(Insight(icon: "target", title: "Goal met on \(metGoal) of \(week.count) \(daysLabel)", message: "Taking the breaks you'd otherwise skip is the quickest way to reach \(goal) a day.", tone: .neutral))
-            }
+            result.append(Insight(
+                icon: "target",
+                title: String(localized: "Goal met on \(metGoal) of \(week.count) days"),
+                message: String(localized: "Most of the breaks in your shift, \(goal) a day."),
+                tone: metGoal * 10 >= week.count * 7 ? .positive : .neutral
+            ))
 
             let completed = week.reduce(0) { $0 + $1.breaksCompleted }
             let skipped = week.reduce(0) { $0 + $1.breaksSkipped }
-            let skipRate = Double(skipped) / Double(max(completed + skipped, 1))
-            if skipRate >= 0.25 {
-                result.append(Insight(icon: "exclamationmark.triangle", title: "\(Int(skipRate * 100))% of breaks skipped this week", message: "\(skipped) skipped, \(completed) taken.", tone: .warning))
+            if skipped * 4 >= (completed + skipped) {
+                result.append(Insight(
+                    icon: "forward",
+                    title: String(localized: "\(skipped) of \(completed + skipped) breaks skipped this week"),
+                    message: String(localized: "\"5 More Minutes\" holds a break back without skipping it."),
+                    tone: .neutral
+                ))
             }
         }
 
+        let streak = streak(workdays: workdays)
         if streak >= 2 {
-            result.append(Insight(icon: "calendar", title: "\(streak) days in a row", message: "At least one break every day.", tone: .positive))
+            result.append(Insight(
+                icon: "calendar",
+                title: String(localized: "\(streak) work days in a row"),
+                message: String(localized: "Days off don't count, and one missed day a week is forgiven."),
+                tone: .positive
+            ))
         }
 
         if result.isEmpty {
-            result.append(Insight(icon: "clock", title: "No breaks recorded yet", message: "Finish a break and your history starts here.", tone: .neutral))
+            result.append(Insight(icon: "clock", title: String(localized: "No breaks recorded yet"),
+                                  message: String(localized: "Finish a break and your history starts here."), tone: .neutral))
         }
         return result
     }

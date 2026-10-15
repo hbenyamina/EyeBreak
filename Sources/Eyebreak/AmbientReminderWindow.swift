@@ -1,17 +1,16 @@
 import AppKit
 import SwiftUI
 
-/// Shows the ambient reminder pill at the top-centre and fades it out on its own.
+/// Shows the blink reminder pill at the top-centre and fades it out on its own. Silent: a
+/// sound for something this small would be one interruption too many.
 class AmbientReminderWindowController {
     private var window: NSWindow?
     private var dismissWork: DispatchWorkItem?
 
     func show(_ reminder: AmbientReminder, duration: TimeInterval) {
         hide()
-        SoundManager.play(.ambient)
-
         let view = AmbientReminderView(reminder: reminder) { [weak self] in self?.hide() }
-            .environment(\.palette, Palette.current(for: .ambientReminder))
+            .environment(\.palette, Palette.current(for: .breakOverlay))
         window = ToastWindow.show(view, position: .topCenter)
 
         let work = DispatchWorkItem { [weak self] in self?.hide() }
@@ -37,17 +36,10 @@ struct AmbientReminderView: View {
     var body: some View {
         Button(action: onDismiss) {
             HStack(spacing: 12) {
-                Group {
-                    switch reminder.glyph {
-                    case .symbol(let name):
-                        Image(systemName: name)
-                            .font(.system(size: 15, weight: .medium))
-                            .foregroundStyle(palette.accent)
-                    case .emoji(let emoji):
-                        Text(emoji).font(.system(size: 18))
-                    }
-                }
-                .frame(width: 34, height: 34)
+                Image(systemName: reminder.symbol)
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(palette.accent)
+                    .frame(width: 34, height: 34)
                 .background(Circle().fill(palette.accent.opacity(0.14)))
 
                 VStack(alignment: .leading, spacing: 1) {
@@ -67,7 +59,7 @@ struct AmbientReminderView: View {
         }
         .buttonStyle(.plain)
         .themedGlass(in: Capsule(), palette: palette, frosted: true)
-        .help("Click to dismiss")
+        .help(Text("Click to dismiss"))
         .accessibilityLabel("\(reminder.title). \(reminder.message)")
     }
 }

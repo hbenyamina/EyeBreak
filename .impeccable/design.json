@@ -1,0 +1,1306 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-15T09:23:19+00:00",
+  "title": "Design System: EyeBreak",
+  "extensions": {
+    "platform": "macOS 26, SwiftUI + AppKit; tokens live in Sources/Shared/Theme.swift (ThemeColors) and Sources/Shared/ShiftTheme.swift. px values are macOS points.",
+    "themes": {
+      "classic": {
+        "name": "Violet & Aqua",
+        "tokenPrefix": ""
+      },
+      "garden": {
+        "name": "Garden",
+        "tokenPrefix": "garden-"
+      },
+      "appearancePairs": "neutral tokens with a -dark sibling follow the system appearance"
+    },
+    "colorMeta": {
+      "eyes-light": {
+        "role": "primary",
+        "displayName": "Lavender Mist",
+        "canonical": "#E6D9FF",
+        "tonalRamp": [
+          "#2E1470",
+          "#6B36E0",
+          "#8C5CF7",
+          "#BA99FF",
+          "#E6D9FF"
+        ]
+      },
+      "eyes-bright": {
+        "role": "primary",
+        "displayName": "Bright Violet",
+        "canonical": "#BA99FF",
+        "tonalRamp": [
+          "#2E1470",
+          "#6B36E0",
+          "#8C5CF7",
+          "#BA99FF",
+          "#E6D9FF"
+        ]
+      },
+      "eyes-accent": {
+        "role": "primary",
+        "displayName": "Eye Violet",
+        "canonical": "#8C5CF7",
+        "tonalRamp": [
+          "#2E1470",
+          "#6B36E0",
+          "#8C5CF7",
+          "#BA99FF",
+          "#E6D9FF"
+        ]
+      },
+      "eyes-deep": {
+        "role": "primary",
+        "displayName": "Deep Violet",
+        "canonical": "#6B36E0",
+        "tonalRamp": [
+          "#2E1470",
+          "#6B36E0",
+          "#8C5CF7",
+          "#BA99FF",
+          "#E6D9FF"
+        ]
+      },
+      "eyes-dark": {
+        "role": "primary",
+        "displayName": "Night Violet",
+        "canonical": "#2E1470",
+        "tonalRamp": [
+          "#2E1470",
+          "#6B36E0",
+          "#8C5CF7",
+          "#BA99FF",
+          "#E6D9FF"
+        ]
+      },
+      "water-light": {
+        "role": "secondary",
+        "displayName": "Water Mist",
+        "canonical": "#E8FCFF",
+        "tonalRamp": [
+          "#0A62D6",
+          "#0490F5",
+          "#14B8FF",
+          "#5FE0FF",
+          "#E8FCFF"
+        ]
+      },
+      "water-bright": {
+        "role": "secondary",
+        "displayName": "Aqua",
+        "canonical": "#5FE0FF",
+        "tonalRamp": [
+          "#0A62D6",
+          "#0490F5",
+          "#14B8FF",
+          "#5FE0FF",
+          "#E8FCFF"
+        ]
+      },
+      "water-accent": {
+        "role": "secondary",
+        "displayName": "Vivid Sky",
+        "canonical": "#14B8FF",
+        "tonalRamp": [
+          "#0A62D6",
+          "#0490F5",
+          "#14B8FF",
+          "#5FE0FF",
+          "#E8FCFF"
+        ]
+      },
+      "water-deep": {
+        "role": "secondary",
+        "displayName": "Clear Blue",
+        "canonical": "#0490F5",
+        "tonalRamp": [
+          "#0A62D6",
+          "#0490F5",
+          "#14B8FF",
+          "#5FE0FF",
+          "#E8FCFF"
+        ]
+      },
+      "water-dark": {
+        "role": "secondary",
+        "displayName": "Deep Water",
+        "canonical": "#0A62D6",
+        "tonalRamp": [
+          "#0A62D6",
+          "#0490F5",
+          "#14B8FF",
+          "#5FE0FF",
+          "#E8FCFF"
+        ]
+      },
+      "water-ink": {
+        "role": "secondary",
+        "displayName": "Water Ink",
+        "canonical": "#06355E",
+        "tonalRamp": [
+          "#00072D",
+          "#00254D",
+          "#18446E",
+          "#396491",
+          "#5986B5",
+          "#7BA9DA",
+          "#9FCEFF",
+          "#CCF3FF"
+        ]
+      },
+      "alert": {
+        "role": "tertiary",
+        "displayName": "Alert Red",
+        "canonical": "#EB1F4D",
+        "tonalRamp": [
+          "#210002",
+          "#4D0010",
+          "#84001F",
+          "#B90033",
+          "#EC204D",
+          "#FF6B7A",
+          "#FFAFB2",
+          "#FFE4E4"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "paper-dark": {
+        "role": "neutral",
+        "displayName": "Paper (dark)",
+        "canonical": "#191919",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#2F2E2B",
+        "tonalRamp": [
+          "#0C0B09",
+          "#262522",
+          "#43423F",
+          "#62615E",
+          "#83827F",
+          "#A6A5A1",
+          "#CAC9C5",
+          "#F0EEEA"
+        ]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Ink (dark)",
+        "canonical": "#E6E5E3",
+        "tonalRamp": [
+          "#0C0B0A",
+          "#262523",
+          "#434240",
+          "#62615F",
+          "#838280",
+          "#A6A5A3",
+          "#CAC9C7",
+          "#EFEEEC"
+        ]
+      },
+      "secondary-ink": {
+        "role": "neutral",
+        "displayName": "Secondary Ink",
+        "canonical": "#73726E",
+        "tonalRamp": [
+          "#0C0B08",
+          "#262522",
+          "#43423E",
+          "#62615D",
+          "#83827E",
+          "#A6A5A1",
+          "#CAC9C5",
+          "#F0EEEA"
+        ]
+      },
+      "secondary-ink-dark": {
+        "role": "neutral",
+        "displayName": "Secondary Ink (dark)",
+        "canonical": "#9B9A97",
+        "tonalRamp": [
+          "#0C0B09",
+          "#262523",
+          "#43423F",
+          "#62615E",
+          "#83827F",
+          "#A6A5A2",
+          "#CAC9C6",
+          "#EFEEEB"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#EBEAE8",
+        "tonalRamp": [
+          "#0C0B0A",
+          "#262523",
+          "#434240",
+          "#62615F",
+          "#838280",
+          "#A6A5A3",
+          "#CAC9C7",
+          "#EFEEEC"
+        ]
+      },
+      "hairline-dark": {
+        "role": "neutral",
+        "displayName": "Hairline (dark)",
+        "canonical": "#2D2D2C",
+        "tonalRamp": [
+          "#0B0B0A",
+          "#252524",
+          "#424241",
+          "#616160",
+          "#828281",
+          "#A5A5A4",
+          "#C9C9C8",
+          "#EEEEED"
+        ]
+      },
+      "wash": {
+        "role": "neutral",
+        "displayName": "Wash",
+        "canonical": "#F2F1EE",
+        "tonalRamp": [
+          "#0C0B09",
+          "#262523",
+          "#43423F",
+          "#62615F",
+          "#83827F",
+          "#A6A5A2",
+          "#CAC9C6",
+          "#EFEEEB"
+        ]
+      },
+      "wash-dark": {
+        "role": "neutral",
+        "displayName": "Wash (dark)",
+        "canonical": "#262625",
+        "tonalRamp": [
+          "#0B0B0A",
+          "#252524",
+          "#424241",
+          "#616160",
+          "#828281",
+          "#A5A5A4",
+          "#C9C9C8",
+          "#EEEEED"
+        ]
+      },
+      "eyes-backdrop": {
+        "role": "neutral",
+        "displayName": "Break Backdrop",
+        "canonical": "rgba(8, 3, 20, 0.45)"
+      },
+      "water-backdrop": {
+        "role": "neutral",
+        "displayName": "Water Backdrop",
+        "canonical": "rgba(0, 18, 38, 0.30)"
+      },
+      "garden-eyes-light": {
+        "role": "primary",
+        "displayName": "New Leaf",
+        "canonical": "#E2F0DC",
+        "tonalRamp": [
+          "#163D22",
+          "#2C7A43",
+          "#3E9A57",
+          "#9DD196",
+          "#E2F0DC"
+        ]
+      },
+      "garden-eyes-bright": {
+        "role": "primary",
+        "displayName": "Bright Leaf",
+        "canonical": "#9DD196",
+        "tonalRamp": [
+          "#163D22",
+          "#2C7A43",
+          "#3E9A57",
+          "#9DD196",
+          "#E2F0DC"
+        ]
+      },
+      "garden-eyes-accent": {
+        "role": "primary",
+        "displayName": "Leaf Green",
+        "canonical": "#3E9A57",
+        "tonalRamp": [
+          "#163D22",
+          "#2C7A43",
+          "#3E9A57",
+          "#9DD196",
+          "#E2F0DC"
+        ]
+      },
+      "garden-eyes-deep": {
+        "role": "primary",
+        "displayName": "Herb Green",
+        "canonical": "#2C7A43",
+        "tonalRamp": [
+          "#163D22",
+          "#2C7A43",
+          "#3E9A57",
+          "#9DD196",
+          "#E2F0DC"
+        ]
+      },
+      "garden-eyes-dark": {
+        "role": "primary",
+        "displayName": "Ivy",
+        "canonical": "#163D22",
+        "tonalRamp": [
+          "#163D22",
+          "#2C7A43",
+          "#3E9A57",
+          "#9DD196",
+          "#E2F0DC"
+        ]
+      },
+      "garden-water-light": {
+        "role": "secondary",
+        "displayName": "Rain Mist",
+        "canonical": "#E3F3FA",
+        "tonalRamp": [
+          "#0F4B6E",
+          "#1C7DB4",
+          "#2F9FD3",
+          "#86D3EF",
+          "#E3F3FA"
+        ]
+      },
+      "garden-water-bright": {
+        "role": "secondary",
+        "displayName": "Rain",
+        "canonical": "#86D3EF",
+        "tonalRamp": [
+          "#0F4B6E",
+          "#1C7DB4",
+          "#2F9FD3",
+          "#86D3EF",
+          "#E3F3FA"
+        ]
+      },
+      "garden-water-accent": {
+        "role": "secondary",
+        "displayName": "Garden Sky",
+        "canonical": "#2F9FD3",
+        "tonalRamp": [
+          "#0F4B6E",
+          "#1C7DB4",
+          "#2F9FD3",
+          "#86D3EF",
+          "#E3F3FA"
+        ]
+      },
+      "garden-water-deep": {
+        "role": "secondary",
+        "displayName": "Watering-can Blue",
+        "canonical": "#1C7DB4",
+        "tonalRamp": [
+          "#0F4B6E",
+          "#1C7DB4",
+          "#2F9FD3",
+          "#86D3EF",
+          "#E3F3FA"
+        ]
+      },
+      "garden-water-dark": {
+        "role": "secondary",
+        "displayName": "Deep Rain",
+        "canonical": "#0F4B6E",
+        "tonalRamp": [
+          "#0F4B6E",
+          "#1C7DB4",
+          "#2F9FD3",
+          "#86D3EF",
+          "#E3F3FA"
+        ]
+      },
+      "garden-water-ink": {
+        "role": "secondary",
+        "displayName": "Garden Water Ink",
+        "canonical": "#0B3550",
+        "tonalRamp": [
+          "#000C24",
+          "#002842",
+          "#1E4662",
+          "#3E6684",
+          "#5F87A7",
+          "#81ABCB",
+          "#A4CFF1",
+          "#C9F5FF"
+        ]
+      },
+      "garden-alert": {
+        "role": "tertiary",
+        "displayName": "Geranium",
+        "canonical": "#D9452C",
+        "tonalRamp": [
+          "#220000",
+          "#4E0000",
+          "#800600",
+          "#B41B00",
+          "#DC482F",
+          "#FF6E53",
+          "#FFB1A0",
+          "#FFE5DD"
+        ]
+      },
+      "garden-paper": {
+        "role": "neutral",
+        "displayName": "Linen",
+        "canonical": "#FAF9F4",
+        "tonalRamp": [
+          "#0C0B08",
+          "#262521",
+          "#43423E",
+          "#62615D",
+          "#83827E",
+          "#A6A5A0",
+          "#CAC9C4",
+          "#EFEEEA"
+        ]
+      },
+      "garden-paper-dark": {
+        "role": "neutral",
+        "displayName": "Night Garden",
+        "canonical": "#151A15",
+        "tonalRamp": [
+          "#080D08",
+          "#212721",
+          "#3E443E",
+          "#5D635D",
+          "#7E847E",
+          "#A0A7A0",
+          "#C4CBC4",
+          "#EAF1E9"
+        ]
+      },
+      "garden-ink": {
+        "role": "neutral",
+        "displayName": "Soil Ink",
+        "canonical": "#24301F",
+        "tonalRamp": [
+          "#050E02",
+          "#1D2918",
+          "#3A4634",
+          "#586653",
+          "#798773",
+          "#9BAA95",
+          "#BFCFB9",
+          "#E4F4DE"
+        ]
+      },
+      "garden-ink-dark": {
+        "role": "neutral",
+        "displayName": "Soil Ink (dark)",
+        "canonical": "#E3E8DE",
+        "tonalRamp": [
+          "#090C06",
+          "#23261F",
+          "#40443C",
+          "#5F635A",
+          "#80847B",
+          "#A2A79D",
+          "#C6CBC1",
+          "#EBF0E6"
+        ]
+      },
+      "garden-secondary-ink": {
+        "role": "neutral",
+        "displayName": "Sage",
+        "canonical": "#66705F",
+        "tonalRamp": [
+          "#070E03",
+          "#20281A",
+          "#3C4536",
+          "#5B6554",
+          "#7C8675",
+          "#9EA997",
+          "#C2CDBA",
+          "#E7F3DF"
+        ]
+      },
+      "garden-secondary-ink-dark": {
+        "role": "neutral",
+        "displayName": "Sage (dark)",
+        "canonical": "#9BA595",
+        "tonalRamp": [
+          "#070D04",
+          "#20281B",
+          "#3D4537",
+          "#5B6556",
+          "#7C8676",
+          "#9FA999",
+          "#C3CDBC",
+          "#E8F3E1"
+        ]
+      },
+      "garden-hairline": {
+        "role": "neutral",
+        "displayName": "Linen Hairline",
+        "canonical": "#E6E4D8",
+        "tonalRamp": [
+          "#0D0B04",
+          "#27251C",
+          "#444239",
+          "#636257",
+          "#848378",
+          "#A7A59A",
+          "#CBC9BE",
+          "#F1EFE3"
+        ]
+      },
+      "garden-hairline-dark": {
+        "role": "neutral",
+        "displayName": "Night Hairline",
+        "canonical": "#263025",
+        "tonalRamp": [
+          "#060E05",
+          "#1E281D",
+          "#3B453A",
+          "#5A6558",
+          "#7A8679",
+          "#9DA99B",
+          "#C1CDBF",
+          "#E6F3E4"
+        ]
+      },
+      "garden-wash": {
+        "role": "neutral",
+        "displayName": "Linen Wash",
+        "canonical": "#F0EEE3",
+        "tonalRamp": [
+          "#0D0B05",
+          "#27251D",
+          "#444239",
+          "#636158",
+          "#848379",
+          "#A7A59B",
+          "#CBC9BF",
+          "#F1EFE4"
+        ]
+      },
+      "garden-wash-dark": {
+        "role": "neutral",
+        "displayName": "Night Wash",
+        "canonical": "#1F261E",
+        "tonalRamp": [
+          "#070D06",
+          "#20271F",
+          "#3D453C",
+          "#5C645B",
+          "#7D857B",
+          "#9FA89E",
+          "#C3CCC2",
+          "#E8F2E7"
+        ]
+      },
+      "garden-eyes-backdrop": {
+        "role": "neutral",
+        "displayName": "Garden Break Backdrop",
+        "canonical": "rgba(5, 18, 8, 0.45)"
+      },
+      "garden-water-backdrop": {
+        "role": "neutral",
+        "displayName": "Garden Water Backdrop",
+        "canonical": "rgba(0, 20, 28, 0.30)"
+      }
+    },
+    "typographyMeta": {
+      "display-widget": {
+        "displayName": "Display",
+        "purpose": "End of Shift widget countdown (32px small, 44px medium), monospaced digits."
+      },
+      "headline": {
+        "displayName": "Page title",
+        "purpose": "Settings page title under the page symbol."
+      },
+      "title-hero": {
+        "displayName": "Hero time",
+        "purpose": "Popover next-break countdown on the glass hero."
+      },
+      "title-popover": {
+        "displayName": "Popover date",
+        "purpose": "The date line at the top of the popover."
+      },
+      "title-section": {
+        "displayName": "Section heading",
+        "purpose": "Section heading over a hairline; selected sidebar row; callout title."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Row titles, page descriptions, sidebar and menu rows."
+      },
+      "body-small": {
+        "displayName": "Detail",
+        "purpose": "Row detail, section footers, slider and stepper read-outs."
+      },
+      "value": {
+        "displayName": "Value",
+        "purpose": "Lane counts and countdown-row values, monospaced digits."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Accent and soft capsule labels (14px when large)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Sidebar status, popover captions, hour and day labels."
+      },
+      "label-strong": {
+        "displayName": "Widget label",
+        "purpose": "Widget headers and footers."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ring-glow",
+        "value": "accent-coloured arc, blur 16px (hero) / 12px (hero compact), opacity 0.45",
+        "purpose": "The single soft glow, on the full-screen break's tapered countdown ring. The floating break card's 64px ring and the popover's 48px ring have none."
+      },
+      {
+        "name": "icon-template",
+        "value": "0 10px 18px rgba(0,0,0,0.22)",
+        "purpose": "Under the app icon squircle, per Apple's template."
+      }
+    ],
+    "glass": [
+      {
+        "name": "popover-hero",
+        "value": "Liquid Glass regular, tint eyes-accent 10%, radius 16",
+        "purpose": "The one floating card in the popover."
+      },
+      {
+        "name": "sidebar",
+        "value": "system sidebar material",
+        "purpose": "Settings window sidebar."
+      },
+      {
+        "name": "toast",
+        "value": "Liquid Glass over behind-window blur (frosted), tint eyes 8% / water 14%, radius 22",
+        "purpose": "Warning toast, water toast, unlock prompt, floating break card (440px, radius 24), blink pill (capsule)."
+      },
+      {
+        "name": "break-overlay",
+        "value": "Liquid Glass guide card radius 28 (full-screen water card 36) over full-screen frost plus the palette backdrop",
+        "purpose": "Break overlays on every display."
+      },
+      {
+        "name": "reduce-transparency",
+        "value": "opaque window background + tint, 1px rim at 15% primary",
+        "purpose": "Every glass surface under Reduce Transparency."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ring-tick",
+        "value": "linear 1s",
+        "purpose": "Countdown ring advancing each second (state)."
+      },
+      {
+        "name": "step-crossfade",
+        "value": "ease-out 0.2s opacity; none under Reduce Motion",
+        "purpose": "The break guide changing step (state)."
+      },
+      {
+        "name": "disclosure-chevron",
+        "value": "ease-out 0.2s, chevron turns 90deg; none under Reduce Motion",
+        "purpose": "More options / Work out my goal opening (state)."
+      },
+      {
+        "name": "toast-fade",
+        "value": "0.25s in, 0.3s out (window alpha)",
+        "purpose": "Toasts, pills and the floating break card appearing and leaving."
+      }
+    ],
+    "rhythm": {
+      "missDepth": 0.42,
+      "floor": 0.06,
+      "drop": "1% of the window, min 60s",
+      "recover": "9% of the window, min 600s, cosine ease",
+      "window": "today's shift, else 8 AM-8 PM, widened to include recorded events",
+      "nowDot": "2.5x line width",
+      "weekDot": "2.2x line width; empty day = open ring 3x line width on paper"
+    },
+    "layout": {
+      "window": {
+        "default": "880x660",
+        "min": "780x560"
+      },
+      "sidebarWidth": {
+        "min": 190,
+        "ideal": 210,
+        "max": 240
+      },
+      "pageMaxWidth": 640,
+      "popoverWidth": 300,
+      "rowMinHeight": 40,
+      "sliderWidth": 170,
+      "sliderReadout": 84,
+      "settingsPages": [
+        "Breaks",
+        "Water",
+        "Workday",
+        "App"
+      ],
+      "essentialsPerPage": "at most 4; the rest under More options (26px above)",
+      "habitRhythm": {
+        "lineHeight": 34,
+        "labelColumn": 76,
+        "valueColumn": 96
+      },
+      "breakRing": 300,
+      "guideCardMaxWidth": 640,
+      "floatingBreakCard": {
+        "width": 440,
+        "ring": 64,
+        "radius": 24
+      },
+      "closeButton": {
+        "circle": 24,
+        "hitTarget": 30
+      }
+    },
+    "appIcon": {
+      "source": "Tools/make-app-icon.swift",
+      "ground": "garden-paper",
+      "eyeLine": "garden-eyes-deep",
+      "waterLine": "garden-water-deep",
+      "squircle": "824pt in 1024, radius 185",
+      "stroke": 44
+    },
+    "widgetThemes": {
+      "source": "Sources/Shared/ShiftTheme.swift",
+      "default": "slate",
+      "derivedInks": {
+        "inkSoft": "most muted mix of ink toward the surface clearing 6.0:1 (7.6:1 light-on-dark)",
+        "inkFaint": "clears 4.7:1 (6.5:1 light-on-dark)",
+        "track": "ink at 28% opacity",
+        "why": "light text on dark rasterises at about 0.72 of nominal contrast on macOS"
+      },
+      "themes": [
+        {
+          "id": "slate",
+          "name": "Slate",
+          "family": "tone",
+          "working": {
+            "surface": "#20414F",
+            "ink": "#EEF5F8"
+          },
+          "ahead": {
+            "surface": "#213745",
+            "ink": "#EEF5F8"
+          },
+          "off": {
+            "surface": "#0C242B",
+            "ink": "#EEF5F8"
+          },
+          "tint": "#31586A",
+          "heroAccent": {
+            "light": "#325B6D",
+            "dark": "#ACC9D7"
+          },
+          "character": "Cool blue-grey, the default."
+        },
+        {
+          "id": "clay",
+          "name": "Clay",
+          "family": "tone",
+          "working": {
+            "surface": "#553225",
+            "ink": "#FAF1EE"
+          },
+          "ahead": {
+            "surface": "#472D20",
+            "ink": "#FAF1EE"
+          },
+          "off": {
+            "surface": "#311915",
+            "ink": "#FAF1EE"
+          },
+          "tint": "#714637",
+          "heroAccent": {
+            "light": "#754839",
+            "dark": "#DEBBAF"
+          },
+          "character": "Unglazed pottery."
+        },
+        {
+          "id": "sage",
+          "name": "Sage",
+          "family": "tone",
+          "working": {
+            "surface": "#264338",
+            "ink": "#EFF5F2"
+          },
+          "ahead": {
+            "surface": "#223A33",
+            "ink": "#EFF5F2"
+          },
+          "off": {
+            "surface": "#14251C",
+            "ink": "#EFF5F2"
+          },
+          "tint": "#395B4D",
+          "heroAccent": {
+            "light": "#3A5E50",
+            "dark": "#B1CBC0"
+          },
+          "character": "Muted green, the quietest tone."
+        },
+        {
+          "id": "ochre",
+          "name": "Ochre",
+          "family": "tone",
+          "working": {
+            "surface": "#483A1B",
+            "ink": "#F6F3ED"
+          },
+          "ahead": {
+            "surface": "#3B341B",
+            "ink": "#F6F3ED"
+          },
+          "off": {
+            "surface": "#2A1E0C",
+            "ink": "#F6F3ED"
+          },
+          "tint": "#61502C",
+          "heroAccent": {
+            "light": "#64532C",
+            "dark": "#D0C3A7"
+          },
+          "character": "Dry olive-gold."
+        },
+        {
+          "id": "plum",
+          "name": "Plum",
+          "family": "tone",
+          "working": {
+            "surface": "#47344B",
+            "ink": "#F6F2F7"
+          },
+          "ahead": {
+            "surface": "#3F2D3E",
+            "ink": "#F6F2F7"
+          },
+          "off": {
+            "surface": "#261C2C",
+            "ink": "#F6F2F7"
+          },
+          "tint": "#604965",
+          "heroAccent": {
+            "light": "#634B69",
+            "dark": "#CFBDD3"
+          },
+          "character": "Dusky violet."
+        },
+        {
+          "id": "graphite",
+          "name": "Graphite",
+          "family": "tone",
+          "working": {
+            "surface": "#3A3C3F",
+            "ink": "#F3F3F4"
+          },
+          "ahead": {
+            "surface": "#333437",
+            "ink": "#F3F3F4"
+          },
+          "off": {
+            "surface": "#1F2123",
+            "ink": "#F3F3F4"
+          },
+          "tint": "#505356",
+          "heroAccent": {
+            "light": "#525659",
+            "dark": "#C2C4C7"
+          },
+          "character": "Almost neutral."
+        },
+        {
+          "id": "ward",
+          "name": "Ward",
+          "family": "workplace",
+          "working": {
+            "surface": "#D3E1E4",
+            "ink": "#192729"
+          },
+          "ahead": {
+            "surface": "#E0EAED",
+            "ink": "#192729"
+          },
+          "off": {
+            "surface": "#BECED0",
+            "ink": "#192729"
+          },
+          "tint": "#315E73",
+          "heroAccent": {
+            "light": "#345B6E",
+            "dark": "#A9CADA"
+          },
+          "character": "Clinical porcelain; pale register."
+        },
+        {
+          "id": "warehouse",
+          "name": "Warehouse",
+          "family": "workplace",
+          "working": {
+            "surface": "#DADFE2",
+            "ink": "#202528"
+          },
+          "ahead": {
+            "surface": "#E5E8EB",
+            "ink": "#202528"
+          },
+          "off": {
+            "surface": "#C6CCCF",
+            "ink": "#202528"
+          },
+          "tint": "#3C5D70",
+          "heroAccent": {
+            "light": "#3C5A6B",
+            "dark": "#AFC8D8"
+          },
+          "character": "Poured concrete; pale register."
+        },
+        {
+          "id": "nightdesk",
+          "name": "Night Desk",
+          "family": "workplace",
+          "working": {
+            "surface": "#293E53",
+            "ink": "#EFF4F9"
+          },
+          "ahead": {
+            "surface": "#293547",
+            "ink": "#EFF4F9"
+          },
+          "off": {
+            "surface": "#12232F",
+            "ink": "#EFF4F9"
+          },
+          "tint": "#3B5B7B",
+          "heroAccent": {
+            "light": "#3C5875",
+            "dark": "#AFC7E1"
+          },
+          "character": "Deep after-hours blue."
+        },
+        {
+          "id": "workshop",
+          "name": "Workshop",
+          "family": "workplace",
+          "working": {
+            "surface": "#4C362D",
+            "ink": "#F7F2F0"
+          },
+          "ahead": {
+            "surface": "#403027",
+            "ink": "#F7F2F0"
+          },
+          "off": {
+            "surface": "#2B1D18",
+            "ink": "#F7F2F0"
+          },
+          "tint": "#6E5322",
+          "heroAccent": {
+            "light": "#695126",
+            "dark": "#D6C19E"
+          },
+          "character": "Oiled timber, brass."
+        },
+        {
+          "id": "line",
+          "name": "Line",
+          "family": "workplace",
+          "working": {
+            "surface": "#334033",
+            "ink": "#F1F4F1"
+          },
+          "ahead": {
+            "surface": "#2C382F",
+            "ink": "#F1F4F1"
+          },
+          "off": {
+            "surface": "#1C231A",
+            "ink": "#F1F4F1"
+          },
+          "tint": "#72511E",
+          "heroAccent": {
+            "light": "#6D4F23",
+            "dark": "#DAC09C"
+          },
+          "character": "Factory green, hazard amber."
+        },
+        {
+          "id": "control",
+          "name": "Control",
+          "family": "workplace",
+          "working": {
+            "surface": "#3A3C3F",
+            "ink": "#F3F3F4"
+          },
+          "ahead": {
+            "surface": "#333436",
+            "ink": "#F3F3F4"
+          },
+          "off": {
+            "surface": "#1F2122",
+            "ink": "#F3F3F4"
+          },
+          "tint": "#734F2B",
+          "heroAccent": {
+            "light": "#6E4E2E",
+            "dark": "#DBBEA3"
+          },
+          "character": "Charcoal console, amber."
+        },
+        {
+          "id": "greenhouse",
+          "name": "Greenhouse",
+          "family": "workplace",
+          "working": {
+            "surface": "#2A4A31",
+            "ink": "#F0F5EE"
+          },
+          "ahead": {
+            "surface": "#2B4337",
+            "ink": "#F0F5EE"
+          },
+          "off": {
+            "surface": "#15241A",
+            "ink": "#F0F5EE"
+          },
+          "tint": "#A4502F",
+          "heroAccent": {
+            "light": "#3B6B44",
+            "dark": "#B7D6B2"
+          },
+          "character": "Leaf green, terracotta signal; pairs with Garden."
+        }
+      ]
+    },
+    "localization": {
+      "languages": [
+        "en",
+        "ar (Modern Standard Arabic)"
+      ],
+      "strings": "Sources/Shared/Localizable.xcstrings via String(localized:) / String(shared:) (Sources/Shared/L10n.swift)",
+      "direction": "Right to left in Arabic; rhythm and week lines use flipsForRightToLeftLayoutDirection; day labels mirror; widgets follow the app's language",
+      "digits": "Locale digits (localizedDigits); break countdown digits kept left to right",
+      "voice": "Calm and factual; no exclamation marks; no health claims beyond docs/EVIDENCE.md"
+    }
+  },
+  "components": [
+    {
+      "name": "Setting Row",
+      "kind": "custom",
+      "refersTo": "setting-row",
+      "description": "Flat row: title and one line of detail left, native control right; 40px minimum, no separators.",
+      "html": "<div class=\"ds-row\"><div class=\"ds-row-text\"><div class=\"ds-row-title\">Break length</div><div class=\"ds-row-detail\">How long to look away.</div></div><label class=\"ds-switch\"><input type=\"checkbox\" checked><span></span></label></div>",
+      "css": ".ds-row{display:flex;align-items:center;gap:20px;padding:9px 0;min-height:40px;font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;width:520px} .ds-row-text{flex:1;display:flex;flex-direction:column;gap:2px} .ds-row-title{font-size:13px;color:#2F2E2B} .ds-row-detail{font-size:12px;color:#73726E} .ds-switch input{display:none} .ds-switch span{display:block;width:32px;height:18px;border-radius:9999px;background:#E3E2DF;position:relative;cursor:pointer} .ds-switch span::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff} .ds-switch input:checked+span{background:#6B36E0} .ds-switch input:checked+span::after{left:16px} .ds-switch:focus-within span{outline:3px solid rgba(107,54,224,0.35);outline-offset:1px}"
+    },
+    {
+      "name": "Section Heading",
+      "kind": "custom",
+      "refersTo": "section-heading",
+      "description": "13px semibold heading over a 1px hairline; the only grouping device on a page.",
+      "html": "<div class=\"ds-section\"><div class=\"ds-section-title\">Timing</div><div class=\"ds-hairline\"></div><div class=\"ds-section-foot\">Every so often, a proper rest instead of a 20-second glance away.</div></div>",
+      "css": ".ds-section{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;width:520px;padding-top:30px} .ds-section-title{font-size:13px;font-weight:600;color:#2F2E2B;padding-bottom:7px} .ds-hairline{height:1px;background:#EBEAE8;margin-bottom:4px} .ds-section-foot{font-size:12px;color:#73726E;padding-top:6px}"
+    },
+    {
+      "name": "Page Header",
+      "kind": "custom",
+      "refersTo": "page-title",
+      "description": "Page symbol in the page tint (Theme.onPage: deep in light mode, accent in dark; water deep on Water), 26px bold title at -0.3 tracking, one line of description.",
+      "html": "<div class=\"ds-pagehead\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#6B36E0\" stroke-width=\"1.6\"><path d=\"M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg><h1>Breaks</h1><p>When to look away, for how long, and what a break looks like.</p></div>",
+      "css": ".ds-pagehead{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;display:flex;flex-direction:column;gap:6px;background:#FFFFFF;padding:34px 44px 6px} .ds-pagehead h1{margin:0;font-size:26px;font-weight:700;letter-spacing:-0.3px;color:#2F2E2B} .ds-pagehead p{margin:0;font-size:13px;color:#73726E}"
+    },
+    {
+      "name": "Sidebar Row",
+      "kind": "nav",
+      "refersTo": "sidebar-row",
+      "description": "One group of four (Breaks, Water, Workday, App). Quiet selection: 12% wash of the page tint, tinted icon, semibold title; never the system accent.",
+      "html": "<nav class=\"ds-side\"><a class=\"ds-side-row is-selected\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>Breaks</a><a class=\"ds-side-row\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z\"/></svg>Water</a><a class=\"ds-side-row\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9\"/></svg>Workday</a><a class=\"ds-side-row\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1\"/></svg>App</a></nav>",
+      "css": ".ds-side{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;width:210px;display:flex;flex-direction:column;gap:2px;padding:8px;background:#F4F3F1} .ds-side-row{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:7px;font-size:13px;color:#2F2E2B;text-decoration:none} .ds-side-row svg{color:#73726E;width:18px} .ds-side-row:hover{background:rgba(0,0,0,0.05)} .ds-side-row:focus-visible{outline:2px solid #6B36E0;outline-offset:1px} .ds-side-row.is-selected{background:rgba(107,54,224,0.12);font-weight:600} .ds-side-row.is-selected svg{color:#6B36E0}"
+    },
+    {
+      "name": "Accent Button",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "Solid capsule for a surface's main action; white on deep violet.",
+      "html": "<button class=\"ds-btn-accent\">Resume</button>",
+      "css": ".ds-btn-accent{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;font-size:12px;font-weight:500;color:#FFFFFF;background:#6B36E0;border:none;border-radius:9999px;padding:4px 11px;cursor:pointer} .ds-btn-accent:active{opacity:0.8} .ds-btn-accent:focus-visible{outline:3px solid rgba(107,54,224,0.35);outline-offset:1px}"
+    },
+    {
+      "name": "Water Button",
+      "kind": "button",
+      "refersTo": "button-accent-water",
+      "description": "Water's solid capsule: aqua fill with dark water ink, never white.",
+      "html": "<button class=\"ds-btn-water\">I drank</button>",
+      "css": ".ds-btn-water{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;font-size:12px;font-weight:500;color:#06355E;background:#5FE0FF;border:none;border-radius:9999px;padding:4px 11px;cursor:pointer} .ds-btn-water:active{opacity:0.8} .ds-btn-water:focus-visible{outline:3px solid rgba(4,144,245,0.4);outline-offset:1px}"
+    },
+    {
+      "name": "Soft Button",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "Quiet capsule for secondary actions on toasts and overlays.",
+      "html": "<button class=\"ds-btn-soft\">Skip</button>",
+      "css": ".ds-btn-soft{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;font-size:12px;font-weight:500;color:#2F2E2B;background:rgba(0,0,0,0.09);border:none;border-radius:9999px;padding:4px 11px;cursor:pointer} .ds-btn-soft:active{background:rgba(0,0,0,0.16)} .ds-btn-soft:focus-visible{outline:3px solid rgba(107,54,224,0.35);outline-offset:1px}"
+    },
+    {
+      "name": "Callout",
+      "kind": "card",
+      "refersTo": "callout",
+      "description": "The one tinted block on a page: wash fill, symbol in the tint, title and message.",
+      "html": "<div class=\"ds-callout\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#6B36E0\" stroke-width=\"2\"><path d=\"M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg><div><div class=\"ds-callout-title\">How EyeBreak works</div><div class=\"ds-callout-msg\">Every 20 minutes, 30 seconds to look across the room and blink. Every hour, 5 minutes on your feet.</div></div></div>",
+      "css": ".ds-callout{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:10px;background:#F2F1EE;width:492px} .ds-callout svg{flex:none;width:20px;margin-top:1px} .ds-callout-title{font-size:13px;font-weight:600;color:#2F2E2B} .ds-callout-msg{font-size:12px;color:#73726E;margin-top:3px}"
+    },
+    {
+      "name": "Popover Hero",
+      "kind": "card",
+      "refersTo": "popover-hero",
+      "description": "The one glass card in the popover: compact countdown ring, caption, 26px semibold tabular time, round dots. Glass approximated flat here.",
+      "html": "<div class=\"ds-hero\"><svg width=\"48\" height=\"48\" viewBox=\"0 0 48 48\"><circle cx=\"24\" cy=\"24\" r=\"21\" fill=\"none\" stroke=\"rgba(0,0,0,0.08)\" stroke-width=\"2.25\"/><path d=\"M24 3 A21 21 0 1 1 3.4 28\" fill=\"none\" stroke=\"#8C5CF7\" stroke-width=\"3\" stroke-linecap=\"round\"/></svg><div><div class=\"ds-hero-cap\">Next break in</div><div class=\"ds-hero-time\">19:58</div><div class=\"ds-dots\"><i class=\"on\"></i><i></i><i></i><i></i></div></div></div>",
+      "css": ".ds-hero{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;display:flex;gap:14px;align-items:center;padding:12px;border-radius:16px;width:248px;background:rgba(140,92,247,0.10);backdrop-filter:blur(20px);border:0.5px solid rgba(255,255,255,0.4)} .ds-hero-cap{font-size:11px;font-weight:500;color:#73726E} .ds-hero-time{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;color:#2F2E2B} .ds-dots{display:flex;gap:4px;margin-top:4px} .ds-dots i{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,0.12)} .ds-dots i.on{background:#8C5CF7}"
+    },
+    {
+      "name": "Rhythm Lanes",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Signature: one line per habit, straight while on track, catching (0.42 of the height) at each miss and easing back; hairline ahead of now, dot at now.",
+      "html": "<div class=\"ds-lanes\"><div class=\"ds-lane\"><svg class=\"ds-sym\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\"><path d=\"M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z\" fill=\"#8C5CF7\"/><circle cx=\"12\" cy=\"12\" r=\"3\" fill=\"#fff\"/></svg><svg class=\"ds-line\" viewBox=\"0 0 300 34\" preserveAspectRatio=\"none\"><path d=\"M118 4H300\" stroke=\"#EBEAE8\" stroke-width=\"1\" stroke-linecap=\"round\"/><path d=\"M0 4H40L43 15C55 15 70 4 118 4\" fill=\"none\" stroke=\"#8C5CF7\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"118\" cy=\"4\" r=\"2.5\" fill=\"#8C5CF7\"/></svg><span class=\"ds-val\">4 of 15</span></div><div class=\"ds-lane\"><svg class=\"ds-sym\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\"><path d=\"M12 2s7 8 7 12.5a7 7 0 0 1-14 0C5 10 12 2 12 2z\" fill=\"#0490F5\"/></svg><svg class=\"ds-line\" viewBox=\"0 0 300 34\" preserveAspectRatio=\"none\"><path d=\"M118 4H300\" stroke=\"#EBEAE8\" stroke-width=\"1\" stroke-linecap=\"round\"/><path d=\"M0 4H118\" fill=\"none\" stroke=\"#0490F5\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"118\" cy=\"4\" r=\"2.5\" fill=\"#0490F5\"/></svg><span class=\"ds-val\">0.75 of 2 L</span></div></div>",
+      "css": ".ds-lanes{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;display:flex;flex-direction:column;gap:8px;width:520px;background:#FFFFFF;padding:8px} .ds-lane{display:flex;align-items:center;gap:12px} .ds-sym{flex:none;width:18px} .ds-line{flex:1;height:34px} .ds-val{width:96px;text-align:right;font-size:12px;font-weight:500;font-variant-numeric:tabular-nums;color:#2F2E2B}"
+    },
+    {
+      "name": "End of Shift Widget",
+      "kind": "card",
+      "refersTo": "",
+      "description": "Solid widget-theme surface per shift state; bold tabular countdown, 28% ink track, derived soft ink.",
+      "html": "<div class=\"ds-eos\"><div class=\"ds-eos-head\">End of shift</div><div class=\"ds-eos-time\">3:24:00</div><div class=\"ds-eos-sub\">left</div><div class=\"ds-eos-track\"><i></i></div><div class=\"ds-eos-foot\">Ends 5:00 PM · Every day</div></div>",
+      "css": ".ds-eos{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;width:150px;height:150px;padding:16px;border-radius:22px;background:#20414F;color:#EEF5F8;display:flex;flex-direction:column} .ds-eos-head{font-size:11px;font-weight:600} .ds-eos-time{margin-top:auto;font-size:32px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1} .ds-eos-sub{font-size:11px;font-weight:500;opacity:0.8} .ds-eos-track{height:4px;border-radius:9999px;background:rgba(238,245,248,0.28);margin:12px 0 7px} .ds-eos-track i{display:block;height:100%;width:57%;border-radius:9999px;background:#EEF5F8} .ds-eos-foot{font-size:11px;font-weight:600;opacity:0.85}"
+    },
+    {
+      "name": "More Options",
+      "kind": "custom",
+      "refersTo": "page",
+      "description": "The fold under a page's four essentials: a plain secondary-ink line with a chevron that turns when open. Also DisclosureRow (\"Work out my goal\").",
+      "html": "<button class=\"ds-more\" aria-expanded=\"false\"><span>More options</span><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M3.5 1.5L7 5l-3.5 3.5\"/></svg></button>",
+      "css": ".ds-more{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;display:flex;align-items:center;gap:6px;padding:6px 0;margin-top:26px;background:none;border:none;font-size:13px;font-weight:500;color:#73726E;cursor:pointer} .ds-more svg{transition:transform .2s ease-out} .ds-more:hover{color:#2F2E2B} .ds-more:focus-visible{outline:2px solid #6B36E0;outline-offset:2px;border-radius:4px} .ds-more[aria-expanded=true] svg{transform:rotate(90deg)} @media (prefers-reduced-motion: reduce){.ds-more svg{transition:none}}"
+    },
+    {
+      "name": "Break Guide Card",
+      "kind": "card",
+      "description": "Every break's one instruction: step symbol in the accent, the step title, one secondary line; glass, 28px corners, under the ring. Steps cross-fade.",
+      "html": "<div class=\"ds-guide\"><div class=\"ds-guide-head\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#8C5CF7\" stroke-width=\"2\"><circle cx=\"7\" cy=\"14\" r=\"4\"/><circle cx=\"17\" cy=\"14\" r=\"4\"/><path d=\"M11 14h2M5 10l2-5h3M19 10l-2-5h-3\"/></svg><span>Look across the room</span></div><div class=\"ds-guide-line\">Something 3 metres away or more.</div></div>",
+      "css": ".ds-guide{font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;display:flex;flex-direction:column;align-items:center;gap:14px;padding:26px 40px;max-width:640px;border-radius:28px;background:rgba(140,92,247,0.08);backdrop-filter:blur(24px);border:0.75px solid rgba(255,255,255,0.3);color:#FFFFFF} .ds-guide-head{display:flex;align-items:center;gap:14px;font-size:30px;font-weight:500} .ds-guide-line{font-size:16px;color:rgba(255,255,255,0.72);text-align:center}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Notebook",
+    "overview": "EyeBreak is a calm Mac productivity app in the TickTick/Notion lineage. Content sits on opaque paper: a page is an SF Symbol, a large bold title and one line of description, then sections set by a semibold heading over a hairline, then flat rows with a title and one line of detail on the left and a native control on the right. Type and spacing do the grouping. There are no boxed grouped forms, stat tiles or card grids. The window has four pages, one per need (Breaks, Water, Workday, App); each shows at most four essentials and folds the rest under \"More options\".\n\nLiquid Glass is the accent, not the ground. It appears only where something floats over the user's work or desktop: the window's sidebar, the popover's hero card holding the next-break countdown, toasts, and break overlays. Everything else is solid. Colour belongs to the habits. The theme's eye colour (violet, or leaf green in Garden) marks breaks and the app's own chrome. Its water colour (aqua, or rain blue) marks water. One red (`Theme.alert`) is held in reserve for a warning; nothing draws in it today. Neutrals are warm ink on paper with hairlines.\n\nThe signature is the rhythm line. Each habit draws one line across today's shift. It stays straight while the user keeps up and catches, dipping and easing back, at each skipped break or missed glass. The same view draws it in the popover, at the top of the Breaks and Water pages and in the Rhythm widget, and the app icon is that line drawn large.\n\nEyeBreak speaks English and Arabic (Modern Standard Arabic). In Arabic the whole interface mirrors right to left, the rhythm lines and day labels included, and times are set in the locale's digits. The voice is calm and factual in both languages.",
+    "keyCharacteristics": [
+      "Opaque paper pages, warm ink, 1px hairlines; flat rows, never boxed groups.",
+      "Glass only where something floats: the sidebar, the popover hero, toasts, break overlays.",
+      "Two habit colours per theme, plus one red held in reserve; accents mark action, selection and state, never decoration.",
+      "Solid colours only. No gradients anywhere.",
+      "SF Pro (never Rounded), SF Symbols, monospaced digits for every live number.",
+      "The rhythm line as the one chart idiom: straight while on track, catching at each miss.",
+      "English and Arabic, mirrored right to left down to the lines; no hard-coded strings."
+    ],
+    "rules": [
+      {
+        "name": "The Colour Has a Job Rule",
+        "body": "Eye colour means eyes, breaks and app chrome. Water colour means water. Alert red is reserved for a warning and unused today. A widget theme's heroAccent means the shift. Resting icons are secondary ink. If a colour can't name its job, it doesn't ship.",
+        "section": "colors"
+      },
+      {
+        "name": "The Solid Only Rule",
+        "body": "Every fill is one flat colour: icons, buttons, selections, charts, backdrops. Gradients are prohibited, with no exceptions.",
+        "section": "colors"
+      },
+      {
+        "name": "The Garden Icon Rule",
+        "body": "The app icon is drawn in Garden's linen (garden-paper), herb green (garden-eyes-deep) and watering-can blue (garden-water-deep) whichever theme is active. It is the one place the per-theme colour rule doesn't apply.",
+        "section": "colors"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Page sections, rows, descriptions and widget headers are in sentence case. Title Case is only for buttons and menu items (\"Take a Break Now\", \"Every 4th Break\").",
+        "section": "typography"
+      },
+      {
+        "name": "The Ticking Digits Rule",
+        "body": "Any number that changes while you watch is set in monospaced digits so it doesn't jitter, in the locale's own digits (`localizedDigits`; Arabic-Indic where the locale uses them). The break countdowns keep their digits in left-to-right order in every language.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Box Rule",
+        "body": "Group with a heading over a hairline and with spacing. Never wrap settings in boxed forms, group boxes, stat tiles or card grids. The wash callout is the one tinted block, for the one thing on a page worth reading first.",
+        "section": "layout"
+      },
+      {
+        "name": "The Glass Floats Rule",
+        "body": "Glass only where something floats: the sidebar, the popover hero, toasts, break overlays. A page, a row or a widget is never glass.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Glow Rule",
+        "body": "The tapered countdown ring on the full-screen break gets one soft solid glow. Nothing else glows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** take every colour from `ThemeColors` by its job. Reach for the token (paper, ink, secondary-ink, hairline, wash, the eye and water ramps), not a literal.",
+      "**Do** build Settings pages from the page grammar: symbol, 26px bold title, one-line description, then sections of a 13px semibold heading over a 1px hairline, then flat 40px-minimum rows. Keep a page to four essentials and put the rest under More options.",
+      "**Do** put text on solid fills only in its paired colour: white on eyes-deep, water-ink on water-bright.",
+      "**Do** use monospaced digits for every countdown and live value.",
+      "**Do** say it with a rhythm line when showing how the day or week is going.",
+      "**Do** take every user-facing string from the string catalog (`Localizable.xcstrings`, `String(localized:)`; shared code via `String(shared:)`). Never hard-code one.",
+      "**Do** mirror anything time-based in right to left (lines, week lines, day labels) and set times in the locale's digits; keep break countdown digits left to right.",
+      "**Do** write copy calm and factual in both languages: no exclamation marks, no health claim beyond `docs/EVIDENCE.md`.",
+      "**Do** derive secondary text on widget surfaces from the surface (`Contrast.muted`), with floors of 6.0 / 4.7 (7.6 / 6.5 light-on-dark)."
+    ],
+    "donts": [
+      "**Don't** use gradients anywhere: icons, buttons, selections, charts, backdrops.",
+      "**Don't** put glass on pages, rows or widgets. Glass is for the sidebar, the popover hero, toasts and break overlays.",
+      "**Don't** box settings into grouped forms, stat tiles or card grids.",
+      "**Don't** use red. `Theme.alert` is reserved for a warning, and nothing draws in it today; a skipped-breaks note is neutral.",
+      "**Don't** put anything on a break beyond the countdown, the guide card and its actions: no quotes, no pictures of damage.",
+      "**Don't** use SF Rounded, a second typeface, or emoji in the app's own UI. Custom ambient reminders may carry the user's own emoji.",
+      "**Don't** add decorative motion. Motion only conveys state: the ring ticking down, the break step cross-fading, a disclosure chevron turning (0.2s ease-out), and toasts fading in and out. All of it stops under Reduce Motion: the ring steps once a second and toasts simply appear.",
+      "**Don't** add a glow or shadow beyond the countdown ring's glow and the icon's template shadow."
+    ]
+  }
+}

@@ -9,15 +9,22 @@ class WaterReminderManager: ObservableObject {
 
     var interval: TimeInterval { TimeInterval(settings.waterReminderInterval * 60) }
     var isEnabled: Bool { settings.waterReminderEnabled }
+    /// The long break asks instead, so there's no countdown of its own.
+    var ridesWithBreaks: Bool { settings.waterRidesWithBreaks }
 
     // MARK: - Published Properties
     @Published private(set) var timeRemaining: TimeInterval
     /// The reminder has fired and hasn't been acknowledged yet.
     @Published private(set) var isDue = false
 
+    /// A glass drunk (true) or a reminder turned down (false), for the day's rhythm.
+    var onRecord: ((_ drank: Bool) -> Void)?
+
     // MARK: - Private Properties
     private var timer: DispatchSourceTimer?
     private var isPaused = false
+    /// Shown by hand ("Show Water Reminder Now"): putting it off isn't a missed glass.
+    private var isManual = false
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Initialization
@@ -31,11 +38,11 @@ class WaterReminderManager: ObservableObject {
             object: nil
         )
 
-        // Interval or on/off changes restart the countdown
-        Publishers.CombineLatest(settings.$waterReminderInterval, settings.$waterReminderEnabled)
+        // Interval, mode or on/off changes restart the countdown
+        Publishers.CombineLatest3(settings.$waterReminderInterval, settings.$waterReminderEnabled, settings.$waterReminderMode)
             .dropFirst()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _, _ in self?.markDrank() }
+            .sink { [weak self] _, _, _ in self?.restart() }
             .store(in: &cancellables)
     }
 
@@ -54,20 +61,37 @@ class WaterReminderManager: ObservableObject {
         timer.resume()
     }
 
-    /// "I already drank" / "I'll drink now" — clears the reminder and restarts the full interval.
-    func markDrank() {
+    /// "I drank", from anywhere: a glass toward today's goal, and the full interval starts
+    /// again, so a reminder only comes when nothing's been drunk for a while.
+    func drink() {
+        onRecord?(true)
+        restart()
+    }
+
+    /// Clears the reminder and starts a full interval, without counting a glass.
+    func restart() {
         isDue = false
+        isManual = false
         timeRemaining = interval
     }
 
-    /// Dismissed without drinking — ask again a little later.
+    /// "Remind me in 10 minutes": not now, but soon. Not a miss — you're asked again shortly.
     func snooze() {
         isDue = false
+        isManual = false
         timeRemaining = min(snoozeInterval, interval)
+    }
+
+    /// Escape: not drinking this time. Recorded, and the next reminder is a full interval
+    /// away rather than a snooze; the line only dips once you're a glass behind your pace.
+    func decline() {
+        if isDue && !isManual { onRecord?(false) }
+        restart()
     }
 
     /// "Show Water Reminder Now"
     func triggerNow() {
+        isManual = !isDue
         isDue = true
     }
 
@@ -77,7 +101,7 @@ class WaterReminderManager: ObservableObject {
 
     // MARK: - Private Methods
     private func tick() {
-        guard isEnabled, !isPaused, !isDue else { return }
+        guard isEnabled, !ridesWithBreaks, !isPaused, !isDue else { return }
         timeRemaining -= 1
         if timeRemaining <= 0 {
             timeRemaining = 0
@@ -87,7 +111,7 @@ class WaterReminderManager: ObservableObject {
 
     @objc private func handleWake() {
         // Back from sleep: start a fresh interval rather than nagging immediately
-        markDrank()
+        restart()
     }
 
     // MARK: - Formatted Time String
@@ -96,34 +120,31 @@ class WaterReminderManager: ObservableObject {
     }
 
     // MARK: - Content
-    static let titles = [
-        "Time for Water!", "Hydration Check", "Water Break", "Stay Hydrated",
-        "Quick Reminder", "Drink Up!", "Hydration Time", "Wellness Check",
-    ]
+    static var titles: [String] { [
+        String(localized: "Time for some water"),
+        String(localized: "A glass of water"),
+        String(localized: "Water, when you're ready"),
+    ] }
 
-    static let messages = [
-        "Stay hydrated! Take a sip of water.",
-        "Don't forget to drink some water!",
-        "Your body needs water. Take a quick sip!",
-        "Grab a glass of water and refresh yourself.",
-        "Have you had water recently? Time to hydrate!",
-        "Keep your energy up with some water.",
-        "A sip of water helps you stay focused!",
-        "Take a moment to drink some water.",
-    ]
+    static var messages: [String] { [
+        String(localized: "A glass now keeps you on pace for the day."),
+        String(localized: "Water, tea or coffee all count."),
+        String(localized: "Fill a glass and take it back to your desk."),
+        String(localized: "A few sips now, before you get thirsty."),
+    ] }
 
-    static let iconOptions: [(name: String, symbol: String)] = [
-        ("Drop", "drop.fill"),
-        ("Water Bottle", "waterbottle.fill"),
-        ("Drop Circle", "drop.circle.fill"),
-        ("Drop Triangle", "drop.triangle.fill"),
-        ("Figure Water", "figure.water.fitness"),
-        ("Cup", "cup.and.saucer.fill"),
-        ("Mug", "mug.fill"),
-        ("Leaf", "leaf.fill"),
-        ("Heart", "heart.fill"),
-        ("Sparkles", "sparkles"),
-        ("Sun", "sun.max.fill"),
-        ("Bell", "bell.fill"),
-    ]
+    static var iconOptions: [(name: String, symbol: String)] { [
+        (String(localized: "Drop"), "drop.fill"),
+        (String(localized: "Water Bottle"), "waterbottle.fill"),
+        (String(localized: "Drop Circle"), "drop.circle.fill"),
+        (String(localized: "Drop Triangle"), "drop.triangle.fill"),
+        (String(localized: "Figure Water"), "figure.water.fitness"),
+        (String(localized: "Cup"), "cup.and.saucer.fill"),
+        (String(localized: "Mug"), "mug.fill"),
+        (String(localized: "Leaf"), "leaf.fill"),
+        (String(localized: "Heart"), "heart.fill"),
+        (String(localized: "Sparkles"), "sparkles"),
+        (String(localized: "Sun"), "sun.max.fill"),
+        (String(localized: "Bell"), "bell.fill"),
+    ] }
 }

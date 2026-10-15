@@ -1,29 +1,22 @@
 import Foundation
 import Combine
 
-/// One gentle nudge shown by the ambient reminder pill.
+/// One blink reminder, shown by the glass pill.
 struct AmbientReminder: Equatable {
-    enum Glyph: Equatable {
-        case symbol(String)
-        case emoji(String)
-    }
-
-    let glyph: Glyph
+    let symbol: String
     let title: String
     let message: String
 
-    static let presets = [
-        AmbientReminder(glyph: .symbol("eye"), title: "Blink", message: "Blink slowly a few times"),
-        AmbientReminder(glyph: .symbol("arrow.left"), title: "Look to the left", message: "Glance away for a moment"),
-        AmbientReminder(glyph: .symbol("arrow.right"), title: "Look to the right", message: "Give your focus a stretch"),
-        AmbientReminder(glyph: .symbol("mountain.2"), title: "Take a visual break", message: "Find something far away"),
-        AmbientReminder(glyph: .symbol("scope"), title: "Shift your focus", message: "Look past your screen"),
-        AmbientReminder(glyph: .symbol("window.vertical.closed"), title: "Change your view", message: "Look out a window"),
-        AmbientReminder(glyph: .symbol("eye.slash"), title: "Rest for a moment", message: "Close your eyes for a breath"),
-    ]
+    /// Only what has evidence behind it: complete blinks and a far look (docs/EVIDENCE.md §1).
+    static var presets: [AmbientReminder] { [
+        AmbientReminder(symbol: "eye", title: String(localized: "Two slow blinks"),
+                        message: String(localized: "Close, squeeze gently, open")),
+        AmbientReminder(symbol: "binoculars", title: String(localized: "Look across the room"),
+                        message: String(localized: "Something 3 metres away or more")),
+    ] }
 }
 
-/// Cute periodic reminders while you work. They never take focus and fade out on their own.
+/// Optional blink reminders between breaks. They never take focus and fade on their own.
 final class AmbientReminderManager: ObservableObject {
     private let settings: AppSettings
 
@@ -85,12 +78,10 @@ final class AmbientReminderManager: ObservableObject {
         }
     }
 
+    /// Blinks and far looks take turns.
     private func nextReminder() -> AmbientReminder {
-        if settings.useCustomReminder && !settings.customReminderMessage.isEmpty {
-            return AmbientReminder(glyph: .emoji(settings.customReminderEmoji), title: settings.customReminderMessage, message: "Eye care reminder")
-        }
-        // Avoid repeating the same nudge twice in a row
-        let pick = AmbientReminder.presets.filter { $0 != lastReminder }.randomElement() ?? AmbientReminder.presets[0]
+        let presets = AmbientReminder.presets
+        let pick = presets.first { $0 != lastReminder } ?? presets[0]
         lastReminder = pick
         return pick
     }

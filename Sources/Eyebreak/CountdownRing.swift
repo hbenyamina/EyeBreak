@@ -67,7 +67,6 @@ struct CountdownRing: View {
         var glow: CGFloat
 
         static let hero = Style(minWidth: 2.5, maxWidth: 22, glow: 16)
-        static let heroCompact = Style(minWidth: 2, maxWidth: 18, glow: 12)
         static let compact = Style(minWidth: 1, maxWidth: 4.5, glow: 0)
     }
 
@@ -102,18 +101,24 @@ struct LiveCountdownRing: View {
     var style: CountdownRing.Style = .hero
 
     @State private var progress: Double?
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         CountdownRing(progress: progress ?? fraction(remaining), style: style)
             .onAppear(perform: advance)
-            .onChange(of: remaining) { _ in advance() }
+            .onChange(of: remaining) { _, _ in advance() }
     }
 
     private func fraction(_ seconds: TimeInterval) -> Double {
         total > 0 ? min(max(seconds / total, 0), 1) : 0
     }
 
+    /// With Reduce Motion the ring steps once a second instead of sweeping.
     private func advance() {
+        guard !reduceMotion else {
+            progress = fraction(remaining)
+            return
+        }
         withAnimation(.linear(duration: 1)) {
             progress = fraction(remaining - 1)
         }

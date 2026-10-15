@@ -9,5 +9,12 @@ struct EyebreakApp: App {
         Settings {
             EmptyView()
         }
+        .commands {
+            // The app menu exists only while EyeBreak's window is open; its Settings… opens that window
+            CommandGroup(replacing: .appSettings) {
+                Button("Settings…") { appDelegate.showSettings() }
+                    .keyboardShortcut(",", modifiers: .command)
+            }
+        }
     }
 }

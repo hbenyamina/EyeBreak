@@ -3,64 +3,61 @@ import SwiftUI
 /// Actions that need the app coordinator (windows, schedule confirmation).
 struct MenuActions {
     let takeBreak: () -> Void
-    let showWater: () -> Void
-    let showAmbient: () -> Void
     let openSettings: () -> Void
 }
 
+/// The menu: the day at a glance, then what you can do about it. Top to bottom: the date
+/// and shift, the next break on a piece of glass, today's rhythm lines, the other
+/// countdowns, and plain actions.
 struct MenuBarView: View {
     @ObservedObject var timerManager: TimerManager
     @ObservedObject var waterManager: WaterReminderManager
     @ObservedObject var ambientManager: AmbientReminderManager
+    @ObservedObject var shift: ShiftModel
+    @ObservedObject var activity: ActivityModel
     @ObservedObject var settings: AppSettings
-    @ObservedObject var stats: StatsStore
     let actions: MenuActions
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 0) {
             header
+                .padding(.bottom, 12)
 
-            if let reason = timerManager.pauseReason, reason != .user {
-                pauseBanner(reason)
+            if let reason = timerManager.pauseReason {
+                pauseLine(reason)
+                    .padding(.bottom, 10)
             }
 
-            countdownCard
+            hero
 
-            todayProgress
+            today
+                .padding(.top, 16)
 
-            VStack(spacing: 2) {
-                if timerManager.isRunning {
-                    MenuRow(
-                        icon: timerManager.isPaused ? "play.fill" : "pause.fill",
-                        title: timerManager.isPaused ? "Resume" : "Pause"
-                    ) {
-                        timerManager.togglePause()
+            countdowns
+                .padding(.top, 12)
+
+            hairline
+
+            VStack(spacing: 1) {
+                if breakIsDue {
+                    if timerManager.canPostpone {
+                        MenuRow(icon: "clock.arrow.circlepath", title: "5 More Minutes") { timerManager.postpone() }
                     }
+                    MenuRow(icon: "forward", title: "Skip This Break") { timerManager.skipBreak() }
                 }
-
-                if timerManager.isInWarningPeriod && !timerManager.isOnBreak {
-                    MenuRow(icon: "forward.fill", title: "Skip This Break") {
-                        timerManager.skipBreak()
-                    }
-                }
-
-                MenuRow(icon: "eye.fill", title: "Take Break Now", action: actions.takeBreak)
+                MenuRow(icon: "eye", title: "Take a Break Now", action: actions.takeBreak)
                     .disabled(timerManager.isOnBreak)
-
-                if settings.waterReminderEnabled {
-                    MenuRow(icon: "drop.fill", title: "Show Water Reminder", action: actions.showWater)
-                        .environment(\.palette, .water)
-                }
-                if settings.ambientRemindersEnabled {
-                    MenuRow(icon: "sparkles", title: "Show Ambient Reminder", action: actions.showAmbient)
+                if shift.adjustedWindowToday != nil {
+                    MenuRow(icon: "arrow.uturn.backward", title: "Undo Late Start") { shift.clearAdjustedStart() }
+                } else if shift.scheduledWindowToday != nil {
+                    MenuRow(icon: "sunrise", title: "Start Shift from Now") { shift.startShift() }
                 }
             }
 
-            Divider()
-                .opacity(0.5)
+            hairline
 
-            VStack(spacing: 2) {
-                MenuRow(icon: "gearshape.fill", title: "Settings…", shortcut: "⌘,", action: actions.openSettings)
+            VStack(spacing: 1) {
+                MenuRow(icon: "gearshape", title: "Settings…", shortcut: "⌘,", action: actions.openSettings)
                     .keyboardShortcut(",", modifiers: .command)
                 MenuRow(icon: "power", title: "Quit EyeBreak", shortcut: "⌘Q") {
                     NSApplication.shared.terminate(nil)
@@ -68,111 +65,156 @@ struct MenuBarView: View {
                 .keyboardShortcut("q", modifiers: .command)
             }
         }
-        .padding(12)
-        .frame(width: 280)
+        .padding(14)
+        .frame(width: 300)
     }
 
     // MARK: - Header
     private var header: some View {
-        HStack(spacing: 8) {
-            Image(systemName: "eye")
-                .font(.system(size: 14, weight: .medium))
-                .foregroundStyle(.secondary)
-            Text("EyeBreak")
-                .font(.system(size: 13, weight: .semibold))
-            Spacer()
+        HStack(alignment: .top, spacing: 8) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(shift.now, format: .dateTime.weekday(.wide).day().month(.wide))
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.primary)
+                Text(verbatim: shiftLine)
+                    .font(.system(size: 12))
+                    .monospacedDigit()
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.85)
+            }
+            Spacer(minLength: 4)
+            if !timerManager.isPaused {
+                pauseMenu
+            }
         }
         .padding(.horizontal, 4)
     }
 
-    private func pauseBanner(_ reason: PauseReason) -> some View {
+    /// Pause everything — breaks, water and nudges — for a while.
+    private var pauseMenu: some View {
+        Menu {
+            Section("Pause all reminders") {
+                ForEach(PauseDuration.allCases) { duration in
+                    Button { timerManager.pause(until: duration.until()) } label: { Text(verbatim: duration.title) }
+                }
+            }
+        } label: {
+            Image(systemName: "pause.circle")
+                .font(.system(size: 17, weight: .regular))
+                .foregroundStyle(.secondary)
+        }
+        .menuStyle(.borderlessButton)
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .help(Text("Pause all reminders"))
+        .accessibilityLabel(Text("Pause all reminders"))
+    }
+
+    /// A break that's about to start, or waiting for you to pause.
+    private var breakIsDue: Bool {
+        !timerManager.isOnBreak && (timerManager.isInWarningPeriod || timerManager.isWaitingForPause)
+    }
+
+    /// "On shift · 3:24 left, until 5:16 PM", "Shift starts at 9:00 AM", "Off the clock".
+    private var shiftLine: String {
+        guard let status = shift.status else { return String(localized: "No shift days picked") }
+        switch status.phase {
+        case .onShift:
+            return String(localized: "On shift · \(ShiftText.short(for: status, now: shift.now)) left, until \(shift.schedule.clockText(for: status.window.end))")
+        case .beforeShift:
+            return String(localized: "Shift starts at \(shift.schedule.clockText(for: status.window.start))")
+        case .offDuty:
+            return String(localized: "Off the clock · next shift \(status.window.start.weekdayText())")
+        }
+    }
+
+    private func pauseLine(_ reason: PauseReason) -> some View {
         HStack(spacing: 8) {
             Image(systemName: reason.icon)
+                .font(.system(size: 11, weight: .medium))
                 .foregroundStyle(Theme.accent)
-            Text(reason.label)
-                .font(.system(size: 12, weight: .medium))
+            if reason == .user {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("All reminders paused")
+                        .font(.system(size: 12, weight: .medium))
+                    Text(verbatim: PauseDuration.phrase(for: timerManager.pausedUntil))
+                        .font(.system(size: 11))
+                        .foregroundStyle(.secondary)
+                }
+            } else {
+                Text(verbatim: reason.label)
+                    .font(.system(size: 12, weight: .medium))
+            }
             Spacer()
+            if reason == .user {
+                Button("Resume") { timerManager.resume() }
+                    .buttonStyle(AccentButtonStyle())
+            }
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 7)
-        .glassSurface(in: Capsule(), tint: Theme.accent.opacity(0.12))
+        .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Color.primary.opacity(0.05)))
     }
 
-    // MARK: - Countdowns
-    /// All your health reminders at a glance.
-    private var countdownCard: some View {
-        VStack(spacing: 10) {
-            HStack(spacing: 12) {
-                ZStack {
-                    LiveCountdownRing(
-                        remaining: timerManager.isOnBreak ? timerManager.breakTimeRemaining : timerManager.timeRemaining,
-                        total: timerManager.isOnBreak ? timerManager.breakDuration : timerManager.workDuration,
-                        style: .compact
+    // MARK: - Hero
+    /// The next break on a piece of glass: the one thing in the menu that floats.
+    private var hero: some View {
+        HStack(spacing: 14) {
+            ZStack {
+                LiveCountdownRing(
+                    remaining: timerManager.isOnBreak ? timerManager.breakTimeRemaining : timerManager.timeRemaining,
+                    total: timerManager.isOnBreak ? timerManager.breakDuration : timerManager.workDuration,
+                    style: .compact
+                )
+                .saturation(isDimmed ? 0 : 1)
+                .opacity(isDimmed ? 0.5 : 1)
+
+                Image(systemName: timerManager.isPaused ? "pause.fill" : "eye")
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(.secondary)
+            }
+            .frame(width: 48, height: 48)
+
+            VStack(alignment: .leading, spacing: 1) {
+                Text(verbatim: breakCaption)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(.secondary)
+                Text(verbatim: timerManager.isRunning ? breakTime : String(localized: "Not running"))
+                    .font(.system(size: timerManager.isRunning ? 26 : 16, weight: .semibold))
+                    .monospacedDigit()
+                    .foregroundStyle(isDimmed ? .secondary : .primary)
+                if settings.longBreakEvery > 0 && timerManager.isRunning {
+                    RoundDots(
+                        filled: timerManager.round.filled(every: settings.longBreakEvery, isOnBreak: timerManager.isOnBreak),
+                        total: settings.longBreakEvery
                     )
-                    .saturation(isDimmed ? 0 : 1)
-                    .opacity(isDimmed ? 0.5 : 1)
-
-                    Image(systemName: timerManager.isPaused ? "pause.fill" : "eye")
-                        .font(.system(size: 13, weight: .medium))
-                        .foregroundStyle(.secondary)
-                }
-                .frame(width: 44, height: 44)
-
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(breakCaption)
-                        .font(.system(size: 11, weight: .medium))
-                        .foregroundStyle(.secondary)
-                    Text(timerManager.isRunning ? breakTime : "Click to start")
-                        .font(.system(size: timerManager.isRunning ? 22 : 15, weight: .medium))
-                        .monospacedDigit()
-                        .foregroundStyle(isDimmed ? .secondary : .primary)
-                }
-
-                Spacer()
-
-                if !timerManager.isRunning {
-                    Button("Start") { timerManager.start() }
-                        .buttonStyle(AccentButtonStyle())
+                    .padding(.top, 4)
                 }
             }
 
-            if settings.waterReminderEnabled || settings.ambientRemindersEnabled {
-                Divider().opacity(0.4)
-            }
+            Spacer(minLength: 4)
 
-            if settings.waterReminderEnabled {
-                CountdownRow(
-                    icon: waterManager.isDue ? "drop.fill" : "drop",
-                    title: waterManager.isDue ? "Time to drink" : "Water in",
-                    value: waterManager.isDue ? "Now" : waterManager.formattedTimeRemaining,
-                    dimmed: isDimmed
-                ) {
-                    Button("I already drank") { waterManager.markDrank() }
-                        .buttonStyle(AccentButtonStyle(palette: .water))
-                }
-                .environment(\.palette, .water)
-            }
-
-            if settings.ambientRemindersEnabled {
-                CountdownRow(
-                    icon: "sparkles",
-                    title: "Ambient reminder in",
-                    value: ambientManager.formattedTimeRemaining,
-                    dimmed: isDimmed
-                ) { EmptyView() }
+            if !timerManager.isRunning {
+                Button("Start") { timerManager.start() }
+                    .buttonStyle(AccentButtonStyle())
             }
         }
-        .padding(10)
+        .padding(12)
         .glassSurface(in: RoundedRectangle(cornerRadius: 16, style: .continuous), tint: Theme.accent.opacity(0.10))
     }
 
     private var isDimmed: Bool { timerManager.pauseReason != nil && !timerManager.isOnBreak }
 
     private var breakCaption: String {
-        if !timerManager.isRunning { return "EyeBreak" }
-        if timerManager.isOnBreak { return "Break time remaining" }
-        if timerManager.pauseReason != nil { return "Paused" }
-        return timerManager.isInWarningPeriod ? "Break starting soon" : "Next break in"
+        if !timerManager.isRunning { return String(localized: "Breaks") }
+        if timerManager.isOnBreak { return timerManager.isLongBreak ? String(localized: "Long break, time left") : String(localized: "Break, time left") }
+        if timerManager.pauseReason != nil { return String(localized: "Paused") }
+        if timerManager.isWaitingForPause {
+            return timerManager.isInCall ? String(localized: "Break after your call") : String(localized: "Break when you pause typing")
+        }
+        if timerManager.isInWarningPeriod { return String(localized: "Break starting soon") }
+        return timerManager.nextBreakIsLong ? String(localized: "Long break in") : String(localized: "Next break in")
     }
 
     private var breakTime: String {
@@ -180,39 +222,84 @@ struct MenuBarView: View {
     }
 
     // MARK: - Today
-    private var todayProgress: some View {
-        let today = stats.today
-        let goal = max(settings.dailyBreakGoal, 1)
-        let progress = min(Double(today.breaksCompleted) / Double(goal), 1)
-
-        return VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 4) {
+    private var today: some View {
+        let misses = activity.misses(.eyes, on: shift.now).count + activity.misses(.water, on: shift.now).count
+        return VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .firstTextBaseline) {
                 Text("Today")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 12, weight: .semibold))
                 Spacer()
-                Text("\(today.breaksCompleted) of \(goal) breaks")
-                    .font(.system(size: 11, weight: .medium))
-                    .monospacedDigit()
-                if today.breaksSkipped > 0 {
-                    Text("· \(today.breaksSkipped) skipped")
-                        .font(.system(size: 11))
-                        .foregroundStyle(.secondary)
-                }
+                Text(verbatim: Rhythm.summary(misses: misses))
+                    .font(.system(size: 11))
+                    .foregroundStyle(.secondary)
             }
-            GeometryReader { geo in
-                ZStack(alignment: .leading) {
-                    Capsule().fill(Color.primary.opacity(0.08))
-                    Capsule()
-                        .fill(Theme.accent)
-                        .frame(width: max(geo.size.width * progress, progress > 0 ? 6 : 0))
-                }
-            }
-            .frame(height: 6)
+            RhythmLanes(activity: activity, now: shift.now, waterGoalML: settings.waterGoalML, waterUnit: settings.waterUnit)
         }
         .padding(.horizontal, 4)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Today: \(today.breaksCompleted) of \(goal) breaks completed")
+    }
+
+    // MARK: - Countdowns
+    private var countdowns: some View {
+        VStack(spacing: 2) {
+            if settings.waterReminderEnabled {
+                CountdownRow(
+                    icon: waterManager.isDue ? "drop.fill" : "drop",
+                    title: waterTitle,
+                    value: waterValue,
+                    dimmed: isDimmed
+                ) {
+                    Button("I Drank") { waterManager.drink() }
+                        .buttonStyle(AccentButtonStyle(palette: .water))
+                }
+                .environment(\.palette, .water)
+            }
+
+            if settings.ambientRemindersEnabled {
+                CountdownRow(icon: "eye", title: String(localized: "Next blink reminder in"), value: ambientManager.formattedTimeRemaining, dimmed: isDimmed) {
+                    EmptyView()
+                }
+            }
+        }
+    }
+
+    /// Water rides with the long break (so the next glass is due then), or keeps its own timer.
+    private var waterTitle: String {
+        waterManager.isDue ? String(localized: "Time to drink") : String(localized: "Next glass in")
+    }
+
+    private var waterValue: String {
+        if waterManager.isDue { return String(localized: "Now") }
+        if settings.waterRidesWithBreaks {
+            return timerManager.timeUntilLongBreak.map(TimerManager.format) ?? "—"
+        }
+        return waterManager.formattedTimeRemaining
+    }
+
+    private var hairline: some View {
+        Rectangle()
+            .fill(Color.primary.opacity(0.08))
+            .frame(height: 1)
+            .padding(.horizontal, 4)
+            .padding(.vertical, 8)
+    }
+}
+
+// MARK: - Round Dots
+/// One dot per work interval in a Pomodoro round; the long break comes after the last.
+private struct RoundDots: View {
+    let filled: Int
+    let total: Int
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(0..<total, id: \.self) { index in
+                Circle()
+                    .fill(index < filled ? AnyShapeStyle(Theme.accent) : AnyShapeStyle(.quaternary))
+                    .frame(width: 6, height: 6)
+            }
+        }
+        .accessibilityElement()
+        .accessibilityLabel(Text("\(filled) of \(total) before the long break"))
     }
 }
 
@@ -223,38 +310,40 @@ private struct CountdownRow<Accessory: View>: View {
     let title: String
     let value: String
     let dimmed: Bool
+    /// Overrides the palette's accent, e.g. the shift's widget theme.
+    var iconColor: Color? = nil
     @ViewBuilder let accessory: () -> Accessory
 
     var body: some View {
         HStack(spacing: 10) {
             Image(systemName: icon)
-                .font(.system(size: 13, weight: .medium))
-                .foregroundStyle(palette.accent)
-                .frame(width: 28, height: 28)
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(iconColor ?? palette.accent)
+                .frame(width: 18)
 
-            VStack(alignment: .leading, spacing: 0) {
-                Text(title)
-                    .font(.system(size: 11, weight: .medium))
-                    .foregroundStyle(.secondary)
-                Text(value)
-                    .font(.system(size: 14, weight: .medium))
-                    .monospacedDigit()
-                    .foregroundStyle(dimmed ? .secondary : .primary)
-            }
+            Text(verbatim: title)
+                .font(.system(size: 12))
+                .foregroundStyle(.secondary)
 
             Spacer(minLength: 4)
+
+            Text(verbatim: value)
+                .font(.system(size: 13, weight: .medium))
+                .monospacedDigit()
+                .foregroundStyle(dimmed ? .secondary : .primary)
             accessory()
         }
-        .padding(.leading, 8)
+        .padding(.horizontal, 4)
+        .frame(minHeight: 28)
     }
 }
 
 // MARK: - Menu Row
-/// Plain row with a solid accent highlight on hover, like a native menu selection.
+/// Plain row with a quiet highlight on hover, like a native menu selection.
 private struct MenuRow: View {
     @Environment(\.palette) private var palette
     let icon: String
-    let title: String
+    let title: LocalizedStringKey
     var shortcut: String? = nil
     let action: () -> Void
 
@@ -267,25 +356,26 @@ private struct MenuRow: View {
         Button(action: action) {
             HStack(spacing: 10) {
                 Image(systemName: icon)
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.system(size: 12, weight: .regular))
                     .foregroundStyle(highlighted ? palette.onFill : Color.secondary)
                     .frame(width: 18)
                 Text(title)
+                    .font(.system(size: 13))
                     .foregroundStyle(highlighted ? palette.onFill : Color.primary)
                 Spacer()
                 if let shortcut {
-                    Text(shortcut)
+                    Text(verbatim: shortcut)
                         .font(.system(size: 11))
                         .foregroundStyle(highlighted ? palette.onFill.opacity(0.8) : Color.secondary)
                 }
             }
             .padding(.horizontal, 8)
-            .padding(.vertical, 6)
+            .padding(.vertical, 5)
             .background(
                 RoundedRectangle(cornerRadius: 6, style: .continuous)
                     .fill(highlighted ? palette.fill : Color.clear)
             )
-            .contentShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .contentShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
             .opacity(isEnabled ? 1 : 0.45)
         }
         .buttonStyle(.plain)

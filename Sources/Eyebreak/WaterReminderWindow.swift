@@ -14,8 +14,7 @@ class WaterReminderWindowController {
         let content = WaterReminderContent.make(settings: settings)
         let palette = Palette.current(for: .waterReminder)
         let actions = WaterReminderActions(
-            drinkNow: { waterManager.markDrank() },
-            alreadyDrank: { waterManager.markDrank() },
+            drink: { waterManager.drink() },
             snooze: { waterManager.snooze() }
         )
 
@@ -53,18 +52,19 @@ struct WaterReminderContent {
         let custom = settings.useCustomWaterReminder
         let message = custom && !settings.customWaterReminderMessage.isEmpty
             ? settings.customWaterReminderMessage
-            : WaterReminderManager.messages.randomElement() ?? "Take a moment to drink some water."
+            : WaterReminderManager.messages.randomElement() ?? ""
         return WaterReminderContent(
             icon: custom ? settings.customWaterReminderIcon : "drop.fill",
-            title: WaterReminderManager.titles.randomElement() ?? "Time for Water!",
+            title: WaterReminderManager.titles.randomElement() ?? "",
             message: message
         )
     }
 }
 
+/// The water reminder's three answers, the same on every surface: I drank (return),
+/// later (×, ten minutes, not a miss), and not now (esc).
 struct WaterReminderActions {
-    let drinkNow: () -> Void
-    let alreadyDrank: () -> Void
+    let drink: () -> Void
     let snooze: () -> Void
 }
 
@@ -110,13 +110,14 @@ struct WaterReminderView: View {
 
                 Spacer(minLength: 8)
 
-                GlassCloseButton(label: "Remind me in 10 minutes", action: actions.snooze)
+                GlassCloseButton(label: String(localized: "Remind me in 10 minutes"), action: actions.snooze)
             }
 
             HStack(spacing: 8) {
-                Button("Thanks, I'll drink water now", action: actions.drinkNow)
+                Button("I Drank", action: actions.drink)
                     .buttonStyle(AccentButtonStyle(palette: palette))
-                Button("I already drank", action: actions.alreadyDrank)
+                    .keyboardShortcut(.defaultAction)
+                Button("In 10 Minutes", action: actions.snooze)
                     .buttonStyle(SoftButtonStyle())
             }
             .padding(.leading, 56)
@@ -156,17 +157,13 @@ struct WaterBlurOverlayView: View {
                 }
 
                 HStack(spacing: 12) {
-                    Button("Thanks, I'll drink water now", action: actions.drinkNow)
+                    Button("I Drank", action: actions.drink)
                         .buttonStyle(AccentButtonStyle(palette: palette, size: .large))
-                    Button("I already drank", action: actions.alreadyDrank)
+                        .keyboardShortcut(.defaultAction)
+                    Button("In 10 Minutes", action: actions.snooze)
                         .buttonStyle(SoftButtonStyle(size: .large))
                 }
                 .padding(.top, 6)
-
-                Button("Remind me in 10 minutes", action: actions.snooze)
-                    .buttonStyle(.plain)
-                    .font(.system(size: 13))
-                    .foregroundStyle(.white.opacity(0.6))
             }
             .padding(.horizontal, 56)
             .padding(.vertical, 44)
@@ -175,7 +172,7 @@ struct WaterBlurOverlayView: View {
 
             VStack {
                 Spacer()
-                SkipHint(action: "snooze")
+                SkipHint(action: "Not now")
                     .padding(.bottom, 48)
             }
         }

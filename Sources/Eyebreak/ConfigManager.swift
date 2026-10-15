@@ -32,10 +32,10 @@ struct AppConfig: Codable {
     // Default fallback values
     static let fallback = AppConfig(
         workDurationMinutes: 20,
-        breakDurationSeconds: 20,
-        warningTimeSeconds: 30,
+        breakDurationSeconds: 30,
+        warningTimeSeconds: 0,
         skipsBeforeDryEyeNudge: 2,
-        waterReminderMinutes: 45
+        waterReminderMinutes: 60
     )
 }
 

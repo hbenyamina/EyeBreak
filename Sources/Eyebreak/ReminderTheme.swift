@@ -2,8 +2,9 @@ import SwiftUI
 import AppKit
 
 // MARK: - Surfaces & Types
+/// The reminder surfaces whose colours can be changed. (2.2.0's third, the ambient nudges,
+/// became blink reminders and wear the break screen's colours.)
 enum ThemeSurface: String, CaseIterable, Identifiable {
-    case ambientReminder
     case breakOverlay
     case waterReminder
 
@@ -11,15 +12,13 @@ enum ThemeSurface: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .ambientReminder: return "Ambient Reminder Theme"
-        case .breakOverlay: return "Break Overlay Theme"
-        case .waterReminder: return "Water Reminder Theme"
+        case .breakOverlay: return String(localized: "Break screen")
+        case .waterReminder: return String(localized: "Water reminders")
         }
     }
 
     var icon: String {
         switch self {
-        case .ambientReminder: return "sparkles"
         case .breakOverlay: return "eye.fill"
         case .waterReminder: return "drop.fill"
         }
@@ -34,6 +33,15 @@ enum ThemeSurface: String, CaseIterable, Identifiable {
 }
 
 enum ThemeType: String, CaseIterable, Identifiable {
+    /// Shown in the picker; the raw values are 2.2.0's stored strings.
+    var label: String {
+        switch self {
+        case .standard: return String(localized: "Theme")
+        case .random: return String(localized: "Random Colour")
+        case .custom: return String(localized: "Custom")
+        }
+    }
+
     case standard = "Default"
     case random = "Random Color"
     case custom = "Custom"
@@ -42,9 +50,9 @@ enum ThemeType: String, CaseIterable, Identifiable {
 
     var detail: String {
         switch self {
-        case .standard: return "EyeBreak's own colours: violet for breaks, aqua for water."
-        case .random: return "A different colour each time it appears."
-        case .custom: return "Pick your own background, text and accent colours."
+        case .standard: return String(localized: "The app theme's own colours.")
+        case .random: return String(localized: "A different colour each time it appears.")
+        case .custom: return String(localized: "Pick your own background, text and accent colours.")
         }
     }
 }
@@ -64,14 +72,15 @@ struct ColorTheme: Codable, Equatable {
     /// Starting point for a custom theme: the surface's default colours.
     static func standard(for surface: ThemeSurface) -> ColorTheme {
         let water = surface == .waterReminder
+        let colors = Theme.colors
         return ColorTheme(
-            backgroundColorHex: water ? "#001226" : "#080214",
+            backgroundColorHex: water ? colors.waterBackdropHex : colors.eyesBackdropHex,
             backgroundOpacity: water ? 0.30 : 0.45,
             textColorHex: "#FFFFFF",
             textOpacity: 1,
-            secondaryTextColorHex: water ? "#E8FCFF" : "#E6D9FF",
+            secondaryTextColorHex: water ? colors.waterLightHex : colors.eyesLightHex,
             secondaryTextOpacity: 0.75,
-            accentColorHex: water ? "#14B8FF" : "#8C5CF7",
+            accentColorHex: water ? colors.waterHex : colors.eyesHex,
             accentOpacity: 1,
             glassHighlightOpacity: 0.35
         )
@@ -99,38 +108,38 @@ struct Palette {
     var fill: Color
     var onFill: Color
 
-    /// Violet: breaks, eye exercises, ambient reminders.
-    static let eyes = Palette(
+    /// The theme's eye colour (violet, or leaf green): breaks, eye exercises, ambient reminders.
+    static var eyes: Palette { Palette(
         light: Theme.light,
         bright: Theme.bright,
         accent: Theme.accent,
         deep: Theme.deep,
         dark: Theme.dark,
-        backdropTint: Color(red: 0.03, green: 0.01, blue: 0.08).opacity(0.45),
+        backdropTint: Theme.colors.eyesBackdrop,
         surfaceTint: Theme.accent.opacity(0.08),
         text: nil,
         secondaryText: nil,
         highlightOpacity: nil,
         fill: Theme.deep,
         onFill: .white
-    )
+    ) }
 
-    /// Clear aqua-blue: water reminders. A lighter backdrop and aqua-tinted glass with a
-    /// clean rim, like water in a clear cup; buttons are bright aqua with dark ink.
-    static let water = Palette(
+    /// The theme's water blue: water reminders. A lighter backdrop and water-tinted glass with
+    /// a clean rim, like water in a clear cup; buttons are the bright blue with dark ink.
+    static var water: Palette { Palette(
         light: Theme.Water.light,
         bright: Theme.Water.bright,
         accent: Theme.Water.accent,
         deep: Theme.Water.deep,
         dark: Theme.Water.dark,
-        backdropTint: Color(red: 0.0, green: 0.07, blue: 0.15).opacity(0.30),
+        backdropTint: Theme.colors.waterBackdrop,
         surfaceTint: Theme.Water.accent.opacity(0.14),
         text: nil,
         secondaryText: nil,
         highlightOpacity: 0.35,
         fill: Theme.Water.bright,
         onFill: Theme.Water.ink
-    )
+    ) }
 
     var textStyle: AnyShapeStyle { text.map { AnyShapeStyle($0) } ?? AnyShapeStyle(.primary) }
     var secondaryTextStyle: AnyShapeStyle { secondaryText.map { AnyShapeStyle($0) } ?? AnyShapeStyle(.secondary) }
@@ -202,7 +211,7 @@ struct Palette {
 
 // MARK: - Environment
 private struct PaletteKey: EnvironmentKey {
-    static let defaultValue = Palette.eyes
+    static var defaultValue: Palette { .eyes }
 }
 
 extension EnvironmentValues {
