@@ -276,8 +276,9 @@ final class AppSettings: ObservableObject {
     var longBreakDuration: TimeInterval { TimeInterval(longBreakMinutes * 60) }
     var warningTime: TimeInterval { TimeInterval(preBreakWarningSeconds) }
 
-    /// Water asks inside the long break only when there is one.
-    var waterRidesWithBreaks: Bool { waterReminderMode == .withBreaks && longBreakEvery > 0 }
+    /// Water asks inside the long break only when there is one and the break can show it
+    /// (a notification-only break has no room for the "I Drank" row).
+    var waterRidesWithBreaks: Bool { waterReminderMode == .withBreaks && longBreakEvery > 0 && breakStyle != .notificationOnly }
 
     var timingPreset: TimingPreset {
         TimingPreset.allCases.first {
@@ -337,7 +338,7 @@ final class AppSettings: ObservableObject {
             Key.activeMinutesPerDay.rawValue: 0,
             Key.exerciseIntensity.rawValue: ExerciseIntensity.moderate.rawValue,
             Key.hotClimate.rawValue: false,
-            Key.waterReminderMode.rawValue: WaterReminderMode.withBreaks.rawValue,
+            Key.waterReminderMode.rawValue: WaterReminderMode.ownTimer.rawValue,
             Key.appTheme.rawValue: AppTheme.classic.rawValue,
             Key.smartScheduleEnabled.rawValue: false,
             Key.askOnUnlock.rawValue: true,
@@ -378,7 +379,7 @@ final class AppSettings: ObservableObject {
         idleThresholdMinutes = max(defaults.integer(forKey: Key.idleThresholdMinutes.rawValue), 1)
 
         waterReminderEnabled = defaults.bool(forKey: Key.waterReminderEnabled.rawValue)
-        waterReminderMode = WaterReminderMode(rawValue: defaults.string(forKey: Key.waterReminderMode.rawValue) ?? "") ?? .withBreaks
+        waterReminderMode = WaterReminderMode(rawValue: defaults.string(forKey: Key.waterReminderMode.rawValue) ?? "") ?? .ownTimer
         waterGoalML = min(max(defaults.integer(forKey: Key.waterGoalML.rawValue), 250), 8000)
         let glass = min(max(defaults.integer(forKey: Key.glassSizeML.rawValue), 50), WaterGoal.largestGlass)
         glassSizeML = glass
