@@ -135,26 +135,19 @@ enum SchedulePreset: String, CaseIterable, Identifiable {
     }
 }
 
-/// What sits next to the eye in the menu bar.
-enum MenuBarCountdown: String, CaseIterable, Identifiable {
-    case nextBreak = "Next Break"
-    case shift = "End of Shift"
-    case both = "Both"
-    case none = "Icon Only"
+/// The countdowns that can sit next to the icon in the menu bar, each switched on its own.
+enum MenuBarItem: CaseIterable, Identifiable {
+    case nextBreak, shift, pomodoro
 
-    var id: String { rawValue }
+    var id: Self { self }
 
     var label: String {
         switch self {
         case .nextBreak: return String(localized: "Next Break")
         case .shift: return String(localized: "End of Shift")
-        case .both: return String(localized: "Both")
-        case .none: return String(localized: "Icon Only")
+        case .pomodoro: return String(localized: "Pomodoro")
         }
     }
-
-    var showsBreak: Bool { self == .nextBreak || self == .both }
-    var showsShift: Bool { self == .shift || self == .both }
 }
 
 // MARK: - Settings Store
@@ -177,7 +170,9 @@ final class AppSettings: ObservableObject {
         case waterReminderEnabled, waterReminderInterval, waterReminderStyle
         case useCustomWaterReminder, customWaterReminderIcon, customWaterReminderMessage
         case ambientRemindersEnabled, ambientReminderIntervalMinutes, ambientReminderDurationSeconds
-        case hasLaunchedBefore, showMenuBarCountdown, menuBarCountdown
+        case hasLaunchedBefore
+        // 3.2's own switches; 3.0's `showMenuBarCountdown` and 3.1's `menuBarCountdown` are left unread
+        case menuBarShowsBreak, menuBarShowsShift, menuBarShowsPomodoro
         /// Which version of the break model the stored settings were moved onto.
         case rhythmModel
     }
@@ -275,7 +270,27 @@ final class AppSettings: ObservableObject {
 
     // MARK: Lifecycle
     @Published var hasLaunchedBefore: Bool { didSet { set(hasLaunchedBefore, .hasLaunchedBefore) } }
-    @Published var menuBarCountdown: MenuBarCountdown { didSet { set(menuBarCountdown.rawValue, .menuBarCountdown) } }
+    /// Beside the icon: the time to the next break, what's left of the shift, and a running
+    /// Pomodoro's block or break.
+    @Published var menuBarShowsBreak: Bool { didSet { set(menuBarShowsBreak, .menuBarShowsBreak) } }
+    @Published var menuBarShowsShift: Bool { didSet { set(menuBarShowsShift, .menuBarShowsShift) } }
+    @Published var menuBarShowsPomodoro: Bool { didSet { set(menuBarShowsPomodoro, .menuBarShowsPomodoro) } }
+
+    func menuBarShows(_ item: MenuBarItem) -> Bool {
+        switch item {
+        case .nextBreak: return menuBarShowsBreak
+        case .shift: return menuBarShowsShift
+        case .pomodoro: return menuBarShowsPomodoro
+        }
+    }
+
+    func setMenuBar(_ item: MenuBarItem, shown: Bool) {
+        switch item {
+        case .nextBreak: menuBarShowsBreak = shown
+        case .shift: menuBarShowsShift = shown
+        case .pomodoro: menuBarShowsPomodoro = shown
+        }
+    }
 
     // MARK: - Derived
     var workDuration: TimeInterval { TimeInterval(workIntervalMinutes * 60) }
@@ -369,6 +384,10 @@ final class AppSettings: ObservableObject {
             Key.ambientReminderIntervalMinutes.rawValue: 10,
             Key.ambientReminderDurationSeconds.rawValue: 6,
             Key.hasLaunchedBefore.rawValue: false,
+            // The shift, and a Pomodoro while one runs; the eye itself fills before a break
+            Key.menuBarShowsBreak.rawValue: false,
+            Key.menuBarShowsShift.rawValue: true,
+            Key.menuBarShowsPomodoro.rawValue: true,
         ])
         Self.moveToRhythmModel(defaults)
 
@@ -435,10 +454,9 @@ final class AppSettings: ObservableObject {
         appTheme = theme
         Theme.current = theme
         hasLaunchedBefore = defaults.bool(forKey: Key.hasLaunchedBefore.rawValue)
-        // 3.0 had an on/off switch for the break countdown; it maps onto the first and last choices.
-        let legacyCountdownOn = defaults.object(forKey: Key.showMenuBarCountdown.rawValue) as? Bool ?? true
-        menuBarCountdown = defaults.string(forKey: Key.menuBarCountdown.rawValue).flatMap(MenuBarCountdown.init)
-            ?? (legacyCountdownOn ? .nextBreak : .none)
+        menuBarShowsBreak = defaults.bool(forKey: Key.menuBarShowsBreak.rawValue)
+        menuBarShowsShift = defaults.bool(forKey: Key.menuBarShowsShift.rawValue)
+        menuBarShowsPomodoro = defaults.bool(forKey: Key.menuBarShowsPomodoro.rawValue)
     }
 
     /// Once, moving stored settings onto the evidence-based break model (docs/EVIDENCE.md).

@@ -4,6 +4,7 @@ import SwiftUI
 struct MenuActions {
     let takeBreak: () -> Void
     let openSettings: () -> Void
+    let openPomodoro: () -> Void
 }
 
 /// The menu: the day at a glance, then what you can do about it. Top to bottom: the date
@@ -16,6 +17,7 @@ struct MenuBarView: View {
     @ObservedObject var shift: ShiftModel
     @ObservedObject var activity: ActivityModel
     @ObservedObject var settings: AppSettings
+    @ObservedObject var stats: StatsStore
     let actions: MenuActions
 
     var body: some View {
@@ -287,6 +289,23 @@ struct MenuBarView: View {
             if settings.ambientRemindersEnabled {
                 CountdownRow(icon: "eye", title: String(localized: "Next blink reminder in"), value: ambientManager.formattedTimeRemaining, dimmed: isDimmed) {
                     EmptyView()
+                }
+            }
+
+            // Once you use the Pomodoro: today's count, and the way to its page
+            if timerManager.pomodoro != nil || stats.today.pomodorosCompleted > 0 {
+                CountdownRow(icon: "timer", title: String(localized: "Pomodoros today"),
+                             value: stats.today.pomodorosCompleted.formatted(), dimmed: false) {
+                    Button(action: actions.openPomodoro) {
+                        Image(systemName: "chevron.forward")
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundStyle(.secondary)
+                            .frame(width: 22, height: 22)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .help(Text("Open Pomodoro"))
+                    .accessibilityLabel(Text("Open Pomodoro"))
                 }
             }
         }

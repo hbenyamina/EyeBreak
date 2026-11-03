@@ -11,6 +11,12 @@ struct AppSettingsView: View {
     @State private var language = AppLanguage.current
     @State private var confirmingReset = false
 
+    /// "End of Shift and Pomodoro", or "Icon Only".
+    private var menuBarSummary: String {
+        let shown = MenuBarItem.allCases.filter(settings.menuBarShows).map(\.label)
+        return shown.isEmpty ? String(localized: "Icon Only") : shown.formatted(.list(type: .and))
+    }
+
     private var version: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "3.1"
     }
@@ -44,12 +50,18 @@ struct AppSettingsView: View {
                     choice.apply()
                     AppLanguage.relaunch()
                 }
-                PickerRow(
-                    title: "Menu bar shows",
-                    detail: "Beside the eye: the time to your next break, what's left of your shift, or both.",
-                    selection: $settings.menuBarCountdown
-                ) {
-                    ForEach(MenuBarCountdown.allCases) { Text(verbatim: $0.label).tag($0) }
+                SettingRow(title: "Menu bar shows", detail: "Beside the icon, any of these. The Pomodoro shows only while one runs.") {
+                    Menu {
+                        ForEach(MenuBarItem.allCases) { item in
+                            Toggle(isOn: Binding(get: { settings.menuBarShows(item) },
+                                                 set: { settings.setMenuBar(item, shown: $0) })) {
+                                Text(verbatim: item.label)
+                            }
+                        }
+                    } label: {
+                        Text(verbatim: menuBarSummary)
+                    }
+                    .fixedSize()
                 }
                 ToggleRow(
                     title: "Open at login",
@@ -77,7 +89,7 @@ struct AppSettingsView: View {
                 }
 
                 SettingsSection(title: "Your data", footer: "Everything EyeBreak records stays on your Mac. Nothing is sent anywhere.") {
-                    ActionRow(title: "Reset history", detail: "Deletes your breaks, today's lines and the streak.", button: "Reset…", role: .destructive) {
+                    ActionRow(title: "Reset history", detail: "Deletes your breaks and Pomodoros, today's lines and the streak.", button: "Reset…", role: .destructive) {
                         confirmingReset = true
                     }
                 }
@@ -107,7 +119,7 @@ struct AppSettingsView: View {
             Button("Reset", role: .destructive) { resetHistory() }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("Your breaks, today's lines and the streak will be deleted.")
+            Text("Your breaks and Pomodoros, today's lines and the streak will be deleted.")
         }
     }
 }

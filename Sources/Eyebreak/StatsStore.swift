@@ -1,18 +1,38 @@
 import Foundation
 
 /// One day of break history. Field names and the default `Date` encoding match
-/// EyeBreak 2.2.0's `breakStatistics`, so existing history loads unchanged.
+/// EyeBreak 2.2.0's `breakStatistics`, so existing history loads unchanged; the Pomodoro
+/// fields came later and read as zero where they're missing.
 struct DayStats: Codable, Identifiable, Equatable {
     var date: Date
     var breaksCompleted: Int
     var totalBreakTime: TimeInterval
     var breaksSkipped: Int
+    /// Pomodoro blocks that ran their full length, and the focus time they held.
+    var pomodorosCompleted = 0
+    var focusTime: TimeInterval = 0
 
     var id: Date { date }
     var total: Int { breaksCompleted + breaksSkipped }
 
     static func empty(_ date: Date) -> DayStats {
         DayStats(date: date, breaksCompleted: 0, totalBreakTime: 0, breaksSkipped: 0)
+    }
+}
+
+extension DayStats {
+    private enum CodingKeys: String, CodingKey {
+        case date, breaksCompleted, totalBreakTime, breaksSkipped, pomodorosCompleted, focusTime
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        date = try container.decode(Date.self, forKey: .date)
+        breaksCompleted = try container.decode(Int.self, forKey: .breaksCompleted)
+        totalBreakTime = try container.decode(TimeInterval.self, forKey: .totalBreakTime)
+        breaksSkipped = try container.decode(Int.self, forKey: .breaksSkipped)
+        pomodorosCompleted = try container.decodeIfPresent(Int.self, forKey: .pomodorosCompleted) ?? 0
+        focusTime = try container.decodeIfPresent(TimeInterval.self, forKey: .focusTime) ?? 0
     }
 }
 
@@ -55,6 +75,11 @@ final class StatsStore: ObservableObject {
 
     func recordSkipped() {
         updateToday { $0.breaksSkipped += 1 }
+    }
+
+    /// A Pomodoro block that ran its full length.
+    func recordPomodoro(focus: TimeInterval) {
+        updateToday { $0.pomodorosCompleted += 1; $0.focusTime += focus }
     }
 
     func reset() {
