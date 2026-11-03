@@ -1,0 +1,4840 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "\"5 More Minutes\" holds a break back without skipping it.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«تأجيل ٥ دقائق» يؤخّر الاستراحة دون أن تُحتسب متخطّاة."
+          }
+        }
+      }
+    },
+    "%@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@"
+          }
+        }
+      }
+    },
+    "%@ L": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ لتر"
+          }
+        }
+      }
+    },
+    "%@ left in this Pomodoro": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ حتى نهاية جلسة البومودورو"
+          }
+        }
+      }
+    },
+    "%@ left in your shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتبقي من العمل: %@"
+          }
+        }
+      }
+    },
+    "%@ of %@ L": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ من %2$@ لتر"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ of %2$@ L"
+          }
+        }
+      }
+    },
+    "%@ of break remaining": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتبقي من الاستراحة: %@"
+          }
+        }
+      }
+    },
+    "%@ overnight, ending the next morning": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عمل ليلي مدته %@، ينتهي صباح اليوم التالي"
+          }
+        }
+      }
+    },
+    "%@ shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يوم عمل مدته %@"
+          }
+        }
+      }
+    },
+    "%@ until the break ends": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ حتى نهاية الاستراحة"
+          }
+        }
+      }
+    },
+    "%@ until your next break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ حتى الاستراحة التالية"
+          }
+        }
+      }
+    },
+    "%@ – %@ today": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اليوم %1$@ – %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ – %2$@ today"
+          }
+        }
+      }
+    },
+    "%@. %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@. %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@. %2$@"
+          }
+        }
+      }
+    },
+    "%@: your only working day": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: يوم العمل الوحيد"
+          }
+        }
+      }
+    },
+    "%lld breaks": {
+      "localizations": {
+        "ar": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld استراحات"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld استراحة"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "استراحة واحدة"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld استراحة"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "استراحتان"
+                }
+              },
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "لا استراحات"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld break"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld breaks"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld breaks skipped in a row. Screens cut blinking by about two thirds; this one takes %@.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحات المتخطّاة على التوالي: %1$lld. تقلّل الشاشات الرمش بنحو الثلثين، وتستغرق هذه الاستراحة %2$@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld breaks skipped in a row. Screens cut blinking by about two thirds; this one takes %2$@."
+          }
+        }
+      }
+    },
+    "%lld done": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld مكتملة"
+          }
+        }
+      }
+    },
+    "%lld fl oz": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld أونصة"
+          }
+        }
+      }
+    },
+    "%lld h %lld min": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld س %2$lld د"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld h %2$lld min"
+          }
+        }
+      }
+    },
+    "%lld min": {
+      "localizations": {
+        "ar": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld دقائق"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld دقيقة"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "دقيقة"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld دقيقة"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "دقيقتان"
+                }
+              },
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld دقيقة"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld min %lld s": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld د %2$lld ث"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld min %2$lld s"
+          }
+        }
+      }
+    },
+    "%lld minutes": {
+      "localizations": {
+        "ar": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld دقائق"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld دقيقة"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "دقيقة واحدة"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld دقيقة"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "دقيقتان"
+                }
+              },
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld دقيقة"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld minute"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld minutes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld misses": {
+      "localizations": {
+        "ar": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld مرات فائتة"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld مرة فائتة"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "مرة فائتة واحدة"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld مرة فائتة"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "مرتان فائتتان"
+                }
+              },
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "لا شيء فائت"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld miss"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld misses"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld ml": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld مل"
+          }
+        }
+      }
+    },
+    "%lld of %lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld من %2$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld before the long break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld من %2$lld قبل الاستراحة الطويلة"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld of %2$lld before the long break"
+          }
+        }
+      }
+    },
+    "%lld of %lld breaks skipped this week": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحات المتخطّاة هذا الأسبوع: %1$lld من %2$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld of %2$lld breaks skipped this week"
+          }
+        }
+      }
+    },
+    "%lld of %lld fl oz": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld من %2$lld أونصة"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld of %2$lld fl oz"
+          }
+        }
+      }
+    },
+    "%lld of the %lld breaks in a %@ shift, so a few skipped still counts as a good day.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld من أصل %2$lld استراحة في يوم عمل مدته %3$@، فتخطّي بعضها لا يمنع أن يكون اليوم جيدًا."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld of the %2$lld breaks in a %3$@ shift, so a few skipped still counts as a good day."
+          }
+        }
+      }
+    },
+    "%lld s": {
+      "localizations": {
+        "ar": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ثوانٍ"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ثانية"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "ثانية"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ثانية"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "ثانيتان"
+                }
+              },
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ثانية"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld seconds": {
+      "localizations": {
+        "ar": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ثوانٍ"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ثانية"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "ثانية واحدة"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ثانية"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "ثانيتان"
+                }
+              },
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld ثانية"
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld second"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld seconds"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld work days in a row": {
+      "localizations": {
+        "ar": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld أيام عمل متتالية"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld يوم عمل متتاليًا"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "يوم عمل واحد"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld يوم عمل متتالٍ"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "يوما عمل متتاليان"
+                }
+              },
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "لا أيام عمل متتالية"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lldd %lldh": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld ي %2$lld س"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lldd %2$lldh"
+          }
+        }
+      }
+    },
+    "%lldh": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld س"
+          }
+        }
+      }
+    },
+    "%lldh %lldm": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld س %2$lld د"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lldh %2$lldm"
+          }
+        }
+      }
+    },
+    "%lldm": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld د"
+          }
+        }
+      }
+    },
+    "%llds": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ث"
+          }
+        }
+      }
+    },
+    "1 minute": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دقيقة واحدة"
+          }
+        }
+      }
+    },
+    "1 miss": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرة فائتة واحدة"
+          }
+        }
+      }
+    },
+    "1 second": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ثانية واحدة"
+          }
+        }
+      }
+    },
+    "20-20-20": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "20-20-20"
+          }
+        }
+      }
+    },
+    "5 More Minutes": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تأجيل ٥ دقائق"
+          }
+        }
+      }
+    },
+    "5 More Minutes holds a break back twice at most, and never counts as skipped.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«تأجيل ٥ دقائق» يؤخّر الاستراحة مرتين على الأكثر، ولا يُحتسب تخطّيًا."
+          }
+        }
+      }
+    },
+    ": that's %@ on this Mac": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "، أي %@ على هذا الـ Mac"
+          }
+        }
+      }
+    },
+    "A different colour each time it appears.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لون مختلف في كل مرة."
+          }
+        }
+      }
+    },
+    "A few sips now, before you get thirsty.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بضع رشفات الآن، قبل الشعور بالعطش."
+          }
+        }
+      }
+    },
+    "A glass now keeps you on pace for the day.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كوب الآن يحافظ على وتيرة هدف اليوم."
+          }
+        }
+      }
+    },
+    "A glass of water": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كوب ماء"
+          }
+        }
+      }
+    },
+    "A kitchen garden in the morning: leaf green for your eyes, rain-water blue, on linen and soil.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حديقة منزلية في الصباح: أخضر الأوراق للعينين، وأزرق ماء المطر، على الكتّان والتربة."
+          }
+        }
+      }
+    },
+    "A quiet companion for the working day: short breaks to look away and blink, an hourly break on your feet, water, and a countdown to the end of your shift. Each number comes from published research.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رفيق هادئ ليوم العمل: استراحات قصيرة لإبعاد النظر عن الشاشة والرمش، واستراحة كل ساعة للوقوف والحركة، وتذكير بشرب الماء، وعدّ تنازلي حتى نهاية يوم العمل. كل رقم فيه مستند إلى أبحاث منشورة."
+          }
+        }
+      }
+    },
+    "A reminder of its own, between breaks.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تذكير مستقل بين الاستراحات."
+          }
+        }
+      }
+    },
+    "A small window at the top of the screen.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نافذة صغيرة أعلى الشاشة."
+          }
+        }
+      }
+    },
+    "A small window at the top of the screen. A break you type through doesn't count.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نافذة صغيرة أعلى الشاشة. الاستراحة التي تستمر فيها الكتابة لا تُحتسب."
+          }
+        }
+      }
+    },
+    "A small, silent reminder that fades on its own.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تذكير صغير صامت يختفي تلقائيًا."
+          }
+        }
+      }
+    },
+    "A soft chime when a break starts and ends, and for water.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نغمة هادئة عند بدء الاستراحة وانتهائها، وعند تذكير الماء."
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حول"
+          }
+        }
+      }
+    },
+    "About %lld glasses of %@.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نحو %1$lld × كوب %2$@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "About %1$lld glasses of %2$@."
+          }
+        }
+      }
+    },
+    "About you": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "معلوماتك"
+          }
+        }
+      }
+    },
+    "Accent": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لون التمييز"
+          }
+        }
+      }
+    },
+    "Adjust Shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعديل ساعات العمل"
+          }
+        }
+      }
+    },
+    "All reminders paused": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جميع التذكيرات متوقفة مؤقتًا"
+          }
+        }
+      }
+    },
+    "All reminders paused %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جميع التذكيرات متوقفة مؤقتًا %@"
+          }
+        }
+      }
+    },
+    "App": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التطبيق"
+          }
+        }
+      }
+    },
+    "Ask again at the next unlock": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسألني مجددًا عند فتح القفل التالي"
+          }
+        }
+      }
+    },
+    "Ask me": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "موعد التذكير"
+          }
+        }
+      }
+    },
+    "Ask when this Mac is unlocked": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السؤال عند فتح قفل هذا الـ Mac"
+          }
+        }
+      }
+    },
+    "Away": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الابتعاد عن الجهاز"
+          }
+        }
+      }
+    },
+    "Away after": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدة عدم النشاط"
+          }
+        }
+      }
+    },
+    "Back to it.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان وقت العودة إلى العمل."
+          }
+        }
+      }
+    },
+    "Background": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخلفية"
+          }
+        }
+      }
+    },
+    "Before": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قبل العمل"
+          }
+        }
+      }
+    },
+    "Behaviour": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طريقة العمل"
+          }
+        }
+      }
+    },
+    "Bell": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جرس"
+          }
+        }
+      }
+    },
+    "Beside the eye: the time to your next break, what's left of your shift, or both.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بجانب أيقونة العين: الوقت حتى الاستراحة التالية، أو المتبقي من يوم العمل، أو كلاهما."
+          }
+        }
+      }
+    },
+    "Between breaks": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بين الاستراحات"
+          }
+        }
+      }
+    },
+    "Blink reminders": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تذكيرات الرمش"
+          }
+        }
+      }
+    },
+    "Body": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجنس"
+          }
+        }
+      }
+    },
+    "Both": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كلاهما"
+          }
+        }
+      }
+    },
+    "Break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة"
+          }
+        }
+      }
+    },
+    "Break after your call": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة بعد انتهاء المكالمة"
+          }
+        }
+      }
+    },
+    "Break done": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انتهت الاستراحة"
+          }
+        }
+      }
+    },
+    "Break in %lld s": {
+      "localizations": {
+        "ar": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "الاستراحة بعد %lld ثوانٍ"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "الاستراحة بعد %lld ثانية"
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "الاستراحة بعد ثانية"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "الاستراحة بعد %lld ثانية"
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "الاستراحة بعد ثانيتين"
+                }
+              },
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "الاستراحة الآن"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Break length": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدة الاستراحة"
+          }
+        }
+      }
+    },
+    "Break screen": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شاشة الاستراحة"
+          }
+        }
+      }
+    },
+    "Break starting soon": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة ستبدأ قريبًا"
+          }
+        }
+      }
+    },
+    "Break when you pause typing": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة عند التوقف عن الكتابة"
+          }
+        }
+      }
+    },
+    "Break, time left": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتبقي من الاستراحة"
+          }
+        }
+      }
+    },
+    "Break: %@ left": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة: المتبقي %@"
+          }
+        }
+      }
+    },
+    "Breaks": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحات"
+          }
+        }
+      }
+    },
+    "Breaks a day": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عدد الاستراحات يوميًا"
+          }
+        }
+      }
+    },
+    "Breaks pause outside your shift, and you're off shift now.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تتوقف الاستراحات خارج ساعات العمل، والوقت الحالي خارجها."
+          }
+        }
+      }
+    },
+    "Breaks taken each day, with skipped ones on top. The dashed line is the daily goal.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحات المأخوذة كل يوم، والمتخطّاة فوقها. الخط المتقطّع هو الهدف اليومي."
+          }
+        }
+      }
+    },
+    "Brisk walking, easy cycling": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مشي سريع، ركوب دراجة بإيقاع خفيف"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إلغاء"
+          }
+        }
+      }
+    },
+    "City": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المدينة"
+          }
+        }
+      }
+    },
+    "Clay": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فخّاري"
+          }
+        }
+      }
+    },
+    "Click to dismiss": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انقر للإخفاء"
+          }
+        }
+      }
+    },
+    "Close your eyes": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إغماض العينين"
+          }
+        }
+      }
+    },
+    "Close, squeeze gently, open": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إغماض العينين، ضغطة خفيفة، ثم فتحهما"
+          }
+        }
+      }
+    },
+    "Colours": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الألوان"
+          }
+        }
+      }
+    },
+    "Control": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "غرفة التحكم"
+          }
+        }
+      }
+    },
+    "Count down to the end of ${label}": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العدّ التنازلي حتى نهاية ${label}"
+          }
+        }
+      }
+    },
+    "Counts down to the end of your shift, then to the next one, even with EyeBreak quit. To add it, right-click the desktop, choose Edit Widgets and search for EyeBreak. With tinted or clear widgets, macOS supplies the colour.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعدّ تنازليًا حتى نهاية يوم العمل، ثم حتى يوم العمل التالي، حتى إن كان EyeBreak مغلقًا. لإضافتها: النقر بزر الماوس الأيمن على سطح المكتب، ثم اختيار «تعديل الأدوات»، والبحث عن EyeBreak. في الأدوات الملوّنة أو الشفافة، يتولّى macOS تحديد اللون."
+          }
+        }
+      }
+    },
+    "Counts down to the end of your shift. Set the hours in EyeBreak Settings → Workday.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعدّ تنازليًا حتى نهاية يوم العمل. تُضبط الساعات من إعدادات EyeBreak ← يوم العمل."
+          }
+        }
+      }
+    },
+    "Cup": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فنجان"
+          }
+        }
+      }
+    },
+    "Custom": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مخصّص"
+          }
+        }
+      }
+    },
+    "Daily goal": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الهدف اليومي"
+          }
+        }
+      }
+    },
+    "Day": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اليوم"
+          }
+        }
+      }
+    },
+    "Day off": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يوم إجازة"
+          }
+        }
+      }
+    },
+    "Days": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأيام"
+          }
+        }
+      }
+    },
+    "Days off don't count, and one missed day a week is forgiven.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا تُحتسب أيام الإجازة، ويُتجاوز عن يوم فائت واحد في الأسبوع."
+          }
+        }
+      }
+    },
+    "Deletes your breaks, today's lines and the streak.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يحذف سجل الاستراحات وخطوط اليوم وسلسلة الأيام المتتالية."
+          }
+        }
+      }
+    },
+    "Deliberate exercise, not walking about the office.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تمارين مقصودة، لا المشي داخل المكتب."
+          }
+        }
+      }
+    },
+    "Dismiss": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إخفاء"
+          }
+        }
+      }
+    },
+    "Drink a glass while you're up": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فرصة لشرب كوب ماء أثناء الوقوف"
+          }
+        }
+      }
+    },
+    "Drink each day": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكمية اليومية"
+          }
+        }
+      }
+    },
+    "Drinks only: food brings another fifth or so. Based on EFSA's intakes as drinks (1.6 L for women, 2.0 L for men), about 10 ml more per kilo above a reference weight, more for exercise, and 500 ml in the heat. An estimate for healthy adults, not medical advice: pregnancy, breastfeeding, and kidney or heart conditions change what's right, so ask your doctor.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشروبات فقط: يضيف الطعام نحو الخُمس. مبنيّ على كميات المشروبات المقترحة من EFSA (١٫٦ لتر للنساء، و٢٫٠ لتر للرجال)، مع نحو ١٠ مل إضافية لكل كيلوغرام فوق وزن مرجعي، وزيادة للتمارين، و٥٠٠ مل في الأجواء الحارة. هذا تقدير للبالغين الأصحاء وليس نصيحة طبية: الحمل والرضاعة وأمراض الكلى أو القلب تغيّر الكمية المناسبة، لذا يُنصح باستشارة الطبيب."
+          }
+        }
+      }
+    },
+    "Drop": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قطرة"
+          }
+        }
+      }
+    },
+    "Drop Circle": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قطرة في دائرة"
+          }
+        }
+      }
+    },
+    "Drop Triangle": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قطرة في مثلث"
+          }
+        }
+      }
+    },
+    "Earlier than the start means a night shift, ending the next morning.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إذا كان قبل وقت البداية، فهو عمل ليلي ينتهي صباح اليوم التالي."
+          }
+        }
+      }
+    },
+    "Early Bird": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صباحي مبكر"
+          }
+        }
+      }
+    },
+    "End of Shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نهاية يوم العمل"
+          }
+        }
+      }
+    },
+    "End of Shift widget": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أداة نهاية يوم العمل"
+          }
+        }
+      }
+    },
+    "End of shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نهاية يوم العمل"
+          }
+        }
+      }
+    },
+    "Ends": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ينتهي"
+          }
+        }
+      }
+    },
+    "Ends %@ · %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ينتهي %1$@ · %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Ends %1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "Enter your weight to get an estimate.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "للحصول على تقدير، يُرجى إدخال الوزن."
+          }
+        }
+      }
+    },
+    "Evenings, days off and the time before a late start stay quiet.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبقى الأمسيات وأيام الإجازة والوقت الذي يسبق البداية المتأخرة هادئة."
+          }
+        }
+      }
+    },
+    "Every": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل"
+          }
+        }
+      }
+    },
+    "Every %@ Break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل %@ استراحة"
+          }
+        }
+      }
+    },
+    "Every 20 minutes, 20 seconds looking 20 feet away.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل ٢٠ دقيقة، ٢٠ ثانية من النظر إلى مسافة ٢٠ قدمًا."
+          }
+        }
+      }
+    },
+    "Every 20 minutes, 30 seconds to look across the room and blink. Every hour, 5 minutes on your feet. Breaks wait for a pause in your typing and hold during calls.": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل ٢٠ دقيقة، ٣٠ ثانية للنظر إلى الطرف الآخر من الغرفة والرمش. وكل ساعة، ٥ دقائق من الوقوف. تنتظر الاستراحات توقّف الكتابة، وتتأجل أثناء المكالمات."
+          }
+        }
+      }
+    },
+    "Every 20 minutes, 30 seconds to look across the room and blink. Every hour, 5 minutes on your feet. Breaks wait for a pause in your typing and hold during calls. Start by setting your working hours under Workday.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل ٢٠ دقيقة، ٣٠ ثانية للنظر إلى الطرف الآخر من الغرفة والرمش. وكل ساعة، ٥ دقائق من الوقوف. تنتظر الاستراحات توقّف الكتابة، وتتأجل أثناء المكالمات. الخطوة الأولى: تحديد ساعات العمل في صفحة «يوم العمل»."
+          }
+        }
+      }
+    },
+    "Every 20 minutes, 30 seconds to look away and blink. Every hour, 5 minutes on your feet.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل ٢٠ دقيقة، ٣٠ ثانية لإبعاد النظر عن الشاشة والرمش. وكل ساعة، ٥ دقائق من الوقوف."
+          }
+        }
+      }
+    },
+    "Every break already ends with two full blinks. These are for days your eyes feel dry.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل استراحة تنتهي أصلًا برمشتين كاملتين. هذه التذكيرات للأيام التي تجفّ فيها العينان."
+          }
+        }
+      }
+    },
+    "Every day": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل يوم"
+          }
+        }
+      }
+    },
+    "Everything EyeBreak records stays on your Mac. Nothing is sent anywhere.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل ما يسجّله EyeBreak يبقى على هذا الـ Mac، ولا يُرسَل أي شيء إلى أي جهة."
+          }
+        }
+      }
+    },
+    "Exercise on a typical day": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التمارين في يوم معتاد"
+          }
+        }
+      }
+    },
+    "EyeBreak": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EyeBreak"
+          }
+        }
+      }
+    },
+    "EyeBreak %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EyeBreak %@"
+          }
+        }
+      }
+    },
+    "EyeBreak restarts to switch.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيُعاد تشغيل EyeBreak لتطبيق التغيير."
+          }
+        }
+      }
+    },
+    "EyeBreak's own colours: violet for your eyes, clear aqua for water.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ألوان EyeBreak الأصلية: البنفسجي للعينين، والأزرق المائي الصافي للماء."
+          }
+        }
+      }
+    },
+    "EyeBreak: click to start": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EyeBreak: انقر للبدء"
+          }
+        }
+      }
+    },
+    "Eyes": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العينان"
+          }
+        }
+      }
+    },
+    "Female": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أنثى"
+          }
+        }
+      }
+    },
+    "Fewer options": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خيارات أقل"
+          }
+        }
+      }
+    },
+    "Figure Water": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رياضة مائية"
+          }
+        }
+      }
+    },
+    "Fill a glass and take it back to your desk.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملء كوب وأخذه إلى المكتب."
+          }
+        }
+      }
+    },
+    "Find something 3 metres away or more: a window, a doorway, the far wall.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النظر إلى شيء يبعد ٣ أمتار أو أكثر: نافذة، أو باب، أو الجدار البعيد."
+          }
+        }
+      }
+    },
+    "Finish a break and your history starts here.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يبدأ السجل هنا بعد إكمال أول استراحة."
+          }
+        }
+      }
+    },
+    "Flexible": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرن"
+          }
+        }
+      }
+    },
+    "Fluid Ounces": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أونصة سائلة"
+          }
+        }
+      }
+    },
+    "Focus": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التركيز"
+          }
+        }
+      }
+    },
+    "Follow my shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حسب ساعات عملي"
+          }
+        }
+      }
+    },
+    "Follows this Mac's time zone (%@).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتبع المنطقة الزمنية لهذا الـ Mac (%@)."
+          }
+        }
+      }
+    },
+    "For 1 Hour": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لمدة ساعة"
+          }
+        }
+      }
+    },
+    "For 2 Hours": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لمدة ساعتين"
+          }
+        }
+      }
+    },
+    "For 30 Minutes": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لمدة ٣٠ دقيقة"
+          }
+        }
+      }
+    },
+    "Full Screen": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملء الشاشة"
+          }
+        }
+      }
+    },
+    "Garden": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حديقة"
+          }
+        }
+      }
+    },
+    "Glass rim": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حافة الزجاج"
+          }
+        }
+      }
+    },
+    "Goal": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الهدف"
+          }
+        }
+      }
+    },
+    "Goal met on %lld of %lld days": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أيام تحقيق الهدف: %1$lld من %2$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Goal met on %1$lld of %2$lld days"
+          }
+        }
+      }
+    },
+    "Got It": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حسنًا"
+          }
+        }
+      }
+    },
+    "Graphite": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رصاصي"
+          }
+        }
+      }
+    },
+    "Greenhouse": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بيت زجاجي"
+          }
+        }
+      }
+    },
+    "Heads-up before a break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تنبيه قبل الاستراحة"
+          }
+        }
+      }
+    },
+    "Heart": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قلب"
+          }
+        }
+      }
+    },
+    "Hidden": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مخفي"
+          }
+        }
+      }
+    },
+    "Hold breaks during calls": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تأجيل الاستراحات أثناء المكالمات"
+          }
+        }
+      }
+    },
+    "Hot, without air conditioning": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جو حار دون تكييف"
+          }
+        }
+      }
+    },
+    "Hours": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ساعات العمل"
+          }
+        }
+      }
+    },
+    "How EyeBreak looks and behaves.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مظهر EyeBreak وطريقة عمله."
+          }
+        }
+      }
+    },
+    "How EyeBreak works": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كيف يعمل EyeBreak"
+          }
+        }
+      }
+    },
+    "How hard": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشدة"
+          }
+        }
+      }
+    },
+    "How much you drink, and when you're asked.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كمية الشرب، وموعد التذكير."
+          }
+        }
+      }
+    },
+    "How you rest your eyes.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طريقة إراحة العينين."
+          }
+        }
+      }
+    },
+    "How you're keeping up with breaks and water today: a straight line while you're on track, a dip where you fell behind.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدى الالتزام اليوم بالاستراحات وشرب الماء: خط مستقيم عند الالتزام، وانخفاض عند كل تأخر."
+          }
+        }
+      }
+    },
+    "I Drank": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شربتُ"
+          }
+        }
+      }
+    },
+    "I Drank a Glass of Water": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شربتُ كوب ماء"
+          }
+        }
+      }
+    },
+    "I drank, on a water reminder": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«شربتُ» في تذكير الماء"
+          }
+        }
+      }
+    },
+    "Icon": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأيقونة"
+          }
+        }
+      }
+    },
+    "Icon Only": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأيقونة فقط"
+          }
+        }
+      }
+    },
+    "In 10 Minutes": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بعد ١٠ دقائق"
+          }
+        }
+      }
+    },
+    "In Use": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستخدَم"
+          }
+        }
+      }
+    },
+    "It waits for a pause in your typing.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستنتظر توقّف الكتابة."
+          }
+        }
+      }
+    },
+    "It's %@. Yes makes today's shift %@ instead of %@.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الساعة الآن %1$@. اختيار «نعم» يجعل ساعات العمل اليوم %2$@ بدلًا من %3$@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "It's %1$@. Yes makes today's shift %2$@ instead of %3$@."
+          }
+        }
+      }
+    },
+    "Just a notification. A break you type through doesn't count.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إشعار فقط. الاستراحة التي تستمر فيها الكتابة لا تُحتسب."
+          }
+        }
+      }
+    },
+    "Keys": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختصارات"
+          }
+        }
+      }
+    },
+    "Label": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العنوان"
+          }
+        }
+      }
+    },
+    "Language": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اللغة"
+          }
+        }
+      }
+    },
+    "Last 30 days": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آخر ٣٠ يومًا"
+          }
+        }
+      }
+    },
+    "Leaf": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ورقة شجر"
+          }
+        }
+      }
+    },
+    "Left in your shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتبقي من يوم العمل"
+          }
+        }
+      }
+    },
+    "Line": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خط الإنتاج"
+          }
+        }
+      }
+    },
+    "Logged a glass of %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم تسجيل كوب %@"
+          }
+        }
+      }
+    },
+    "Long break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة الطويلة"
+          }
+        }
+      }
+    },
+    "Long break in": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة الطويلة بعد"
+          }
+        }
+      }
+    },
+    "Long break length": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدة الاستراحة الطويلة"
+          }
+        }
+      }
+    },
+    "Long break, time left": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتبقي من الاستراحة الطويلة"
+          }
+        }
+      }
+    },
+    "Long breaks are off in Breaks, so water keeps its own timer.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحات الطويلة متوقفة في «الاستراحات»، لذا يعمل تذكير الماء بمؤقت مستقل."
+          }
+        }
+      }
+    },
+    "Look across the room": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النظر إلى مكان بعيد"
+          }
+        }
+      }
+    },
+    "Look across the room for %lld seconds, then blink slowly twice.": {
+      "localizations": {
+        "ar": {
+          "variations": {
+            "plural": {
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "النظر إلى مكان بعيد لمدة %lld ثوانٍ، ثم الرمش ببطء مرتين."
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "النظر إلى مكان بعيد لمدة %lld ثانية، ثم الرمش ببطء مرتين."
+                }
+              },
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "النظر إلى مكان بعيد لمدة ثانية واحدة، ثم الرمش ببطء مرتين."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "النظر إلى مكان بعيد لمدة %lld ثانية، ثم الرمش ببطء مرتين."
+                }
+              },
+              "two": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "النظر إلى مكان بعيد لمدة ثانيتين، ثم الرمش ببطء مرتين."
+                }
+              },
+              "zero": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "النظر إلى مكان بعيد قليلًا، ثم الرمش ببطء مرتين."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Male": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ذكر"
+          }
+        }
+      }
+    },
+    "Menu Bar Only": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شريط القوائم فقط"
+          }
+        }
+      }
+    },
+    "Menu bar shows": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يعرض شريط القوائم"
+          }
+        }
+      }
+    },
+    "Message": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الرسالة"
+          }
+        }
+      }
+    },
+    "Millilitres": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملليلتر"
+          }
+        }
+      }
+    },
+    "Moderate": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوسطة"
+          }
+        }
+      }
+    },
+    "More options": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خيارات أكثر"
+          }
+        }
+      }
+    },
+    "Most of the breaks in your shift, %lld a day.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "معظم استراحات يوم العمل، %lld يوميًا."
+          }
+        }
+      }
+    },
+    "Mug": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كوب بمقبض"
+          }
+        }
+      }
+    },
+    "My glass": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حجم الكوب"
+          }
+        }
+      }
+    },
+    "My own icon and message": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أيقونة ورسالة مخصّصتان"
+          }
+        }
+      }
+    },
+    "Never": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أبدًا"
+          }
+        }
+      }
+    },
+    "Next": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التالي"
+          }
+        }
+      }
+    },
+    "Next Break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة التالية"
+          }
+        }
+      }
+    },
+    "Next blink reminder in": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تذكير الرمش التالي بعد"
+          }
+        }
+      }
+    },
+    "Next break in": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة التالية بعد"
+          }
+        }
+      }
+    },
+    "Next break in %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة التالية بعد %@"
+          }
+        }
+      }
+    },
+    "Next glass in": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكوب التالي بعد"
+          }
+        }
+      }
+    },
+    "Night Desk": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مكتب ليلي"
+          }
+        }
+      }
+    },
+    "Night Owl": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مسائي"
+          }
+        }
+      }
+    },
+    "No": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا"
+          }
+        }
+      }
+    },
+    "No breaks recorded yet": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد استراحات مسجّلة بعد"
+          }
+        }
+      }
+    },
+    "No days": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا أيام"
+          }
+        }
+      }
+    },
+    "No shift days picked": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم تُحدَّد أيام العمل"
+          }
+        }
+      }
+    },
+    "None": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا شيء"
+          }
+        }
+      }
+    },
+    "Not now": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ليس الآن"
+          }
+        }
+      }
+    },
+    "Not running": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقف"
+          }
+        }
+      }
+    },
+    "Notification": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إشعار"
+          }
+        }
+      }
+    },
+    "Notifications are off for EyeBreak, so the question appears as a small panel at the top right.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإشعارات متوقفة لـ EyeBreak، لذا يظهر السؤال في لوحة صغيرة أعلى يمين الشاشة."
+          }
+        }
+      }
+    },
+    "Notifications are off for EyeBreak, so this style shows nothing. Turn them on in System Settings, or pick another.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإشعارات متوقفة لـ EyeBreak، لذا لن يظهر شيء بهذا النمط. يمكن تفعيلها من إعدادات النظام، أو اختيار نمط آخر."
+          }
+        }
+      }
+    },
+    "Now": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الآن"
+          }
+        }
+      }
+    },
+    "Ochre": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خردلي"
+          }
+        }
+      }
+    },
+    "Off": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خارج العمل"
+          }
+        }
+      }
+    },
+    "Off Shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خارج ساعات العمل"
+          }
+        }
+      }
+    },
+    "Off shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خارج ساعات العمل"
+          }
+        }
+      }
+    },
+    "Off shift now, so breaks and reminders are paused.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوقت الحالي خارج ساعات العمل، لذا الاستراحات والتذكيرات متوقفة."
+          }
+        }
+      }
+    },
+    "Off the clock": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خارج ساعات العمل"
+          }
+        }
+      }
+    },
+    "Off the clock · next shift %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خارج ساعات العمل · العمل التالي %@"
+          }
+        }
+      }
+    },
+    "Off the clock · next shift in": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خارج ساعات العمل · العمل التالي بعد"
+          }
+        }
+      }
+    },
+    "Off: after each break, start the next from the menu. Your usual breaks run in between.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عند إيقافه، تُبدأ الجلسة التالية من القائمة بعد كل استراحة، وتستمر استراحاتك المعتادة بين الجلسات."
+          }
+        }
+      }
+    },
+    "On Its Own Timer": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بمؤقت مستقل"
+          }
+        }
+      }
+    },
+    "On a break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في استراحة"
+          }
+        }
+      }
+    },
+    "On shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أثناء العمل"
+          }
+        }
+      }
+    },
+    "On shift now, so breaks and reminders are on.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوقت الحالي ضمن ساعات العمل، لذا الاستراحات والتذكيرات مفعّلة."
+          }
+        }
+      }
+    },
+    "On shift · %@ left, until %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أثناء العمل · المتبقي %1$@، حتى %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "On shift · %1$@ left, until %2$@"
+          }
+        }
+      }
+    },
+    "On shift, before it, and off the clock.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أثناء العمل، وقبله، وخارج ساعاته."
+          }
+        }
+      }
+    },
+    "On track": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "على المسار الصحيح"
+          }
+        }
+      }
+    },
+    "One slow, full blink": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رمشة واحدة بطيئة وكاملة"
+          }
+        }
+      }
+    },
+    "Open at login": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفتح عند تسجيل الدخول"
+          }
+        }
+      }
+    },
+    "Open slowly": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح العينين ببطء"
+          }
+        }
+      }
+    },
+    "Pause All Reminders": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف جميع التذكيرات مؤقتًا"
+          }
+        }
+      }
+    },
+    "Pause all reminders": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف جميع التذكيرات مؤقتًا"
+          }
+        }
+      }
+    },
+    "Pause everything outside these hours": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف كل شيء خارج هذه الأوقات"
+          }
+        }
+      }
+    },
+    "Pause when I'm away": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإيقاف المؤقت عند ابتعادي عن الجهاز"
+          }
+        }
+      }
+    },
+    "Paused": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقف مؤقتًا"
+          }
+        }
+      }
+    },
+    "Paused %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقف مؤقتًا %@"
+          }
+        }
+      }
+    },
+    "Paused until your shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقف حتى بداية العمل"
+          }
+        }
+      }
+    },
+    "Paused while the screen is locked": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقف أثناء قفل الشاشة"
+          }
+        }
+      }
+    },
+    "Paused while you're away": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقف أثناء الابتعاد عن الجهاز"
+          }
+        }
+      }
+    },
+    "Pick at least one day": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُرجى اختيار يوم واحد على الأقل"
+          }
+        }
+      }
+    },
+    "Pick the days you work in EyeBreak Settings → Workday": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُحدَّد أيام العمل من إعدادات EyeBreak ← يوم العمل"
+          }
+        }
+      }
+    },
+    "Pick your own background, text and accent colours.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختيار ألوان الخلفية والنص والتمييز حسب الرغبة."
+          }
+        }
+      }
+    },
+    "Plum": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برقوقي"
+          }
+        }
+      }
+    },
+    "Pomodoro": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بومودورو"
+          }
+        }
+      }
+    },
+    "Pomodoro, then a long break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلسة بومودورو، تليها استراحة طويلة"
+          }
+        }
+      }
+    },
+    "Pomodoro, time left": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتبقي من جلسة البومودورو"
+          }
+        }
+      }
+    },
+    "Pomodoro: %@ left": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البومودورو: المتبقي %@"
+          }
+        }
+      }
+    },
+    "Preset": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قالب جاهز"
+          }
+        }
+      }
+    },
+    "Presets and time zone": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "القوالب الجاهزة والمنطقة الزمنية"
+          }
+        }
+      }
+    },
+    "Press Escape: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مفتاح Esc: %@"
+          }
+        }
+      }
+    },
+    "Preview": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "معاينة"
+          }
+        }
+      }
+    },
+    "Quit EyeBreak": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إنهاء EyeBreak"
+          }
+        }
+      }
+    },
+    "Random Colour": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لون عشوائي"
+          }
+        }
+      }
+    },
+    "Rather Not Say": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أفضّل عدم الإفصاح"
+          }
+        }
+      }
+    },
+    "Read in %@ (%@)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بتوقيت %1$@ (%2$@)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Read in %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "Recommended": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الموصى به"
+          }
+        }
+      }
+    },
+    "Refill your water and look out of a window for a while.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة ملء كوب الماء، والنظر من النافذة قليلًا."
+          }
+        }
+      }
+    },
+    "Remind me in 10 minutes": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ذكّرني بعد ١٠ دقائق"
+          }
+        }
+      }
+    },
+    "Remind me to drink": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ذكّرني بشرب الماء"
+          }
+        }
+      }
+    },
+    "Reminders pause outside your shift, and you're off shift now.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تتوقف التذكيرات خارج ساعات العمل، والوقت الحالي خارجها."
+          }
+        }
+      }
+    },
+    "Reset": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة تعيين"
+          }
+        }
+      }
+    },
+    "Reset history": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة تعيين السجل"
+          }
+        }
+      }
+    },
+    "Reset to Theme": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استعادة ألوان السمة"
+          }
+        }
+      }
+    },
+    "Reset your history?": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة تعيين السجل؟"
+          }
+        }
+      }
+    },
+    "Reset…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة تعيين…"
+          }
+        }
+      }
+    },
+    "Resume": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استئناف"
+          }
+        }
+      }
+    },
+    "Resume Reminders": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استئناف التذكيرات"
+          }
+        }
+      }
+    },
+    "Rhythm": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإيقاع"
+          }
+        }
+      }
+    },
+    "Running late or early?": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بداية متأخرة أو مبكرة؟"
+          }
+        }
+      }
+    },
+    "Running, sport, hard training": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جري، رياضة، تمارين شاقة"
+          }
+        }
+      }
+    },
+    "Sage": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مريمية"
+          }
+        }
+      }
+    },
+    "Same as This Mac": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لغة هذا الـ Mac"
+          }
+        }
+      }
+    },
+    "Same as this Mac": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "توقيت هذا الـ Mac"
+          }
+        }
+      }
+    },
+    "Secondary text": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النص الثانوي"
+          }
+        }
+      }
+    },
+    "See a water reminder": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض تذكير الماء"
+          }
+        }
+      }
+    },
+    "See one": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض مثال"
+          }
+        }
+      }
+    },
+    "See what a break looks like": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "معاينة شكل الاستراحة"
+          }
+        }
+      }
+    },
+    "Settings…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإعدادات…"
+          }
+        }
+      }
+    },
+    "Shift starts at %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يبدأ العمل الساعة %@"
+          }
+        }
+      }
+    },
+    "Show Anyway": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العرض على أي حال"
+          }
+        }
+      }
+    },
+    "Show Now": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العرض الآن"
+          }
+        }
+      }
+    },
+    "Show amounts in": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض الكميات بـ"
+          }
+        }
+      }
+    },
+    "Shown": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ظاهر"
+          }
+        }
+      }
+    },
+    "Shows as": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طريقة الظهور"
+          }
+        }
+      }
+    },
+    "Shuffle": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبديل عشوائي"
+          }
+        }
+      }
+    },
+    "Skip": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تخطّي"
+          }
+        }
+      }
+    },
+    "Skip This Break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تخطّي هذه الاستراحة"
+          }
+        }
+      }
+    },
+    "Skip a break from any app": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تخطّي الاستراحة من أي تطبيق"
+          }
+        }
+      }
+    },
+    "Skip a break, or say not now to water": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تخطّي الاستراحة، أو «ليس الآن» لتذكير الماء"
+          }
+        }
+      }
+    },
+    "Skipped": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متخطّاة"
+          }
+        }
+      }
+    },
+    "Slate": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أردوازي"
+          }
+        }
+      }
+    },
+    "Slow blink %lld of %lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رمشة بطيئة %1$lld من %2$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Slow blink %1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "Something 3 metres away or more": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شيء يبعد ٣ أمتار أو أكثر"
+          }
+        }
+      }
+    },
+    "Sounds": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأصوات"
+          }
+        }
+      }
+    },
+    "Sparkles": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لمعان"
+          }
+        }
+      }
+    },
+    "Squeeze gently": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ضغط العينين برفق"
+          }
+        }
+      }
+    },
+    "Stand up and move": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوقوف والحركة"
+          }
+        }
+      }
+    },
+    "Stand up, refill your water and look out of a window.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوقوف، وإعادة ملء كوب الماء، والنظر من النافذة."
+          }
+        }
+      }
+    },
+    "Stand up, refill your water, look out of a window.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوقوف، وإعادة ملء كوب الماء، والنظر من النافذة."
+          }
+        }
+      }
+    },
+    "Standard": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قياسي"
+          }
+        }
+      }
+    },
+    "Start": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء"
+          }
+        }
+      }
+    },
+    "Start Next Pomodoro": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء جلسة البومودورو التالية"
+          }
+        }
+      }
+    },
+    "Start Pomodoro": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء جلسة بومودورو"
+          }
+        }
+      }
+    },
+    "Start Shift from Now": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء العمل من الآن"
+          }
+        }
+      }
+    },
+    "Start from Now": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البدء من الآن"
+          }
+        }
+      }
+    },
+    "Start one from the menu bar. While it runs, its breaks take the place of the ones above, each one a chance to stand and refill your water.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُبدأ الجلسة من شريط القوائم. وطوال مدتها تحلّ استراحاتها محل الاستراحات أعلاه، وكل منها فرصة للوقوف وإعادة ملء كوب الماء."
+          }
+        }
+      }
+    },
+    "Start over": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البدء من جديد"
+          }
+        }
+      }
+    },
+    "Start the next one by itself": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء الجلسة التالية تلقائيًا"
+          }
+        }
+      }
+    },
+    "Start the timer when EyeBreak opens": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تشغيل المؤقت عند فتح EyeBreak"
+          }
+        }
+      }
+    },
+    "Start today's shift from this moment; the end moves with it.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء يوم العمل من هذه اللحظة، مع تحريك وقت النهاية تبعًا لذلك."
+          }
+        }
+      }
+    },
+    "Start your shift from now?": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء يوم العمل من الآن؟"
+          }
+        }
+      }
+    },
+    "Started from now today": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم تعديل بداية العمل اليوم"
+          }
+        }
+      }
+    },
+    "Starting late": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البداية المتأخرة"
+          }
+        }
+      }
+    },
+    "Starts": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يبدأ"
+          }
+        }
+      }
+    },
+    "Stop Pomodoro": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف جلسة البومودورو"
+          }
+        }
+      }
+    },
+    "Straight while you keep pace with your goal; it dips when you fall a glass behind. Water, tea and coffee all count.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستقيم ما دامت الوتيرة متوافقة مع الهدف، وينخفض عند التأخر بكوب. الماء والشاي والقهوة كلها تُحتسب."
+          }
+        }
+      }
+    },
+    "Straight while you take your breaks; it dips where you skip one.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستقيم ما دامت الاستراحات تؤخذ في وقتها، وينخفض عند تخطّي أي منها."
+          }
+        }
+      }
+    },
+    "Suggested": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المقترح"
+          }
+        }
+      }
+    },
+    "Suggested: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المقترح: %@"
+          }
+        }
+      }
+    },
+    "Sun": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شمس"
+          }
+        }
+      }
+    },
+    "Take Break Anyway": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أخذ الاستراحة على أي حال"
+          }
+        }
+      }
+    },
+    "Take a Break Now": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أخذ استراحة الآن"
+          }
+        }
+      }
+    },
+    "Taken": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مأخوذة"
+          }
+        }
+      }
+    },
+    "Text": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النص"
+          }
+        }
+      }
+    },
+    "The app theme's own colours.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ألوان سمة التطبيق نفسها."
+          }
+        }
+      }
+    },
+    "The break comes back in 5 minutes. It isn't counted as skipped.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعود الاستراحة بعد ٥ دقائق، ولا تُحتسب متخطّاة."
+          }
+        }
+      }
+    },
+    "The eye in the menu bar fills for the last minute.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تمتلئ أيقونة العين في شريط القوائم خلال الدقيقة الأخيرة."
+          }
+        }
+      }
+    },
+    "The first unlock while a shift is due asks whether to start it from that moment. Yes keeps the shift's length, so the end moves too. It's for that day only.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عند أول فتح للقفل في وقت العمل، يظهر سؤال عن بدء يوم العمل من تلك اللحظة. اختيار «نعم» يحافظ على مدة يوم العمل، فيتحرك وقت النهاية أيضًا. ويسري ذلك على ذلك اليوم فقط."
+          }
+        }
+      }
+    },
+    "The long break asks you to refill, so there's no separate reminder.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تتضمن الاستراحة الطويلة إعادة ملء كوب الماء، لذا لا يوجد تذكير منفصل."
+          }
+        }
+      }
+    },
+    "The reminder": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التذكير"
+          }
+        }
+      }
+    },
+    "The screen frosts over, so there's nothing to read but the next step.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُغطّى الشاشة بطبقة ضبابية، فلا يظهر سوى الخطوة التالية."
+          }
+        }
+      }
+    },
+    "The whole screen frosts over until you answer.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُغطّى الشاشة كلها بطبقة ضبابية حتى الرد."
+          }
+        }
+      }
+    },
+    "Theme": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السمة"
+          }
+        }
+      }
+    },
+    "This is how it will look": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هكذا سيبدو"
+          }
+        }
+      }
+    },
+    "This week": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هذا الأسبوع"
+          }
+        }
+      }
+    },
+    "Time for a break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان وقت الاستراحة"
+          }
+        }
+      }
+    },
+    "Time for a glass of water": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان وقت كوب ماء"
+          }
+        }
+      }
+    },
+    "Time for a long break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان وقت الاستراحة الطويلة"
+          }
+        }
+      }
+    },
+    "Time for some water": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان وقت شرب الماء"
+          }
+        }
+      }
+    },
+    "Time to drink": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حان وقت الشرب"
+          }
+        }
+      }
+    },
+    "Time zone": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المنطقة الزمنية"
+          }
+        }
+      }
+    },
+    "Timing": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التوقيت"
+          }
+        }
+      }
+    },
+    "To drink %@ over a %@ shift, about every %lld minutes. Never closer than %lld minutes for this glass.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لشرب %1$@ خلال يوم عمل مدته %2$@، تذكير كل %3$lld دقيقة تقريبًا. وبهذا الحجم من الأكواب، لا تقل الفترة عن %4$lld دقيقة."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "To drink %1$@ over a %2$@ shift, about every %3$lld minutes. Never closer than %4$lld minutes for this glass."
+          }
+        }
+      }
+    },
+    "Today": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اليوم"
+          }
+        }
+      }
+    },
+    "Today's rhythm": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاع اليوم"
+          }
+        }
+      }
+    },
+    "Tones": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "درجات لونية"
+          }
+        }
+      }
+    },
+    "Try it": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجربة"
+          }
+        }
+      }
+    },
+    "Two slow blinks": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رمشتان بطيئتان"
+          }
+        }
+      }
+    },
+    "Type": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النوع"
+          }
+        }
+      }
+    },
+    "Undo Late Start": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التراجع عن البداية المتأخرة"
+          }
+        }
+      }
+    },
+    "Units": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوحدات"
+          }
+        }
+      }
+    },
+    "Until I Resume": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى أستأنفها"
+          }
+        }
+      }
+    },
+    "Until Tomorrow": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى الغد"
+          }
+        }
+      }
+    },
+    "Until your shift starts": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتبقي حتى بداية العمل"
+          }
+        }
+      }
+    },
+    "Up to 2 minutes, so a break doesn't land mid-sentence.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى دقيقتين، كي لا تبدأ الاستراحة في منتصف جملة."
+          }
+        }
+      }
+    },
+    "Use This Goal": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اعتماد هذا الهدف"
+          }
+        }
+      }
+    },
+    "Vigorous": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شديدة"
+          }
+        }
+      }
+    },
+    "Violet & Aqua": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بنفسجي وأزرق مائي"
+          }
+        }
+      }
+    },
+    "Wait for a pause in my typing": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انتظار توقّفي عن الكتابة"
+          }
+        }
+      }
+    },
+    "Ward": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عيادة"
+          }
+        }
+      }
+    },
+    "Warehouse": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستودع"
+          }
+        }
+      }
+    },
+    "Water": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الماء"
+          }
+        }
+      }
+    },
+    "Water Bottle": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قارورة ماء"
+          }
+        }
+      }
+    },
+    "Water reminders": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تذكيرات الماء"
+          }
+        }
+      }
+    },
+    "Water, tea or coffee all count.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الماء والشاي والقهوة كلها تُحتسب."
+          }
+        }
+      }
+    },
+    "Water, when you're ready": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كوب ماء، في الوقت المناسب"
+          }
+        }
+      }
+    },
+    "Weight": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوزن"
+          }
+        }
+      }
+    },
+    "What one \"I Drank\" adds.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكمية التي تضيفها «شربتُ» في كل مرة."
+          }
+        }
+      }
+    },
+    "What the week says": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملخص الأسبوع"
+          }
+        }
+      }
+    },
+    "When you step away or lock the screen, EyeBreak pauses. The timer starts fresh when you're back, since you already rested.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عند الابتعاد عن الجهاز أو قفل الشاشة، يتوقف EyeBreak مؤقتًا. ويبدأ المؤقت من جديد عند العودة، لأن الراحة قد حصلت بالفعل."
+          }
+        }
+      }
+    },
+    "When you work. Breaks, reminders and the widgets follow it.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أوقات العمل. تتبعها الاستراحات والتذكيرات والأدوات."
+          }
+        }
+      }
+    },
+    "While a camera or the microphone is in use.": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أثناء استخدام الكاميرا أو الميكروفون."
+          }
+        }
+      }
+    },
+    "While a camera or the microphone is on. EyeBreak only checks whether they're on; it never sees or hears anything.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أثناء تشغيل الكاميرا أو الميكروفون. يتحقق EyeBreak من تشغيلهما فقط، ولا يرى أو يسمع أي شيء."
+          }
+        }
+      }
+    },
+    "Window": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نافذة"
+          }
+        }
+      }
+    },
+    "With the Long Break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع الاستراحة الطويلة"
+          }
+        }
+      }
+    },
+    "Work between breaks": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدة العمل بين الاستراحات"
+          }
+        }
+      }
+    },
+    "Work out my goal": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حساب هدفي"
+          }
+        }
+      }
+    },
+    "Workday": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يوم العمل"
+          }
+        }
+      }
+    },
+    "Working day": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يوم عمل"
+          }
+        }
+      }
+    },
+    "Workplaces": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أماكن العمل"
+          }
+        }
+      }
+    },
+    "Workshop": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ورشة"
+          }
+        }
+      }
+    },
+    "Would you like to show a reminder anyway?": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض التذكير على أي حال؟"
+          }
+        }
+      }
+    },
+    "Would you like to take a break anyway or adjust your schedule?": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أخذ استراحة على أي حال، أم تعديل ساعات العمل؟"
+          }
+        }
+      }
+    },
+    "Wrap up what you're doing.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لحظات لإنهاء العمل الجاري."
+          }
+        }
+      }
+    },
+    "Yes, start now": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نعم، البدء الآن"
+          }
+        }
+      }
+    },
+    "Your breaks, today's lines and the streak will be deleted.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيُحذف سجل الاستراحات وخطوط اليوم وسلسلة الأيام المتتالية."
+          }
+        }
+      }
+    },
+    "Your data": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البيانات"
+          }
+        }
+      }
+    },
+    "Your days will fill in here from the first break you take.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستظهر الأيام هنا بدءًا من أول استراحة."
+          }
+        }
+      }
+    },
+    "Your own lengths, set under More options.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدد مخصّصة، تُضبط من «خيارات أكثر»."
+          }
+        }
+      }
+    },
+    "Your rhythm": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاعك"
+          }
+        }
+      }
+    },
+    "Your shift starts in": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يبدأ العمل بعد"
+          }
+        }
+      }
+    },
+    "Your shift: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ساعات العمل: %@"
+          }
+        }
+      }
+    },
+    "at %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الساعة %@"
+          }
+        }
+      }
+    },
+    "ends %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ينتهي %@"
+          }
+        }
+      }
+    },
+    "from %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "من %@"
+          }
+        }
+      }
+    },
+    "kg": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كجم"
+          }
+        }
+      }
+    },
+    "lb": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رطل"
+          }
+        }
+      }
+    },
+    "left": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتبقي"
+          }
+        }
+      }
+    },
+    "no shift days picked": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم تُحدَّد أيام العمل"
+          }
+        }
+      }
+    },
+    "today": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اليوم"
+          }
+        }
+      }
+    },
+    "tomorrow": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "غدًا"
+          }
+        }
+      }
+    },
+    "until %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى %@"
+          }
+        }
+      }
+    },
+    "until the end of your shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى نهاية يوم العمل"
+          }
+        }
+      }
+    },
+    "until tomorrow": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى الغد"
+          }
+        }
+      }
+    },
+    "until you resume": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى الاستئناف"
+          }
+        }
+      }
+    },
+    "until your next shift": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى يوم العمل التالي"
+          }
+        }
+      }
+    },
+    "until your shift starts": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى بداية العمل"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

@@ -39,3 +39,6 @@ Package.resolved
 
 # Claude
 .claude/
+
+# Impeccable review captures (screenshots of local test runs)
+.impeccable/review/

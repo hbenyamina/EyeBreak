@@ -4,6 +4,8 @@ struct AppConfig: Codable {
     let workDurationMinutes: Int
     let breakDurationSeconds: Int
     let warningTimeSeconds: Int
+    let skipsBeforeDryEyeNudge: Int?
+    let waterReminderMinutes: Int?
 
     // Computed properties for TimeInterval values
     var workDuration: TimeInterval {
@@ -18,11 +20,22 @@ struct AppConfig: Codable {
         TimeInterval(warningTimeSeconds)
     }
 
+    var dryEyeNudgeThreshold: Int {
+        skipsBeforeDryEyeNudge ?? 2
+    }
+
+    /// 0 disables water reminders.
+    var waterReminderInterval: TimeInterval {
+        TimeInterval(max(waterReminderMinutes ?? 45, 0) * 60)
+    }
+
     // Default fallback values
     static let fallback = AppConfig(
         workDurationMinutes: 20,
-        breakDurationSeconds: 20,
-        warningTimeSeconds: 30
+        breakDurationSeconds: 30,
+        warningTimeSeconds: 0,
+        skipsBeforeDryEyeNudge: 2,
+        waterReminderMinutes: 60
     )
 }
 
