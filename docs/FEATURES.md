@@ -132,30 +132,36 @@ read by the widget — not in UserDefaults.
 
 ## 8. History and goals
 
-- `breakStatistics` (2.2.0 format): `[{date, breaksCompleted, breaksSkipped, totalBreakTime}]`, one entry per day.
+- `breakStatistics` (2.2.0 format): `[{date, breaksCompleted, breaksSkipped, totalBreakTime}]`, one entry per day, plus
+  `pomodorosCompleted` and `focusTime` (seconds), which read as 0 in older entries.
 - **Daily goal:** `breakGoalFollowsShift` (on): three quarters of the breaks today's shift holds (16 of 21 in 8 hours
   at the Recommended rhythm); off: `dailyBreakGoal`.
 - **Streak:** work days in a row with a break; days off don't count, today doesn't break it, one missed work day in
   seven is forgiven.
 - **Insights:** plain facts (goal met on N of M days, skips this week, work days in a row). Reset history clears the
-  break history and today's lines together.
+  break and Pomodoro history and today's lines together.
 
 ## 9. Shell
 
-- **Menu bar:** the eye (filled in the last minute before a break, crossed out while paused), and beside it the next
-  break, the shift, both or nothing (`menuBarCountdown`). During a Pomodoro's block, a timer with the block's countdown
-  whatever that setting says. VoiceOver reads the pause state.
+- **Menu bar:** the eye (filled in the last minute before a break, crossed out while paused; a timer during a Pomodoro's
+  block), and beside it whichever countdowns App → Menu bar shows switches on, each on its own: the next break
+  (`menuBarShowsBreak`, off), what's left of the shift (`menuBarShowsShift`, on) and a running Pomodoro's block or break
+  (`menuBarShowsPomodoro`, on), which takes the next break's place while it runs. 3.1's `menuBarCountdown` is no longer
+  read. VoiceOver reads the pause state.
 - **Popover:** date and shift line with the pause menu; the glass hero (next break, round dots, "Break when you pause
-  typing" / "Break after your call"); today's lines; the next glass with I Drank; 5 More Minutes and Skip This Break
+  typing" / "Break after your call"); today's lines; the next glass with I Drank; "Pomodoros today" with a chevron to
+  the Pomodoro page, once one runs or one is done today; 5 More Minutes and Skip This Break
   while a break is due; Take a Break Now; Start Pomodoro / Start Next Pomodoro / Stop Pomodoro; Start Shift from Now /
   Undo Late Start; Settings (⌘,) and Quit (⌘Q).
 - **Right-click menu:** pause for 30 min / 1 h / 2 h / until tomorrow / until resumed, or Resume; 5 More Minutes; Take a
   Break Now; Start / Start Next / Stop Pomodoro; I Drank a Glass of Water; Settings (⌘,); Quit (⌘Q).
 - **App window** (Dock icon only while open), one page per need, each with at most four essentials and **More options**:
   - **Breaks:** your rhythm (today's line, the week); Rhythm, Break screen, Wait for a pause, Hold during calls. More:
-    timing, Pomodoro, daily goal, blink reminders, away detection, the last 30 days, what the week says, preview.
+    timing, daily goal, blink reminders, away detection, the last 30 days, what the week says, preview.
   - **Water:** your rhythm; Remind me, Drink each day, My glass, Ask me. "Work out my goal" opens the calculator. More:
     units, the reminder's look, preview.
+  - **Pomodoro:** today (right now with Start / Start Next / Stop, Pomodoros done, time in focus); this week as bars with
+    its totals; Focus, Break, Long break, Start the next one by itself. More: the long break's length.
   - **Workday:** today; Starts, Ends, Days, Pause everything outside these hours. More: presets and time zone, the
     unlock question, the End of Shift widget's colours.
   - **App:** theme; Language, Menu bar shows, Open at login. More: sounds, auto-start, reminder colours, keys, reset
@@ -208,7 +214,7 @@ read by the widget — not in UserDefaults.
 | Long break (min) | `pomodoroLongBreakMinutes` | 15 |
 | Start the next block by itself | `pomodoroAutoContinue` | on |
 
-- **Start Pomodoro** in the popover or the right-click menu (not during a break). It starts the timer, ends a pause you
+- **Start Pomodoro** in the popover, the right-click menu or the Pomodoro page (not during a break). It starts the timer, ends a pause you
   chose, and runs off shift too; being away still holds it.
 - **While it runs it is the break timer:** the block replaces the work interval and its break replaces the usual one, so
   nothing else cuts into a block. Its breaks are ordinary EyeBreak breaks in the chosen style: they wait for a pause in
@@ -218,7 +224,8 @@ read by the widget — not in UserDefaults.
 - **Counting:** a block counts when its time runs out. Take a Break Now ends it early with a short break that doesn't
   count; a break held back by 5 More Minutes isn't counted twice. Counted blocks move the round, and the break after
   every Nth is the long one. The hero shows "Pomodoro, time left" (or "…, then a long break"), the round as dots and
-  how many are done; the sidebar reads "Pomodoro: 18:42 left".
+  how many are done; the sidebar reads "Pomodoro: 18:42 left". Each counted block is added to the day's history
+  (`pomodorosCompleted`, `focusTime` = the block's length), which the Pomodoro page shows for today and the week.
 - **Between blocks:** with `pomodoroAutoContinue` off, the Pomodoro waits after each break for **Start Next Pomodoro**,
   and your usual rhythm runs meanwhile.
 - **Stop Pomodoro** hands back to the usual rhythm, with the next break no further off than its own interval; a

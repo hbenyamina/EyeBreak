@@ -201,7 +201,7 @@ components:
 
 **Creative North Star: "The Quiet Notebook"**
 
-EyeBreak is a calm Mac productivity app in the TickTick/Notion lineage. Content sits on opaque paper: a page is an SF Symbol, a large bold title and one line of description, then sections set by a semibold heading over a hairline, then flat rows with a title and one line of detail on the left and a native control on the right. Type and spacing do the grouping. There are no boxed grouped forms, stat tiles or card grids. The window has four pages, one per need (Breaks, Water, Workday, App); each shows at most four essentials and folds the rest under "More options".
+EyeBreak is a calm Mac productivity app in the TickTick/Notion lineage. Content sits on opaque paper: a page is an SF Symbol, a large bold title and one line of description, then sections set by a semibold heading over a hairline, then flat rows with a title and one line of detail on the left and a native control on the right. Type and spacing do the grouping. There are no boxed grouped forms, stat tiles or card grids. The window has five pages, one per need (Breaks, Water, Pomodoro, Workday, App); each shows at most four essentials and folds the rest under "More options".
 
 Liquid Glass is the accent, not the ground. It appears only where something floats over the user's work or desktop: the window's sidebar, the popover's hero card holding the next-break countdown, toasts, and break overlays. Everything else is solid. Colour belongs to the habits. The theme's eye colour (violet, or leaf green in Garden) marks breaks and the app's own chrome. Its water colour (aqua, or rain blue) marks water. One red (`Theme.alert`) is held in reserve for a warning; nothing draws in it today. Neutrals are warm ink on paper with hairlines.
 
@@ -338,12 +338,12 @@ Corners are continuous (squircle) curves throughout. Radii grow with how far a s
 - **Style:** a wash fill with 10px corners and 14px padding. It holds a 15px medium symbol in the tint, a 13px semibold title and a 12px secondary message, with an optional trailing accessory. There is at most one per page, 24px above what follows (today, the first-run "How EyeBreak works" on Breaks, with a "Got It" accent button).
 
 ### Navigation (sidebar)
-- **Style:** the system sidebar list (Liquid Glass). At the top is the app icon (30px) beside "EyeBreak" in 13px semibold and one or two 11px tabular status lines. Below that is one group of four: Breaks (eye), Water (drop), Workday (hourglass), App (gearshape).
+- **Style:** the system sidebar list (Liquid Glass). At the top is the app icon (30px) beside "EyeBreak" in 13px semibold and one or two 11px tabular status lines. Below that is one group of five: Breaks (eye), Water (drop), Pomodoro (timer), Workday (hourglass), App (gearshape).
 - **Row:** an 18px-wide 13px symbol and a 13px title, padded 6 × 8px, with 7px corners.
 - **States:** at rest, the icon is secondary ink. On hover, the row gets a 5% primary-colour wash. When selected, the row takes a 12% wash of the page tint, the icon turns to the tint and the title goes semibold. It never uses the system accent highlight.
 
 ### Menu bar item
-- **Style:** the `eye` symbol, with the countdown beside it when enabled. It fills (`eye.fill`) for the last minute before a break and while a break waits for a pause, and turns to `eye.slash` while paused or stopped. During a Pomodoro's block it is `timer`, always with the block's countdown, and fills to `eye.fill` like the eye for the block's last minute.
+- **Style:** the `eye` symbol, with the countdowns beside it that App → Menu bar shows switches on (next break off, end of shift and a running Pomodoro on by default). It fills (`eye.fill`) for the last minute before a break and while a break waits for a pause, and turns to `eye.slash` while paused or stopped. During a Pomodoro's block it is `timer`, and fills to `eye.fill` like the eye for the block's last minute.
 
 ### Popover menu rows
 - **Style:** a 12px symbol in secondary colour, a 13px title, and an optional 11px shortcut, padded 5 × 8px.

@@ -412,6 +412,21 @@ do {
     check("Start runs the next block", !later.isWaiting)
 }
 
+// MARK: History with Pomodoros
+
+do {
+    // 2.2.0's breakStatistics entry: no Pomodoro fields
+    let old = Data(#"[{"date":813740000,"breaksCompleted":12,"totalBreakTime":360,"breaksSkipped":2}]"#.utf8)
+    let days = try? JSONDecoder().decode([DayStats].self, from: old)
+    check("2.2.0 history still loads", days?.first?.breaksCompleted == 12 && days?.first?.breaksSkipped == 2)
+    check("its Pomodoro fields read as zero", days?.first?.pomodorosCompleted == 0 && days?.first?.focusTime == 0)
+    var day = DayStats.empty(Date(timeIntervalSinceReferenceDate: 813740000))
+    day.pomodorosCompleted = 4
+    day.focusTime = 6000
+    let again = (try? JSONEncoder().encode([day])).flatMap { try? JSONDecoder().decode([DayStats].self, from: $0) }
+    check("Pomodoros survive a round trip", again?.first == day)
+}
+
 // MARK: Rhythm lines
 
 do {

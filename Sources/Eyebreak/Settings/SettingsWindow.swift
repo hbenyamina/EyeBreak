@@ -8,6 +8,7 @@ import SwiftUI
 enum SettingsPane: String, CaseIterable, Identifiable {
     case breaks = "Breaks"
     case water = "Water"
+    case pomodoro = "Pomodoro"
     case workday = "Workday"
     case app = "App"
 
@@ -17,6 +18,7 @@ enum SettingsPane: String, CaseIterable, Identifiable {
         switch self {
         case .breaks: return "Breaks"
         case .water: return "Water"
+        case .pomodoro: return "Pomodoro"
         case .workday: return "Workday"
         case .app: return "App"
         }
@@ -26,6 +28,7 @@ enum SettingsPane: String, CaseIterable, Identifiable {
         switch self {
         case .breaks: return "eye"
         case .water: return "drop"
+        case .pomodoro: return "timer"
         case .workday: return "hourglass"
         case .app: return "gearshape"
         }
@@ -35,6 +38,7 @@ enum SettingsPane: String, CaseIterable, Identifiable {
         switch self {
         case .breaks: return "How you rest your eyes."
         case .water: return "How much you drink, and when you're asked."
+        case .pomodoro: return "Focus in blocks, with a break after each, and what you've done."
         case .workday: return "When you work. Breaks, reminders and the widgets follow it."
         case .app: return "How EyeBreak looks and behaves."
         }
@@ -118,6 +122,8 @@ struct SettingsView: View {
                               previewBreak: actions.previewBreak, showBlinkNow: actions.showAmbientNow)
         case .water:
             WaterSettingsView(settings: settings, activity: activity, shift: shift, showWaterNow: actions.showWaterNow)
+        case .pomodoro:
+            PomodoroSettingsView(settings: settings, stats: stats, timerManager: timerManager)
         case .workday:
             WorkdaySettingsView(settings: settings, shift: shift, prompt: unlockPrompt)
         case .app:

@@ -57,7 +57,6 @@ struct BreakSettingsView: View {
 
             MoreOptions {
                 timing
-                pomodoro
                 goal
                 blinks
                 away
@@ -98,24 +97,9 @@ struct BreakSettingsView: View {
         }
     }
 
-    // MARK: - Pomodoro
-    private var pomodoro: some View {
-        SettingsSection(title: "Pomodoro", footer: "Start one from the menu bar. While it runs, its breaks take the place of the ones above, each one a chance to stand and refill your water.") {
-            SliderRow(title: "Focus", value: $settings.pomodoroFocusMinutes, range: 10...60, step: 5, format: SettingsFormat.minutes)
-            SliderRow(title: "Break", value: $settings.pomodoroBreakMinutes, range: 3...15, format: SettingsFormat.minutes)
-            PickerRow(title: "Long break", selection: $settings.pomodoroLongBreakEvery) {
-                ForEach(2...6, id: \.self) { Text(verbatim: Self.everyNth($0)).tag($0) }
-            }
-            SliderRow(title: "Long break length", value: $settings.pomodoroLongBreakMinutes, range: 10...30, step: 5, format: SettingsFormat.minutes)
-            ToggleRow(title: "Start the next one by itself",
-                      subtitle: "Off: after each break, start the next from the menu. Your usual breaks run in between.",
-                      isOn: $settings.pomodoroAutoContinue)
-        }
-    }
-
     /// "Every 3rd Break"; in Arabic an ordinal word, which the number formatter doesn't give:
     /// "كل ثالث استراحة", "كل ثاني استراحة" (every other).
-    private static func everyNth(_ value: Int) -> String {
+    static func everyNth(_ value: Int) -> String {
         let ordinal: String
         let arabicOrdinals = [2: "ثاني", 3: "ثالث", 4: "رابع", 5: "خامس", 6: "سادس", 7: "سابع", 8: "ثامن"]
         if L10n.appLanguage == "ar", let word = arabicOrdinals[value] {

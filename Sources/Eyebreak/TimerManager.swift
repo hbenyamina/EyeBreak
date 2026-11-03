@@ -288,7 +288,9 @@ class TimerManager: ObservableObject {
         } else {
             // Skipped before it began: the work interval still counts toward the round
             if isFocusing {
+                let counted = pomodoro?.completed ?? 0
                 let long = pomodoro?.blockEnded(finished: true, every: settings.pomodoroLongBreakEvery) ?? false
+                if (pomodoro?.completed ?? 0) > counted { stats.recordPomodoro(focus: settings.pomodoroFocusDuration) }
                 pomodoro?.breakEnded(wasLong: long, continues: settings.pomodoroAutoContinue)
             } else {
                 round.breakEnded(wasLong: nextBreakIsLong)
@@ -449,7 +451,9 @@ class TimerManager: ObservableObject {
         isPomodoroBreak = !isPreview && isFocusing
         if isPomodoroBreak {
             // A block counts when its time ran out; Take a Break Now ends it early, with a short break
+            let counted = pomodoro?.completed ?? 0
             isLongBreak = pomodoro?.blockEnded(finished: timeRemaining <= 0, every: settings.pomodoroLongBreakEvery) ?? false
+            if (pomodoro?.completed ?? 0) > counted { stats.recordPomodoro(focus: settings.pomodoroFocusDuration) }
             currentBreakDuration = isLongBreak ? settings.pomodoroLongBreakDuration : settings.pomodoroBreakDuration
         } else {
             isLongBreak = !isPreview && nextBreakIsLong

@@ -46,10 +46,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         activityModel = ActivityModel(shift: shiftModel)
         timerManager.onRecord = { [weak self] taken in self?.activityModel.record(taken ? .breakTaken : .breakSkipped) }
         waterReminderManager.onRecord = { [weak self] drank in self?.activityModel.record(drank ? .drank : .waterMissed) }
-        // Coming from Shift Countdown, keep its countdown in the menu bar beside EyeBreak's.
-        if shiftModel.migration == .fromShiftCountdown && settings.menuBarCountdown == .nextBreak {
-            settings.menuBarCountdown = .both
-        }
         settingsWindowController = SettingsWindowController { [unowned self] navigation in
             SettingsView(
                 navigation: navigation,
@@ -126,12 +122,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // MARK: - Links
-    /// `eyebreak://statistics` and `eyebreak://shift`, from the widgets.
+    /// `eyebreak://statistics` and `eyebreak://shift` from the widgets, `eyebreak://pomodoro`.
     func application(_ application: NSApplication, open urls: [URL]) {
         guard let url = urls.first, url.scheme == "eyebreak" else { return }
         let pane: SettingsPane? = switch url.host {
         case "statistics", "breaks": .breaks
         case "water": .water
+        case "pomodoro": .pomodoro
         case "shift", "workday": .workday
         default: nil
         }
@@ -164,11 +161,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             shift: shiftModel,
             activity: activityModel,
             settings: settings,
+            stats: stats,
             actions: MenuActions(
                 takeBreak: { [weak self] in self?.takeBreakNow() },
                 openSettings: { [weak self] in
                     self?.popover.performClose(nil)
                     self?.settingsWindowController.show()
+                },
+                openPomodoro: { [weak self] in
+                    self?.popover.performClose(nil)
+                    self?.settingsWindowController.show(pane: .pomodoro)
                 }
             )
         )
@@ -188,8 +190,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in self?.updateStatusItem() }
             .store(in: &cancellables)
-        settings.$menuBarCountdown
-            .removeDuplicates()
+        Publishers.CombineLatest3(settings.$menuBarShowsBreak, settings.$menuBarShowsShift, settings.$menuBarShowsPomodoro)
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.updateStatusItem() }
             .store(in: &cancellables)
@@ -203,7 +205,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // for a pause in typing. No toast, no sound.
         let breakSoon = !dimmed && !timerManager.isOnBreak
             && (timerManager.isWaitingForPause || timerManager.isInWarningPeriod || timerManager.timeRemaining <= 60)
-        // A Pomodoro's block shows as a timer, and its countdown always shows: you started it.
+        // A Pomodoro's block shows as a timer.
         let focusing = timerManager.isFocusing && !timerManager.isOnBreak
         let imageName = dimmed ? "eye.slash" : breakSoon ? "eye.fill" : focusing ? "timer" : "eye"
         if statusImageName != imageName {
@@ -211,14 +213,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.image = NSImage(systemSymbolName: imageName, accessibilityDescription: "EyeBreak")
         }
 
-        // Countdowns beside the icon: the next break (or what's left of this one), and the
-        // shift. The break's is hidden while paused, where a frozen number would mislead.
-        let choice = settings.menuBarCountdown
-        let breakCountdown: TimeInterval? = !(choice.showsBreak || focusing) || dimmed ? nil
+        // Countdowns beside the icon, each as chosen: the next break (or what's left of this
+        // one), a running Pomodoro's block or break in its place, and the shift. The timer's is
+        // hidden while paused, where a frozen number would mislead.
+        let inPomodoro = timerManager.isFocusing || timerManager.isPomodoroBreak
+        let showsTimer = inPomodoro ? settings.menuBarShowsPomodoro : settings.menuBarShowsBreak
+        let breakCountdown: TimeInterval? = !showsTimer || dimmed ? nil
             : timerManager.isOnBreak ? timerManager.breakTimeRemaining
             : timerManager.timeRemaining
         let shiftStatus = shiftModel.status
-        let shiftText = choice.showsShift ? ShiftText.short(for: shiftStatus, now: shiftModel.now) : nil
+        let shiftText = settings.menuBarShowsShift ? ShiftText.short(for: shiftStatus, now: shiftModel.now) : nil
         let shiftSymbol = ShiftText.symbol(for: shiftStatus)
 
         let key = "\(breakCountdown.map(Self.menuBarTime) ?? "")|\(shiftText ?? "")|\(shiftSymbol)"
@@ -584,21 +588,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     /// card while a break runs, and the menu bar item's symbol, title and tooltip
     /// (`status.txt`), drawn offscreen into that folder. For checking states without opening
     /// anything, e.g. while a full-screen app hides the menu bar. `-snapshotSettings Breaks`
-    /// adds that page once; `-silentBreaks YES` keeps breaks off the screen.
+    /// adds that page each time; `-silentBreaks YES` keeps breaks off the screen.
     @MainActor
     private func startSnapshots(in directory: URL) {
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         let every = max(UserDefaults.standard.double(forKey: "snapshotEvery"), 1)
         let started = Date()
-        if let name = UserDefaults.standard.string(forKey: "snapshotSettings"), let pane = SettingsPane(rawValue: name) {
-            let height = UserDefaults.standard.double(forKey: "settingsHeight")
-            Self.drawOffscreen(settingsWindowController.snapshotView(pane: pane),
-                               size: NSSize(width: 880, height: height > 0 ? height : 660),
-                               to: directory.appendingPathComponent("settings-\(name).png"))
-        }
+        let settingsPane = UserDefaults.standard.string(forKey: "snapshotSettings").flatMap(SettingsPane.init)
+        let settingsHeight = UserDefaults.standard.double(forKey: "settingsHeight")
         Timer.scheduledTimer(withTimeInterval: every, repeats: true) { [weak self] _ in MainActor.assumeIsolated {
             guard let self, let button = self.statusItem.button else { return }
             let stamp = String(format: "%04d", Int(Date().timeIntervalSince(started).rounded()))
+            if let pane = settingsPane {
+                Self.drawOffscreen(self.settingsWindowController.snapshotView(pane: pane),
+                                   size: NSSize(width: 880, height: settingsHeight > 0 ? settingsHeight : 660),
+                                   to: directory.appendingPathComponent("settings-\(pane.rawValue)-\(stamp).png"))
+            }
             if let menu = (self.popover.contentViewController as? NSHostingController<MenuBarView>)?.rootView {
                 Self.drawOffscreen(menu, to: directory.appendingPathComponent("menu-\(stamp).png"))
             }

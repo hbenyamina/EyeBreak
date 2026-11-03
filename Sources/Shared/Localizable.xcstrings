@@ -1139,12 +1139,12 @@
         }
       }
     },
-    "Beside the eye: the time to your next break, what's left of your shift, or both.": {
+    "Beside the icon, any of these. The Pomodoro shows only while one runs.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "بجانب أيقونة العين: الوقت حتى الاستراحة التالية، أو المتبقي من يوم العمل، أو كلاهما."
+            "value": "بجانب الأيقونة، أيٌّ من هذه. ولا يظهر البومودورو إلا أثناء تشغيل جلسة."
           }
         }
       }
@@ -1175,16 +1175,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "الجنس"
-          }
-        }
-      }
-    },
-    "Both": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "كلاهما"
           }
         }
       }
@@ -1555,12 +1545,12 @@
         }
       }
     },
-    "Deletes your breaks, today's lines and the streak.": {
+    "Deletes your breaks and Pomodoros, today's lines and the streak.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "يحذف سجل الاستراحات وخطوط اليوم وسلسلة الأيام المتتالية."
+            "value": "يحذف سجل الاستراحات وجلسات البومودورو وخطوط اليوم وسلسلة الأيام المتتالية."
           }
         }
       }
@@ -1992,6 +1982,16 @@
         }
       }
     },
+    "Focus in blocks, with a break after each, and what you've done.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التركيز على فترات تليها استراحة بعد كل منها، وما أُنجز منها."
+          }
+        }
+      }
+    },
     "Follow my shift": {
       "localizations": {
         "ar": {
@@ -2414,6 +2414,16 @@
         }
       }
     },
+    "Lengths": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المُدد"
+          }
+        }
+      }
+    },
     "Line": {
       "localizations": {
         "ar": {
@@ -2810,6 +2820,16 @@
         }
       }
     },
+    "Not running. Start one here or from the menu bar.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا تعمل الآن. يمكن بدء جلسة من هنا أو من شريط القوائم."
+          }
+        }
+      }
+    },
     "Notification": {
       "localizations": {
         "ar": {
@@ -2960,6 +2980,16 @@
         }
       }
     },
+    "On a break, %@ left": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في استراحة، المتبقي %@"
+          }
+        }
+      }
+    },
     "On shift": {
       "localizations": {
         "ar": {
@@ -3022,6 +3052,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "رمشة واحدة بطيئة وكاملة"
+          }
+        }
+      }
+    },
+    "Open Pomodoro": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح صفحة البومودورو"
           }
         }
       }
@@ -3186,6 +3226,16 @@
         }
       }
     },
+    "Pomodoro %lld, %@ left": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلسة البومودورو %lld، المتبقي %@"
+          }
+        }
+      }
+    },
     "Pomodoro, then a long break": {
       "localizations": {
         "ar": {
@@ -3212,6 +3262,56 @@
           "stringUnit": {
             "state": "translated",
             "value": "البومودورو: المتبقي %@"
+          }
+        }
+      }
+    },
+    "Pomodoros": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلسات البومودورو"
+          }
+        }
+      }
+    },
+    "Pomodoros done": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجلسات المكتملة"
+          }
+        }
+      }
+    },
+    "Pomodoros each day this week": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلسات البومودورو في كل يوم من هذا الأسبوع"
+          }
+        }
+      }
+    },
+    "Pomodoros that ran their full length, each day.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجلسات التي اكتملت مدتها، في كل يوم."
+          }
+        }
+      }
+    },
+    "Pomodoros today": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلسات البومودورو اليوم"
           }
         }
       }
@@ -3298,6 +3398,16 @@
           "stringUnit": {
             "state": "new",
             "value": "Read in %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "Ready for the next one": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بانتظار بدء الجلسة التالية"
           }
         }
       }
@@ -3428,6 +3538,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "الإيقاع"
+          }
+        }
+      }
+    },
+    "Right now": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الآن"
           }
         }
       }
@@ -3768,6 +3888,16 @@
         }
       }
     },
+    "Start Next": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء التالية"
+          }
+        }
+      }
+    },
     "Start Next Pomodoro": {
       "localizations": {
         "ar": {
@@ -3804,16 +3934,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "البدء من الآن"
-          }
-        }
-      }
-    },
-    "Start one from the menu bar. While it runs, its breaks take the place of the ones above, each one a chance to stand and refill your water.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تُبدأ الجلسة من شريط القوائم. وطوال مدتها تحلّ استراحاتها محل الاستراحات أعلاه، وكل منها فرصة للوقوف وإعادة ملء كوب الماء."
           }
         }
       }
@@ -3894,6 +4014,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "يبدأ"
+          }
+        }
+      }
+    },
+    "Stop": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف"
           }
         }
       }
@@ -4144,6 +4274,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "حان وقت شرب الماء"
+          }
+        }
+      }
+    },
+    "Time in focus": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وقت التركيز"
           }
         }
       }
@@ -4495,6 +4635,16 @@
         }
       }
     },
+    "While one runs, its breaks take the place of your usual ones, each a chance to stand and refill your water.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أثناء الجلسة، تحلّ استراحاتها محل استراحاتك المعتادة، وكل منها فرصة للوقوف وإعادة ملء كوب الماء."
+          }
+        }
+      }
+    },
     "Window": {
       "localizations": {
         "ar": {
@@ -4615,12 +4765,12 @@
         }
       }
     },
-    "Your breaks, today's lines and the streak will be deleted.": {
+    "Your breaks and Pomodoros, today's lines and the streak will be deleted.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "سيُحذف سجل الاستراحات وخطوط اليوم وسلسلة الأيام المتتالية."
+            "value": "سيُحذف سجل الاستراحات وجلسات البومودورو وخطوط اليوم وسلسلة الأيام المتتالية."
           }
         }
       }
@@ -4681,6 +4831,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "ساعات العمل: %@"
+          }
+        }
+      }
+    },
+    "Your week fills in here from the first Pomodoro you finish.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمتلئ أسبوعك هنا بدءًا من أول جلسة بومودورو تكتمل."
           }
         }
       }
