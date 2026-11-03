@@ -166,6 +166,9 @@ private struct SidebarStatus: View {
         if let reason = timerManager.pauseReason {
             return reason == .outsideWorkHours ? String(localized: "Off shift") : String(localized: "Paused")
         }
+        if timerManager.isFocusing {
+            return String(localized: "Pomodoro: \(TimerManager.format(timerManager.timeRemaining)) left")
+        }
         return String(localized: "Next break in \(TimerManager.format(timerManager.timeRemaining))")
     }
 
@@ -257,6 +260,15 @@ final class SettingsWindowController: NSObject, NSWindowDelegate {
         // Opening a page shouldn't drop the cursor into its first text field
         DispatchQueue.main.async { [weak window] in window?.makeFirstResponder(nil) }
     }
+
+    #if DEBUG
+    /// A page's content for drawing offscreen (`-snapshotSettings`), without opening the window.
+    func snapshotView(pane: SettingsPane) -> SettingsView {
+        let navigation = SettingsNavigation()
+        navigation.pane = pane
+        return makeView(navigation)
+    }
+    #endif
 
     func windowWillClose(_ notification: Notification) {
         // Back to a menu bar app once nothing of ours is on screen

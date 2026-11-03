@@ -58,15 +58,26 @@ enum ShiftStore {
         return FileManager.default.homeDirectoryForCurrentUser
     }
 
-    private static func applicationSupport(_ directory: String, _ file: String) -> URL {
+    private static func applicationSupport(_ directory: String) -> URL {
         realHome
             .appendingPathComponent("Library/Application Support", isDirectory: true)
             .appendingPathComponent(directory, isDirectory: true)
-            .appendingPathComponent(file)
     }
 
-    static var fileURL: URL { applicationSupport(directoryName, fileName) }
-    static var legacyFileURL: URL { applicationSupport(legacyDirectoryName, legacyFileName) }
+    /// `~/Library/Application Support/EyeBreak`, shared by every build and bundle ID. A
+    /// debug build launched with `EYEBREAK_SUPPORT_DIR` keeps its files there instead, so a
+    /// test run can't touch the installed app's shift or day.
+    static var directoryURL: URL {
+        #if DEBUG
+        if let folder = ProcessInfo.processInfo.environment["EYEBREAK_SUPPORT_DIR"], !folder.isEmpty {
+            return URL(fileURLWithPath: folder, isDirectory: true)
+        }
+        #endif
+        return applicationSupport(directoryName)
+    }
+
+    static var fileURL: URL { directoryURL.appendingPathComponent(fileName) }
+    static var legacyFileURL: URL { applicationSupport(legacyDirectoryName).appendingPathComponent(legacyFileName) }
 
     static var exists: Bool { FileManager.default.fileExists(atPath: fileURL.path) }
 

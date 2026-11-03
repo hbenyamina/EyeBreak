@@ -343,14 +343,14 @@ Corners are continuous (squircle) curves throughout. Radii grow with how far a s
 - **States:** at rest, the icon is secondary ink. On hover, the row gets a 5% primary-colour wash. When selected, the row takes a 12% wash of the page tint, the icon turns to the tint and the title goes semibold. It never uses the system accent highlight.
 
 ### Menu bar item
-- **Style:** the `eye` symbol, with the countdown beside it when enabled. It fills (`eye.fill`) for the last minute before a break and while a break waits for a pause, and turns to `eye.slash` while paused or stopped.
+- **Style:** the `eye` symbol, with the countdown beside it when enabled. It fills (`eye.fill`) for the last minute before a break and while a break waits for a pause, and turns to `eye.slash` while paused or stopped. During a Pomodoro's block it is `timer`, always with the block's countdown, and fills to `eye.fill` like the eye for the block's last minute.
 
 ### Popover menu rows
 - **Style:** a 12px symbol in secondary colour, a 13px title, and an optional 11px shortcut, padded 5 × 8px.
 - **Hover:** a solid fill in the habit's colour with 6px corners, like a native menu selection. Text and icon switch to the on-fill colour. Disabled rows drop to 45%.
 
 ### Popover hero
-- **Style:** a glass card with 16px corners, tinted with the eye accent at 10%, and 12px padding. It holds a 48px compact countdown ring with the eye symbol at its centre, an 11px medium caption, and the 26px semibold tabular time. A row of 6px round dots (filled in eye accent, empty in quaternary) shows the Pomodoro round. When paused, the ring desaturates to half opacity. While a break is due, "5 More Minutes" and "Skip This Break" join the actions above "Take a Break Now".
+- **Style:** a glass card with 16px corners, tinted with the eye accent at 10%, and 12px padding. It holds a 48px compact countdown ring with the eye symbol at its centre, an 11px medium caption, and the 26px semibold tabular time. A row of 6px round dots (filled in eye accent, empty in quaternary) shows the round of breaks. During a Pomodoro the centre symbol is `timer`, the caption "Pomodoro, time left", and the dots show the Pomodoro's round, followed by an 11px secondary "3 done". When paused, the ring desaturates to half opacity. While a break is due, "5 More Minutes" and "Skip This Break" join the actions above "Take a Break Now".
 
 ### Rhythm line (signature)
 - **Behaviour:** the line is drawn up to now, in the habit's colour (eye accent; water deep). Ahead of now it is a 1px hairline at the line's resting height. A solid dot 2.5× the line width marks now. Each miss pulls the line down by 0.42 of its height. The drop takes about 1% of the window (at least 1 minute) and the recovery eases back over about 9% (at least 10 minutes), so on an 8-hour shift that is 5 minutes down and 45 back. The line never goes below 0.06 of its height.

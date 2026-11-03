@@ -31,6 +31,16 @@
         }
       }
     },
+    "%@ left in this Pomodoro": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ حتى نهاية جلسة البومودورو"
+          }
+        }
+      }
+    },
     "%@ left in your shift": {
       "localizations": {
         "ar": {
@@ -225,6 +235,16 @@
           "stringUnit": {
             "state": "new",
             "value": "%1$lld breaks skipped in a row. Screens cut blinking by about two thirds; this one takes %2$@."
+          }
+        }
+      }
+    },
+    "%lld done": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld مكتملة"
           }
         }
       }
@@ -793,16 +813,6 @@
         }
       }
     },
-    "25 minutes of focus and a 5-minute break, with 15 minutes after every fourth.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "٢٥ دقيقة من التركيز ثم استراحة ٥ دقائق، و١٥ دقيقة بعد كل رابعة."
-          }
-        }
-      }
-    },
     "5 More Minutes": {
       "localizations": {
         "ar": {
@@ -1175,6 +1185,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "كلاهما"
+          }
+        }
+      }
+    },
+    "Break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستراحة"
           }
         }
       }
@@ -1958,6 +1978,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "أونصة سائلة"
+          }
+        }
+      }
+    },
+    "Focus": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التركيز"
           }
         }
       }
@@ -2900,6 +2930,16 @@
         }
       }
     },
+    "Off: after each break, start the next from the menu. Your usual breaks run in between.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عند إيقافه، تُبدأ الجلسة التالية من القائمة بعد كل استراحة، وتستمر استراحاتك المعتادة بين الجلسات."
+          }
+        }
+      }
+    },
     "On Its Own Timer": {
       "localizations": {
         "ar": {
@@ -3142,6 +3182,36 @@
           "stringUnit": {
             "state": "translated",
             "value": "بومودورو"
+          }
+        }
+      }
+    },
+    "Pomodoro, then a long break": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلسة بومودورو، تليها استراحة طويلة"
+          }
+        }
+      }
+    },
+    "Pomodoro, time left": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المتبقي من جلسة البومودورو"
+          }
+        }
+      }
+    },
+    "Pomodoro: %@ left": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "البومودورو: المتبقي %@"
           }
         }
       }
@@ -3698,6 +3768,26 @@
         }
       }
     },
+    "Start Next Pomodoro": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء جلسة البومودورو التالية"
+          }
+        }
+      }
+    },
+    "Start Pomodoro": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء جلسة بومودورو"
+          }
+        }
+      }
+    },
     "Start Shift from Now": {
       "localizations": {
         "ar": {
@@ -3718,12 +3808,32 @@
         }
       }
     },
+    "Start one from the menu bar. While it runs, its breaks take the place of the ones above, each one a chance to stand and refill your water.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُبدأ الجلسة من شريط القوائم. وطوال مدتها تحلّ استراحاتها محل الاستراحات أعلاه، وكل منها فرصة للوقوف وإعادة ملء كوب الماء."
+          }
+        }
+      }
+    },
     "Start over": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
             "value": "البدء من جديد"
+          }
+        }
+      }
+    },
+    "Start the next one by itself": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدء الجلسة التالية تلقائيًا"
           }
         }
       }
@@ -3784,6 +3894,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "يبدأ"
+          }
+        }
+      }
+    },
+    "Stop Pomodoro": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف جلسة البومودورو"
           }
         }
       }

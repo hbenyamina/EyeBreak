@@ -9,13 +9,17 @@ class WaterReminderManager: ObservableObject {
 
     var interval: TimeInterval { TimeInterval(settings.waterReminderInterval * 60) }
     var isEnabled: Bool { settings.waterReminderEnabled }
-    /// The long break asks instead, so there's no countdown of its own.
-    var ridesWithBreaks: Bool { settings.waterRidesWithBreaks }
+    /// The long break asks instead (every break during a Pomodoro), so there's no countdown of its own.
+    var ridesWithBreaks: Bool {
+        settings.waterRidesWithBreaks || (ridesWithPomodoro && settings.breakStyle != .notificationOnly)
+    }
 
     // MARK: - Published Properties
     @Published private(set) var timeRemaining: TimeInterval
     /// The reminder has fired and hasn't been acknowledged yet.
     @Published private(set) var isDue = false
+    /// A Pomodoro's block is running: its breaks ask for water instead.
+    @Published var ridesWithPomodoro = false
 
     /// A glass drunk (true) or a reminder turned down (false), for the day's rhythm.
     var onRecord: ((_ drank: Bool) -> Void)?

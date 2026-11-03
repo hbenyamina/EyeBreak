@@ -47,6 +47,16 @@ struct MenuBarView: View {
                 }
                 MenuRow(icon: "eye", title: "Take a Break Now", action: actions.takeBreak)
                     .disabled(timerManager.isOnBreak)
+                if let pomodoro = timerManager.pomodoro {
+                    if pomodoro.isWaiting {
+                        MenuRow(icon: "play", title: "Start Next Pomodoro") { timerManager.startPomodoro() }
+                            .disabled(timerManager.isOnBreak)
+                    }
+                    MenuRow(icon: "stop", title: "Stop Pomodoro") { timerManager.stopPomodoro() }
+                } else {
+                    MenuRow(icon: "timer", title: "Start Pomodoro") { timerManager.startPomodoro() }
+                        .disabled(timerManager.isOnBreak)
+                }
                 if shift.adjustedWindowToday != nil {
                     MenuRow(icon: "arrow.uturn.backward", title: "Undo Late Start") { shift.clearAdjustedStart() }
                 } else if shift.scheduledWindowToday != nil {
@@ -170,7 +180,7 @@ struct MenuBarView: View {
                 .saturation(isDimmed ? 0 : 1)
                 .opacity(isDimmed ? 0.5 : 1)
 
-                Image(systemName: timerManager.isPaused ? "pause.fill" : "eye")
+                Image(systemName: timerManager.isPaused ? "pause.fill" : isFocusBlock ? "timer" : "eye")
                     .font(.system(size: 13, weight: .medium))
                     .foregroundStyle(.secondary)
             }
@@ -184,7 +194,21 @@ struct MenuBarView: View {
                     .font(.system(size: timerManager.isRunning ? 26 : 16, weight: .semibold))
                     .monospacedDigit()
                     .foregroundStyle(isDimmed ? .secondary : .primary)
-                if settings.longBreakEvery > 0 && timerManager.isRunning {
+                if let pomodoro = timerManager.pomodoro, timerManager.isFocusing || timerManager.isPomodoroBreak {
+                    // The Pomodoro's own round, and how many blocks are done
+                    HStack(spacing: 8) {
+                        RoundDots(
+                            filled: pomodoro.filled(every: settings.pomodoroLongBreakEvery, isOnBreak: timerManager.isPomodoroBreak),
+                            total: settings.pomodoroLongBreakEvery
+                        )
+                        if pomodoro.completed > 0 {
+                            Text(verbatim: String(localized: "\(pomodoro.completed) done"))
+                                .font(.system(size: 11))
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .padding(.top, 4)
+                } else if settings.longBreakEvery > 0 && timerManager.isRunning {
                     RoundDots(
                         filled: timerManager.round.filled(every: settings.longBreakEvery, isOnBreak: timerManager.isOnBreak),
                         total: settings.longBreakEvery
@@ -206,6 +230,9 @@ struct MenuBarView: View {
 
     private var isDimmed: Bool { timerManager.pauseReason != nil && !timerManager.isOnBreak }
 
+    /// A Pomodoro's block is running (not its break).
+    private var isFocusBlock: Bool { timerManager.isFocusing && !timerManager.isOnBreak }
+
     private var breakCaption: String {
         if !timerManager.isRunning { return String(localized: "Breaks") }
         if timerManager.isOnBreak { return timerManager.isLongBreak ? String(localized: "Long break, time left") : String(localized: "Break, time left") }
@@ -214,6 +241,9 @@ struct MenuBarView: View {
             return timerManager.isInCall ? String(localized: "Break after your call") : String(localized: "Break when you pause typing")
         }
         if timerManager.isInWarningPeriod { return String(localized: "Break starting soon") }
+        if isFocusBlock {
+            return timerManager.nextBreakIsLong ? String(localized: "Pomodoro, then a long break") : String(localized: "Pomodoro, time left")
+        }
         return timerManager.nextBreakIsLong ? String(localized: "Long break in") : String(localized: "Next break in")
     }
 
@@ -269,8 +299,8 @@ struct MenuBarView: View {
 
     private var waterValue: String {
         if waterManager.isDue { return String(localized: "Now") }
-        if settings.waterRidesWithBreaks {
-            return timerManager.timeUntilLongBreak.map(TimerManager.format) ?? "—"
+        if waterManager.ridesWithBreaks {
+            return timerManager.timeUntilWaterBreak.map(TimerManager.format) ?? "—"
         }
         return waterManager.formattedTimeRemaining
     }
@@ -285,7 +315,7 @@ struct MenuBarView: View {
 }
 
 // MARK: - Round Dots
-/// One dot per work interval in a Pomodoro round; the long break comes after the last.
+/// One dot per work interval (or Pomodoro block) in a round; the long break comes after the last.
 private struct RoundDots: View {
     let filled: Int
     let total: Int

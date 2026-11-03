@@ -57,6 +57,7 @@ struct BreakSettingsView: View {
 
             MoreOptions {
                 timing
+                pomodoro
                 goal
                 blinks
                 away
@@ -94,6 +95,21 @@ struct BreakSettingsView: View {
                 Text("Menu Bar Only").tag(0)
                 ForEach([5, 10, 30], id: \.self) { Text(verbatim: SettingsFormat.seconds($0)).tag($0) }
             }
+        }
+    }
+
+    // MARK: - Pomodoro
+    private var pomodoro: some View {
+        SettingsSection(title: "Pomodoro", footer: "Start one from the menu bar. While it runs, its breaks take the place of the ones above, each one a chance to stand and refill your water.") {
+            SliderRow(title: "Focus", value: $settings.pomodoroFocusMinutes, range: 10...60, step: 5, format: SettingsFormat.minutes)
+            SliderRow(title: "Break", value: $settings.pomodoroBreakMinutes, range: 3...15, format: SettingsFormat.minutes)
+            PickerRow(title: "Long break", selection: $settings.pomodoroLongBreakEvery) {
+                ForEach(2...6, id: \.self) { Text(verbatim: Self.everyNth($0)).tag($0) }
+            }
+            SliderRow(title: "Long break length", value: $settings.pomodoroLongBreakMinutes, range: 10...30, step: 5, format: SettingsFormat.minutes)
+            ToggleRow(title: "Start the next one by itself",
+                      subtitle: "Off: after each break, start the next from the menu. Your usual breaks run in between.",
+                      isOn: $settings.pomodoroAutoContinue)
         }
     }
 

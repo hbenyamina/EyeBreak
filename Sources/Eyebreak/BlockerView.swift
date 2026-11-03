@@ -104,7 +104,7 @@ struct BreakGuideCard: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .contentTransition(.opacity)
 
-            if let water, timerManager.isLongBreak {
+            if let water, timerManager.breakIsOnYourFeet {
                 waterRow(water)
                     .padding(.top, large ? 8 : 2)
             }

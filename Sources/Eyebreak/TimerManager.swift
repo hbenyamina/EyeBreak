@@ -34,14 +34,24 @@ class TimerManager: ObservableObject {
     private let settings: AppSettings
     private let stats: StatsStore
 
-    var workDuration: TimeInterval { settings.workDuration }
+    /// A Pomodoro's block while one runs, else the usual work interval.
+    var workDuration: TimeInterval { isFocusing ? settings.pomodoroFocusDuration : settings.workDuration }
     var warningTime: TimeInterval { settings.warningTime }
     /// Length of the current break, or of the next one.
     var breakDuration: TimeInterval {
-        isOnBreak ? currentBreakDuration : nextBreakIsLong ? settings.longBreakDuration : settings.breakDuration
+        if isOnBreak { return currentBreakDuration }
+        if isFocusing { return nextBreakIsLong ? settings.pomodoroLongBreakDuration : settings.pomodoroBreakDuration }
+        return nextBreakIsLong ? settings.longBreakDuration : settings.breakDuration
     }
-    /// Whether the coming break is the long one that closes a Pomodoro round.
-    var nextBreakIsLong: Bool { round.nextIsLong(every: settings.longBreakEvery) }
+    /// Whether the coming break is the long one that closes a round (the Pomodoro's while one runs).
+    var nextBreakIsLong: Bool {
+        if isFocusing, let pomodoro { return pomodoro.nextBreakIsLong(every: settings.pomodoroLongBreakEvery) }
+        return round.nextIsLong(every: settings.longBreakEvery)
+    }
+    /// A Pomodoro is on and its block is the work interval (not waiting for you to start the next).
+    var isFocusing: Bool { pomodoro.map { !$0.isWaiting } ?? false }
+    /// The break asks you to get up: a long one, or any Pomodoro break, which run minutes.
+    var breakIsOnYourFeet: Bool { isLongBreak || isPomodoroBreak }
 
     // MARK: - Published Properties
     @Published var timeRemaining: TimeInterval
@@ -57,10 +67,14 @@ class TimerManager: ObservableObject {
     @Published private(set) var currentBreakStyle: BreakStyle
     /// Breaks skipped in a row; reset only when a break runs to completion.
     @Published private(set) var skippedBreakStreak: Int = 0
-    /// Position in the Pomodoro round, when long breaks are on.
+    /// Position in the round of breaks, when long breaks are on.
     @Published private(set) var round = BreakRound()
     /// The break under way is a long one.
     @Published private(set) var isLongBreak = false
+    /// The Pomodoro you started, until you stop it (or the Mac sleeps).
+    @Published private(set) var pomodoro: Pomodoro?
+    /// The break under way closes a Pomodoro block.
+    @Published private(set) var isPomodoroBreak = false
     /// A break is due, held for a pause in your typing or the end of a call.
     @Published private(set) var isWaitingForPause = false
     /// The camera or microphone is in use (from `PresenceMonitor`).
@@ -81,7 +95,7 @@ class TimerManager: ObservableObject {
 
     /// What the break asks of you right now.
     var breakStep: BreakStep {
-        BreakGuide.step(elapsed: currentBreakDuration - breakTimeRemaining, duration: currentBreakDuration, isLong: isLongBreak)
+        BreakGuide.step(elapsed: currentBreakDuration - breakTimeRemaining, duration: currentBreakDuration, isLong: breakIsOnYourFeet)
     }
 
     /// Until the next long break starts; nil with long breaks off.
@@ -97,6 +111,12 @@ class TimerManager: ObservableObject {
             time = breakTimeRemaining + workDuration
         }
         return time + Double(max(intervalsLeft, 0)) * (workDuration + settings.breakDuration)
+    }
+
+    /// Until the next break that asks for water: every Pomodoro break, else the long one.
+    var timeUntilWaterBreak: TimeInterval? {
+        if isFocusing { return isOnBreak ? 0 : timeRemaining }
+        return timeUntilLongBreak
     }
 
     // MARK: - Callbacks
@@ -132,13 +152,23 @@ class TimerManager: ObservableObject {
         currentBreakStyle = settings.breakStyle
         setupSleepWakeNotifications()
 
-        // A new work interval takes effect immediately (outside of a break)
+        // A new work interval takes effect immediately (outside of a break), and a new
+        // block length during a Pomodoro's block
         settings.$workIntervalMinutes
             .dropFirst()
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                guard let self = self, !self.isOnBreak else { return }
+                guard let self = self, !self.isOnBreak, !self.isFocusing else { return }
+                self.resetWorkTimer()
+            }
+            .store(in: &cancellables)
+        settings.$pomodoroFocusMinutes
+            .dropFirst()
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self = self, !self.isOnBreak, self.isFocusing else { return }
                 self.resetWorkTimer()
             }
             .store(in: &cancellables)
@@ -206,7 +236,9 @@ class TimerManager: ObservableObject {
     }
 
     private func applyAutoPause() {
-        let reason = requestedAutoPause
+        var reason = requestedAutoPause
+        // A Pomodoro you started runs off shift too; being away still holds it
+        if reason == .outsideWorkHours && pomodoro != nil { reason = nil }
         guard reason != autoPauseReason else { return }
         // Being away during a break is the point of the break; applied once it ends
         if isOnBreak && (reason == .idle || reason == .screenLocked) { return }
@@ -255,7 +287,12 @@ class TimerManager: ObservableObject {
             endBreak(completed: false)
         } else {
             // Skipped before it began: the work interval still counts toward the round
-            round.breakEnded(wasLong: nextBreakIsLong)
+            if isFocusing {
+                let long = pomodoro?.blockEnded(finished: true, every: settings.pomodoroLongBreakEvery) ?? false
+                pomodoro?.breakEnded(wasLong: long, continues: settings.pomodoroAutoContinue)
+            } else {
+                round.breakEnded(wasLong: nextBreakIsLong)
+            }
             postponesUsed = 0
             resetWorkTimer()
         }
@@ -271,12 +308,48 @@ class TimerManager: ObservableObject {
             isOnBreak = false
             onBreakEnd?(false)
             isLongBreak = false
+            isPomodoroBreak = false
         }
         timeRemaining = TimeInterval(Self.postponeMinutes * 60)
         hasShownWarning = false
         isInWarningPeriod = false
         isWaitingForPause = false
         waitedSeconds = 0
+        applyAutoPause()
+    }
+
+    // MARK: - Pomodoro
+    /// Starts a Pomodoro, or its next block: the work interval becomes a focus block and
+    /// its break the Pomodoro's. Starts the timer and ends a pause you chose, since you
+    /// asked for it, and runs off shift too.
+    func startPomodoro() {
+        guard !isOnBreak else { return }
+        if pomodoro == nil {
+            pomodoro = Pomodoro()
+        } else {
+            pomodoro?.startNextBlock()
+        }
+        if !isRunning {
+            isRunning = true
+            startHeartbeat()
+        }
+        isPaused = false
+        pausedUntil = nil
+        postponesUsed = 0
+        resetWorkTimer()
+        applyAutoPause()
+        onStateChange?(pauseReason != nil)
+    }
+
+    /// Ends the Pomodoro; the usual rhythm takes over, with the next break no further off
+    /// than its own interval. A Pomodoro break under way runs to its end.
+    func stopPomodoro() {
+        guard pomodoro != nil else { return }
+        let wasFocusing = isFocusing
+        pomodoro = nil
+        if wasFocusing && !isOnBreak {
+            timeRemaining = min(timeRemaining, workDuration)
+        }
         applyAutoPause()
     }
 
@@ -373,9 +446,16 @@ class TimerManager: ObservableObject {
         isWaitingForPause = false
         waitedSeconds = 0
         activeBreakSeconds = 0
-        isLongBreak = !isPreview && nextBreakIsLong
+        isPomodoroBreak = !isPreview && isFocusing
+        if isPomodoroBreak {
+            // A block counts when its time ran out; Take a Break Now ends it early, with a short break
+            isLongBreak = pomodoro?.blockEnded(finished: timeRemaining <= 0, every: settings.pomodoroLongBreakEvery) ?? false
+            currentBreakDuration = isLongBreak ? settings.pomodoroLongBreakDuration : settings.pomodoroBreakDuration
+        } else {
+            isLongBreak = !isPreview && nextBreakIsLong
+            currentBreakDuration = isLongBreak ? settings.longBreakDuration : settings.breakDuration
+        }
         currentBreakStyle = settings.breakStyle
-        currentBreakDuration = isLongBreak ? settings.longBreakDuration : settings.breakDuration
         breakTimeRemaining = currentBreakDuration
         showsSkipNote = !isPreview && skipNoteIsDue()
         isOnBreak = true
@@ -394,11 +474,16 @@ class TimerManager: ObservableObject {
     private func endBreak(completed: Bool) {
         isOnBreak = false
         if !isPreviewBreak {
-            round.breakEnded(wasLong: isLongBreak)
+            if isPomodoroBreak {
+                pomodoro?.breakEnded(wasLong: isLongBreak, continues: settings.pomodoroAutoContinue)
+            } else {
+                round.breakEnded(wasLong: isLongBreak)
+            }
             postponesUsed = 0
         }
         onBreakEnd?(completed)
         isLongBreak = false
+        isPomodoroBreak = false
         showsSkipNote = false
         resetWorkTimer()
         applyAutoPause()
@@ -415,13 +500,16 @@ class TimerManager: ObservableObject {
     }
 
     @objc private func handleWake() {
-        // Reset timer when Mac wakes from sleep
+        // Reset timer when Mac wakes from sleep. Sleep ends a Pomodoro too: you'd start the
+        // next one yourself.
+        pomodoro = nil
         if isOnBreak {
             endBreak(completed: false)
         }
         resetWorkTimer()
         round.reset()
         postponesUsed = 0
+        applyAutoPause()
     }
 
     // MARK: - Formatted Time String

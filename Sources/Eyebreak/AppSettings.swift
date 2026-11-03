@@ -72,7 +72,6 @@ enum WaterReminderMode: String, CaseIterable, Identifiable {
 enum TimingPreset: String, CaseIterable, Identifiable {
     case recommended = "Recommended"
     case classic = "20-20-20"
-    case pomodoro = "Pomodoro"
     case custom = "Custom"
 
     var id: String { rawValue }
@@ -81,7 +80,6 @@ enum TimingPreset: String, CaseIterable, Identifiable {
         switch self {
         case .recommended: return String(localized: "Recommended")
         case .classic: return String(localized: "20-20-20")
-        case .pomodoro: return String(localized: "Pomodoro")
         case .custom: return String(localized: "Custom")
         }
     }
@@ -92,7 +90,6 @@ enum TimingPreset: String, CaseIterable, Identifiable {
         switch self {
         case .recommended: return (20, 30, 3, 5)
         case .classic: return (20, 20, 0, 5)
-        case .pomodoro: return (25, 300, 4, 15)
         case .custom: return nil
         }
     }
@@ -101,7 +98,6 @@ enum TimingPreset: String, CaseIterable, Identifiable {
         switch self {
         case .recommended: return String(localized: "Every 20 minutes, 30 seconds to look away and blink. Every hour, 5 minutes on your feet.")
         case .classic: return String(localized: "Every 20 minutes, 20 seconds looking 20 feet away.")
-        case .pomodoro: return String(localized: "25 minutes of focus and a 5-minute break, with 15 minutes after every fourth.")
         case .custom: return String(localized: "Your own lengths, set under More options.")
         }
     }
@@ -172,6 +168,7 @@ final class AppSettings: ObservableObject {
         case soundEffectsEnabled, breakStyle
         case skipsBeforeDryEyeNudge, dailyBreakGoal, breakGoalFollowsShift
         case waitForPause, holdDuringCalls
+        case pomodoroFocusMinutes, pomodoroBreakMinutes, pomodoroLongBreakMinutes, pomodoroLongBreakEvery, pomodoroAutoContinue
         case waterGoalML, glassSizeML, waterUnit, bodyWeightKg, activeMinutesPerDay, hotClimate
         case waterSex, exerciseIntensity, waterReminderMode
         case appTheme
@@ -207,6 +204,16 @@ final class AppSettings: ObservableObject {
     @Published var waitForPause: Bool { didSet { set(waitForPause, .waitForPause) } }
     /// Breaks and reminders hold while the camera or microphone is in use.
     @Published var holdDuringCalls: Bool { didSet { set(holdDuringCalls, .holdDuringCalls) } }
+
+    // MARK: Pomodoro
+    // Its own lengths: while one runs, these replace the break rhythm above.
+    @Published var pomodoroFocusMinutes: Int { didSet { set(pomodoroFocusMinutes, .pomodoroFocusMinutes) } }
+    @Published var pomodoroBreakMinutes: Int { didSet { set(pomodoroBreakMinutes, .pomodoroBreakMinutes) } }
+    @Published var pomodoroLongBreakMinutes: Int { didSet { set(pomodoroLongBreakMinutes, .pomodoroLongBreakMinutes) } }
+    /// The break after every Nth block is the long one.
+    @Published var pomodoroLongBreakEvery: Int { didSet { set(pomodoroLongBreakEvery, .pomodoroLongBreakEvery) } }
+    /// The next block starts as its break ends; off, it waits for Start.
+    @Published var pomodoroAutoContinue: Bool { didSet { set(pomodoroAutoContinue, .pomodoroAutoContinue) } }
 
     // MARK: Shift
     // The hours themselves live in `ShiftModel`, in the file the widget reads.
@@ -275,6 +282,9 @@ final class AppSettings: ObservableObject {
     var breakDuration: TimeInterval { TimeInterval(breakDurationSeconds) }
     var longBreakDuration: TimeInterval { TimeInterval(longBreakMinutes * 60) }
     var warningTime: TimeInterval { TimeInterval(preBreakWarningSeconds) }
+    var pomodoroFocusDuration: TimeInterval { TimeInterval(pomodoroFocusMinutes * 60) }
+    var pomodoroBreakDuration: TimeInterval { TimeInterval(pomodoroBreakMinutes * 60) }
+    var pomodoroLongBreakDuration: TimeInterval { TimeInterval(pomodoroLongBreakMinutes * 60) }
 
     /// Water asks inside the long break only when there is one and the break can show it
     /// (a notification-only break has no room for the "I Drank" row).
@@ -330,6 +340,11 @@ final class AppSettings: ObservableObject {
             Key.breakGoalFollowsShift.rawValue: true,
             Key.waitForPause.rawValue: true,
             Key.holdDuringCalls.rawValue: true,
+            Key.pomodoroFocusMinutes.rawValue: 25,
+            Key.pomodoroBreakMinutes.rawValue: 5,
+            Key.pomodoroLongBreakMinutes.rawValue: 15,
+            Key.pomodoroLongBreakEvery.rawValue: 4,
+            Key.pomodoroAutoContinue.rawValue: true,
             Key.waterGoalML.rawValue: 2000,
             Key.glassSizeML.rawValue: 250,
             Key.waterUnit.rawValue: WaterUnit.regionDefault.rawValue,
@@ -371,6 +386,12 @@ final class AppSettings: ObservableObject {
         breakGoalFollowsShift = defaults.bool(forKey: Key.breakGoalFollowsShift.rawValue)
         waitForPause = defaults.bool(forKey: Key.waitForPause.rawValue)
         holdDuringCalls = defaults.bool(forKey: Key.holdDuringCalls.rawValue)
+
+        pomodoroFocusMinutes = max(defaults.integer(forKey: Key.pomodoroFocusMinutes.rawValue), 1)
+        pomodoroBreakMinutes = max(defaults.integer(forKey: Key.pomodoroBreakMinutes.rawValue), 1)
+        pomodoroLongBreakMinutes = max(defaults.integer(forKey: Key.pomodoroLongBreakMinutes.rawValue), 1)
+        pomodoroLongBreakEvery = max(defaults.integer(forKey: Key.pomodoroLongBreakEvery.rawValue), 2)
+        pomodoroAutoContinue = defaults.bool(forKey: Key.pomodoroAutoContinue.rawValue)
 
         smartScheduleEnabled = defaults.bool(forKey: Key.smartScheduleEnabled.rawValue)
         askOnUnlock = defaults.bool(forKey: Key.askOnUnlock.rawValue)

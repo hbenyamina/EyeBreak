@@ -1,7 +1,8 @@
-# EyeBreak 3.1 — Feature Spec
+# EyeBreak 3.2 — Feature Spec
 
 EyeBreak 2.2.0 (the build in `/Applications`) has no surviving source. 3.0 rebuilt its features here; 3.1 merged in
-Shift Countdown and then moved the break and water model onto the evidence in [EVIDENCE.md](EVIDENCE.md). This file is
+Shift Countdown and then moved the break and water model onto the evidence in [EVIDENCE.md](EVIDENCE.md); 3.2 added the
+Pomodoro timer (§14). This file is
 the source of truth for behaviour and settings keys.
 
 All builds use the bundle ID `com.eyebreak.app`, so they share `UserDefaults`; 2.2.0's key names and formats are kept
@@ -23,8 +24,9 @@ evidence-based model (`rhythmModel` = 1), and only when they still hold the old 
 | Sound effects | `soundEffectsEnabled` | on |
 
 - **Rhythm presets:** **Recommended** (20 min / 30 s, a 5-minute long break every 3rd), **20-20-20** (20 min / 20 s, no
-  long break), **Pomodoro** (25 min / 5 min, 15 min every 4th), **Custom**. Moving onto this model, the old default
-  (20/20, no long breaks) becomes Recommended, a 5 s heads-up becomes 0, and the 10-minute nudges switch off.
+  long break), **Custom**. Moving onto this model, the old default (20/20, no long breaks) becomes Recommended, a 5 s
+  heads-up becomes 0, and the 10-minute nudges switch off. The old **Pomodoro** preset is now the Pomodoro timer (§14);
+  lengths that matched it read as Custom and keep working.
 - **Every break is a routine** (`BreakGuide`): look across the room (3 m or more) until the last 10 s, then two
   complete blinks: close 2 s, squeeze 2 s, open 1 s. A long break starts with "Stand up and move: refill your water and
   look out of a window" and ends with the same blinks. A break under 20 s has one blink; under 10 s, none.
@@ -141,15 +143,17 @@ read by the widget — not in UserDefaults.
 ## 9. Shell
 
 - **Menu bar:** the eye (filled in the last minute before a break, crossed out while paused), and beside it the next
-  break, the shift, both or nothing (`menuBarCountdown`). VoiceOver reads the pause state.
+  break, the shift, both or nothing (`menuBarCountdown`). During a Pomodoro's block, a timer with the block's countdown
+  whatever that setting says. VoiceOver reads the pause state.
 - **Popover:** date and shift line with the pause menu; the glass hero (next break, round dots, "Break when you pause
   typing" / "Break after your call"); today's lines; the next glass with I Drank; 5 More Minutes and Skip This Break
-  while a break is due; Take a Break Now; Start Shift from Now / Undo Late Start; Settings (⌘,) and Quit (⌘Q).
+  while a break is due; Take a Break Now; Start Pomodoro / Start Next Pomodoro / Stop Pomodoro; Start Shift from Now /
+  Undo Late Start; Settings (⌘,) and Quit (⌘Q).
 - **Right-click menu:** pause for 30 min / 1 h / 2 h / until tomorrow / until resumed, or Resume; 5 More Minutes; Take a
-  Break Now; I Drank a Glass of Water; Settings (⌘,); Quit (⌘Q).
+  Break Now; Start / Start Next / Stop Pomodoro; I Drank a Glass of Water; Settings (⌘,); Quit (⌘Q).
 - **App window** (Dock icon only while open), one page per need, each with at most four essentials and **More options**:
   - **Breaks:** your rhythm (today's line, the week); Rhythm, Break screen, Wait for a pause, Hold during calls. More:
-    timing, daily goal, blink reminders, away detection, the last 30 days, what the week says, preview.
+    timing, Pomodoro, daily goal, blink reminders, away detection, the last 30 days, what the week says, preview.
   - **Water:** your rhythm; Remind me, Drink each day, My glass, Ask me. "Work out my goal" opens the calculator. More:
     units, the reminder's look, preview.
   - **Workday:** today; Starts, Ends, Days, Pause everything outside these hours. More: presets and time zone, the
@@ -193,3 +197,31 @@ read by the widget — not in UserDefaults.
 - Reduce Transparency: every glass surface turns opaque. Reduce Motion: no step cross-fades or chevron turns.
 - Page symbols use the theme's accent in dark mode (`Theme.onPage`), clearing 3:1. Close buttons have 30 pt targets.
 - Each break step is announced to VoiceOver, since the blinks are done with eyes closed.
+
+## 14. Pomodoro
+
+| Setting | Key | Default |
+|---|---|---|
+| Focus block (min) | `pomodoroFocusMinutes` | 25 |
+| Break (min) | `pomodoroBreakMinutes` | 5 |
+| Long break after every Nth block | `pomodoroLongBreakEvery` | 4 |
+| Long break (min) | `pomodoroLongBreakMinutes` | 15 |
+| Start the next block by itself | `pomodoroAutoContinue` | on |
+
+- **Start Pomodoro** in the popover or the right-click menu (not during a break). It starts the timer, ends a pause you
+  chose, and runs off shift too; being away still holds it.
+- **While it runs it is the break timer:** the block replaces the work interval and its break replaces the usual one, so
+  nothing else cuts into a block. Its breaks are ordinary EyeBreak breaks in the chosen style: they wait for a pause in
+  typing, hold during calls, take 5 More Minutes and esc. Each is minutes long, so each one opens with "Stand up and
+  move" and carries the water row (unless a glass was logged within `WaterGoal.minimumInterval`, so even short blocks
+  keep to 500 ml an hour); the water reminder's own timer and the blink pills wait while a block runs.
+- **Counting:** a block counts when its time runs out. Take a Break Now ends it early with a short break that doesn't
+  count; a break held back by 5 More Minutes isn't counted twice. Counted blocks move the round, and the break after
+  every Nth is the long one. The hero shows "Pomodoro, time left" (or "…, then a long break"), the round as dots and
+  how many are done; the sidebar reads "Pomodoro: 18:42 left".
+- **Between blocks:** with `pomodoroAutoContinue` off, the Pomodoro waits after each break for **Start Next Pomodoro**,
+  and your usual rhythm runs meanwhile.
+- **Stop Pomodoro** hands back to the usual rhythm, with the next break no further off than its own interval; a
+  Pomodoro break under way runs to its end.
+- Coming back from being away restarts the block (as it does the work interval) and keeps the round; sleep or quitting
+  ends the Pomodoro. Its breaks count in the history and the eye line like any other.

@@ -372,6 +372,46 @@ do {
     check("coming back from away starts a fresh round", away.position == 0)
 }
 
+// MARK: The Pomodoro timer
+
+do {
+    var p = Pomodoro()
+    check("a Pomodoro starts with nothing done", p.completed == 0 && !p.isWaiting && p.filled(every: 4, isOnBreak: false) == 0)
+    for block in 1...3 {
+        let long = p.blockEnded(finished: true, every: 4)
+        check("block \(block) earns a short break", !long)
+        check("its dot fills during the break", p.filled(every: 4, isOnBreak: true) == block)
+        p.breakEnded(wasLong: long, continues: true)
+    }
+    check("three blocks done", p.completed == 3 && p.filled(every: 4, isOnBreak: false) == 3)
+    check("the fourth block's break will be long", p.nextBreakIsLong(every: 4))
+    let fourth = p.blockEnded(finished: true, every: 4)
+    check("the fourth block earns the long break", fourth)
+    check("all four dots during the long break", p.filled(every: 4, isOnBreak: true) == 4)
+    p.breakEnded(wasLong: fourth, continues: true)
+    check("the long break closes the round, the count carries on", p.completed == 4 && p.filled(every: 4, isOnBreak: false) == 0)
+
+    var early = Pomodoro()
+    for _ in 0..<3 { early.breakEnded(wasLong: early.blockEnded(finished: true, every: 4), continues: true) }
+    let cut = early.blockEnded(finished: false, every: 4)
+    check("a block ended early gets a short break", !cut)
+    check("and doesn't count", early.completed == 3)
+    check("its dot stays empty during that break", early.filled(every: 4, isOnBreak: true) == 3)
+    early.breakEnded(wasLong: cut, continues: true)
+    check("the round doesn't move on for it", early.nextBreakIsLong(every: 4) && early.completed == 3)
+
+    var later = Pomodoro()
+    let first = later.blockEnded(finished: true, every: 4)
+    // 5 More Minutes: the same break comes back, from the timer or from Take a Break Now
+    let again = later.blockEnded(finished: false, every: 4)
+    check("a break held back by 5 More Minutes isn't counted twice", later.completed == 1 && first == again)
+    later.breakEnded(wasLong: again, continues: false)
+    check("the round moves on once", later.filled(every: 4, isOnBreak: false) == 1)
+    check("off, the next block waits for you", later.isWaiting)
+    later.startNextBlock()
+    check("Start runs the next block", !later.isWaiting)
+}
+
 // MARK: Rhythm lines
 
 do {

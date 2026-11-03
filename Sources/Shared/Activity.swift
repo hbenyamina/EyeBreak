@@ -166,16 +166,9 @@ extension ShiftSchedule {
 enum ActivityStore {
     static let fileName = "activity.json"
 
+    /// Beside the shift file, in the real home even inside the widget's sandbox (see ShiftStore).
     private static var fileURL: URL {
-        var home = FileManager.default.homeDirectoryForCurrentUser
-        // The real home, also inside the widget's sandbox (see ShiftStore)
-        if let entry = getpwuid(getuid()), let directory = entry.pointee.pw_dir {
-            home = URL(fileURLWithPath: String(cString: directory), isDirectory: true)
-        }
-        return home
-            .appendingPathComponent("Library/Application Support", isDirectory: true)
-            .appendingPathComponent(ShiftStore.directoryName, isDirectory: true)
-            .appendingPathComponent(fileName)
+        ShiftStore.directoryURL.appendingPathComponent(fileName)
     }
 
     static func load() -> ActivityLog {

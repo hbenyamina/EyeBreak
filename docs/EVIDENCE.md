@@ -101,6 +101,13 @@ not); outdoor time helps adult eye strain (its evidence is for myopia in childre
 screen sharing or presenting; carry the blink and the water prompt inside the break; turn the warning into a menu-bar
 cue; add "5 more minutes" (at most twice, not a skip); and don't schedule a break right after a natural one.
 
+**The Pomodoro timer (added November 2026).** 25 minutes of focus and 5 of break, with 15 after every fourth, is a
+productivity convention (Cirillo), not a health finding, and EyeBreak makes no claim for it. Run as one timer, it
+keeps to the findings above: one break per block instead of a second set of prompts, so a block is never interrupted
+(volume, timing); 5 minutes on your feet every half hour, more than the ~5 minutes an hour of §3; and a 25-minute
+block stretches the 20-minute look-away by 5 minutes, inside the Weak evidence for any exact interval (§1). So while
+it runs its breaks replace the usual ones, open with standing up, and carry the water prompt.
+
 ## 3. Movement
 
 Breaking up sitting with light walking lowers post-meal glucose and blood pressure and improves mood: 2 min every

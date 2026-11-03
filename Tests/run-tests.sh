@@ -1,7 +1,8 @@
 #!/bin/bash
 # Checks the shift maths (phases, night shifts, daylight saving, time zones, late starts,
 # timeline entries), the shared file's format and migration from Shift Countdown, widget
-# theme contrast, the Pomodoro rounds, and the habit rules (break routine, water pace, goal, streak).
+# theme contrast, the break rounds, the Pomodoro timer, and the habit rules (break routine,
+# water pace, goal, streak).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -19,6 +20,7 @@ trap 'rm -rf "$OUT"' EXIT
 xcrun swiftc -swift-version 5 -O -o "$OUT/tests" \
     Sources/Shared/*.swift \
     Sources/Eyebreak/BreakRound.swift \
+    Sources/Eyebreak/Pomodoro.swift \
     Sources/Eyebreak/Habits.swift \
     Tests/main.swift
 

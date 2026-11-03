@@ -42,9 +42,10 @@ enum NotificationManager {
         UNUserNotificationCenter.current().add(request)
     }
 
-    static func postBreakStart(duration: TimeInterval, isLong: Bool) {
-        if isLong {
-            post(title: String(localized: "Time for a long break"),
+    /// `onYourFeet`: a long break or a Pomodoro's, minutes long rather than seconds.
+    static func postBreakStart(duration: TimeInterval, isLong: Bool, onYourFeet: Bool) {
+        if onYourFeet {
+            post(title: isLong ? String(localized: "Time for a long break") : String(localized: "Time for a break"),
                  body: String(localized: "Stand up, refill your water and look out of a window."))
         } else {
             post(title: String(localized: "Time for a break"),

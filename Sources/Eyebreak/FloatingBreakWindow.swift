@@ -33,7 +33,7 @@ struct FloatingBreakView: View {
 
     /// Room for the steps' two lines, plus the water row and the skip note when they show.
     private var height: CGFloat {
-        116 + (timerManager.isLongBreak && water != nil ? 28 : 0) + (timerManager.showsSkipNote ? 32 : 0)
+        116 + (timerManager.breakIsOnYourFeet && water != nil ? 28 : 0) + (timerManager.showsSkipNote ? 32 : 0)
     }
 
     var body: some View {

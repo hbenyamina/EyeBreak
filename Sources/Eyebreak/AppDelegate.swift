@@ -113,6 +113,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                                 elapsed: UserDefaults.standard.double(forKey: "previewElapsed"))
             }
         }
+        if UserDefaults.standard.bool(forKey: "startPomodoro") {
+            timerManager.startPomodoro()
+        }
+        if let directory = UserDefaults.standard.string(forKey: "snapshotDir") {
+            startSnapshots(in: URL(fileURLWithPath: directory, isDirectory: true))
+        }
         if UserDefaults.standard.bool(forKey: "previewWater") {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in self?.waterReminderManager.triggerNow() }
         }
@@ -197,7 +203,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // for a pause in typing. No toast, no sound.
         let breakSoon = !dimmed && !timerManager.isOnBreak
             && (timerManager.isWaitingForPause || timerManager.isInWarningPeriod || timerManager.timeRemaining <= 60)
-        let imageName = dimmed ? "eye.slash" : breakSoon ? "eye.fill" : "eye"
+        // A Pomodoro's block shows as a timer, and its countdown always shows: you started it.
+        let focusing = timerManager.isFocusing && !timerManager.isOnBreak
+        let imageName = dimmed ? "eye.slash" : breakSoon ? "eye.fill" : focusing ? "timer" : "eye"
         if statusImageName != imageName {
             statusImageName = imageName
             button.image = NSImage(systemSymbolName: imageName, accessibilityDescription: "EyeBreak")
@@ -206,7 +214,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Countdowns beside the icon: the next break (or what's left of this one), and the
         // shift. The break's is hidden while paused, where a frozen number would mislead.
         let choice = settings.menuBarCountdown
-        let breakCountdown: TimeInterval? = !choice.showsBreak || dimmed ? nil
+        let breakCountdown: TimeInterval? = !(choice.showsBreak || focusing) || dimmed ? nil
             : timerManager.isOnBreak ? timerManager.breakTimeRemaining
             : timerManager.timeRemaining
         let shiftStatus = shiftModel.status
@@ -230,6 +238,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else if let breakCountdown {
             spoken.append(timerManager.isOnBreak
                 ? String(localized: "\(Self.menuBarTime(breakCountdown)) until the break ends")
+                : focusing ? String(localized: "\(Self.menuBarTime(breakCountdown)) left in this Pomodoro")
                 : String(localized: "\(Self.menuBarTime(breakCountdown)) until your next break"))
         }
         if let shiftText {
@@ -246,6 +255,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             breakTip = reason == .user ? String(localized: "All reminders paused \(PauseDuration.phrase(for: timerManager.pausedUntil))") : reason.label
         } else if timerManager.isWaitingForPause {
             breakTip = timerManager.isInCall ? String(localized: "Break after your call") : String(localized: "Break when you pause typing")
+        } else if focusing {
+            breakTip = String(localized: "Pomodoro: \(timerManager.formattedTimeRemaining) left")
         } else {
             breakTip = String(localized: "Next break in \(timerManager.formattedTimeRemaining)")
         }
@@ -317,6 +328,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             menu.addItem(ClosureMenuItem(title: String(localized: "5 More Minutes")) { [weak self] in self?.timerManager.postpone() })
         }
         menu.addItem(ClosureMenuItem(title: String(localized: "Take a Break Now")) { [weak self] in self?.takeBreakNow() })
+        if let pomodoro = timerManager.pomodoro {
+            if pomodoro.isWaiting && !timerManager.isOnBreak {
+                menu.addItem(ClosureMenuItem(title: String(localized: "Start Next Pomodoro")) { [weak self] in self?.timerManager.startPomodoro() })
+            }
+            menu.addItem(ClosureMenuItem(title: String(localized: "Stop Pomodoro")) { [weak self] in self?.timerManager.stopPomodoro() })
+        } else if !timerManager.isOnBreak {
+            menu.addItem(ClosureMenuItem(title: String(localized: "Start Pomodoro")) { [weak self] in self?.timerManager.startPomodoro() })
+        }
         if settings.waterReminderEnabled {
             menu.addItem(ClosureMenuItem(title: String(localized: "I Drank a Glass of Water")) { [weak self] in self?.waterReminderManager.drink() })
         }
@@ -375,6 +394,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func presentBreak() {
         warningWindowController.hideWarning()
         popover.performClose(nil)
+        #if DEBUG
+        if UserDefaults.standard.bool(forKey: "silentBreaks") { return }
+        #endif
         SoundManager.play(.breakStart)
 
         let palette = Palette.current(for: .breakOverlay)
@@ -385,13 +407,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case .floatingWindow:
             floatingBreakController.show(timerManager: timerManager, water: water)
         case .notificationOnly:
-            NotificationManager.postBreakStart(duration: timerManager.currentBreakDuration, isLong: timerManager.isLongBreak)
+            NotificationManager.postBreakStart(duration: timerManager.currentBreakDuration, isLong: timerManager.isLongBreak,
+                                               onYourFeet: timerManager.breakIsOnYourFeet)
         }
     }
 
-    /// The long break carries the water reminder: one interruption, and you're up anyway.
+    /// The long break carries the water reminder (every break, in a Pomodoro): one
+    /// interruption, and you're up anyway.
     private func waterPromptForBreak() -> BreakWaterPrompt? {
-        guard settings.waterReminderEnabled, settings.waterRidesWithBreaks else { return nil }
+        guard settings.waterReminderEnabled, waterReminderManager.ridesWithBreaks else { return nil }
+        // However short the Pomodoro, never asks faster than the kidneys clear a glass
+        let lastDrink = activityModel.log.events.filter { $0.kind == .drank }.map(\.date).max()
+        if timerManager.isPomodoroBreak, let lastDrink,
+           Date().timeIntervalSince(lastDrink) < TimeInterval(WaterGoal.minimumInterval(glass: settings.glassSizeML) * 60) {
+            return nil
+        }
         return BreakWaterPrompt(glass: WaterAmount.text(settings.glassSizeML, unit: settings.waterUnit)) { [weak self] in
             self?.waterReminderManager.drink()
         }
@@ -409,7 +439,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func takeBreakNow() {
         popover.performClose(nil)
-        guard confirmOutsideSchedule(
+        // A Pomodoro runs off shift, so its breaks do too
+        guard timerManager.pomodoro != nil || confirmOutsideSchedule(
             message: String(localized: "Breaks pause outside your shift, and you're off shift now."),
             question: String(localized: "Would you like to take a break anyway or adjust your schedule?"),
             confirmTitle: String(localized: "Take Break Anyway")
@@ -429,19 +460,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             .store(in: &cancellables)
 
+        // A Pomodoro's block runs uninterrupted: water waits for its breaks, which ask for it
+        timerManager.$pomodoro
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.waterReminderManager.ridesWithPomodoro = self.timerManager.isFocusing
+            }
+            .store(in: &cancellables)
+
         // Show the water reminder only while it's due and no break, break warning or call needs
         // the screen; it reappears once they're over. @Published fires on willSet, so hop to
         // the next main-queue turn before reading the window state.
-        Publishers.CombineLatest4(
-            waterReminderManager.$isDue,
-            timerManager.$isOnBreak,
-            timerManager.$isInWarningPeriod,
-            timerManager.$isInCall
+        Publishers.CombineLatest(
+            Publishers.CombineLatest4(
+                waterReminderManager.$isDue,
+                timerManager.$isOnBreak,
+                timerManager.$isInWarningPeriod,
+                timerManager.$isInCall
+            ),
+            timerManager.$pomodoro
         )
         .receive(on: DispatchQueue.main)
-        .sink { [weak self] isDue, isOnBreak, isInWarningPeriod, isInCall in
+        .sink { [weak self] state, _ in
             guard let self = self else { return }
-            let shouldShow = isDue && !isOnBreak && !isInWarningPeriod && !isInCall
+            let (isDue, isOnBreak, isInWarningPeriod, isInCall) = state
+            let shouldShow = isDue && !isOnBreak && !isInWarningPeriod && !isInCall && !self.timerManager.isFocusing
             if shouldShow && !self.waterReminderWindowController.isVisible {
                 self.waterReminderWindowController.showReminder(waterManager: self.waterReminderManager)
             } else if !shouldShow {
@@ -452,7 +496,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         ambientReminderManager.onFire = { [weak self] reminder in
             guard let self = self, !self.timerManager.isOnBreak, !self.timerManager.isInWarningPeriod,
-                  !self.timerManager.isInCall else { return }
+                  !self.timerManager.isInCall, !self.timerManager.isFocusing else { return }
             self.ambientReminderWindowController.show(reminder, duration: TimeInterval(self.settings.ambientReminderDurationSeconds))
         }
     }
@@ -533,6 +577,76 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return false
         }
     }
+
+    #if DEBUG
+    // MARK: - Snapshots
+    /// `-snapshotDir /path` (with `-snapshotEvery 10`): every few seconds the menu, the break
+    /// card while a break runs, and the menu bar item's symbol, title and tooltip
+    /// (`status.txt`), drawn offscreen into that folder. For checking states without opening
+    /// anything, e.g. while a full-screen app hides the menu bar. `-snapshotSettings Breaks`
+    /// adds that page once; `-silentBreaks YES` keeps breaks off the screen.
+    @MainActor
+    private func startSnapshots(in directory: URL) {
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        let every = max(UserDefaults.standard.double(forKey: "snapshotEvery"), 1)
+        let started = Date()
+        if let name = UserDefaults.standard.string(forKey: "snapshotSettings"), let pane = SettingsPane(rawValue: name) {
+            let height = UserDefaults.standard.double(forKey: "settingsHeight")
+            Self.drawOffscreen(settingsWindowController.snapshotView(pane: pane),
+                               size: NSSize(width: 880, height: height > 0 ? height : 660),
+                               to: directory.appendingPathComponent("settings-\(name).png"))
+        }
+        Timer.scheduledTimer(withTimeInterval: every, repeats: true) { [weak self] _ in MainActor.assumeIsolated {
+            guard let self, let button = self.statusItem.button else { return }
+            let stamp = String(format: "%04d", Int(Date().timeIntervalSince(started).rounded()))
+            if let menu = (self.popover.contentViewController as? NSHostingController<MenuBarView>)?.rootView {
+                Self.drawOffscreen(menu, to: directory.appendingPathComponent("menu-\(stamp).png"))
+            }
+            if self.timerManager.isOnBreak {
+                let card = FloatingBreakView(timerManager: self.timerManager, water: self.waterPromptForBreak()) {}
+                    .environment(\.palette, Palette.current(for: .breakOverlay))
+                Self.drawOffscreen(card, to: directory.appendingPathComponent("break-\(stamp).png"))
+            }
+            let line = "\(stamp)s  \(self.statusImageName)  \"\(button.attributedTitle.string)\"  \((button.toolTip ?? "").replacingOccurrences(of: "\n", with: " | "))\n"
+            let log = directory.appendingPathComponent("status.txt")
+            if let handle = try? FileHandle(forWritingTo: log) {
+                handle.seekToEndOfFile()
+                handle.write(Data(line.utf8))
+                try? handle.close()
+            } else {
+                try? Data(line.utf8).write(to: log)
+            }
+        } }
+    }
+
+    /// Draws a view in a borderless window off every screen and writes it as a PNG.
+    /// SwiftUI's own renderer comes out beside it (`-swiftui.png`): it draws text on glass,
+    /// which the window can't, though not AppKit controls.
+    @MainActor
+    private static func drawOffscreen<Content: View>(_ view: Content, size: NSSize? = nil, to url: URL) {
+        let renderer = ImageRenderer(content: view.frame(width: size?.width, height: size?.height))
+        renderer.scale = 2
+        if let image = renderer.nsImage, let tiff = image.tiffRepresentation,
+           let png = NSBitmapImageRep(data: tiff)?.representation(using: .png, properties: [:]) {
+            try? png.write(to: url.deletingPathExtension().appendingPathExtension("swiftui.png"))
+        }
+        let host = NSHostingView(rootView: view)
+        let frame = NSRect(origin: .zero, size: size ?? host.fittingSize)
+        let window = NSWindow(contentRect: frame.offsetBy(dx: -20000, dy: -20000), styleMask: .borderless, backing: .buffered, defer: false)
+        window.isReleasedWhenClosed = false
+        window.backgroundColor = .windowBackgroundColor
+        window.contentView = host
+        window.orderFrontRegardless()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            host.layoutSubtreeIfNeeded()
+            if let rep = host.bitmapImageRepForCachingDisplay(in: host.bounds) {
+                host.cacheDisplay(in: host.bounds, to: rep)
+                try? rep.representation(using: .png, properties: [:])?.write(to: url)
+            }
+            window.orderOut(nil)
+        }
+    }
+    #endif
 
     // MARK: - Hotkeys
     private func setupHotkeys() {
